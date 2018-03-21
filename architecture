@@ -91,5 +91,11 @@ PATH : localhost:8080/entreedetvous
    "jour":"jour",
    "moment":"moment",
    "service":"service",
-   "description":"descriptio"
+   "description":"description",
+   "fait":booleen
   }
+
+  /rdv/{id}/done  Passe un rdv a Fait
+  /rdv/{id}/undone   Passe  un rdv a non Fait
+ 
+ 
