@@ -1,8 +1,9 @@
-[![Build Status](https://travis-ci.org/iut-lille/jersey-skeleton.svg?branch=master)](https://travis-ci.org/iut-lille/jersey-skeleton)
+[![Build Status](https://travis-ci.org/marmat8951/jersey-skeleton.svg?branch=master)](https://travis-ci.org/iut-lille/jersey-skeleton)
 
 # Squelette d'application web pour la semaine agile @ Univ-Lille
 
 La semaine agile conclut la formation de DUT Informatique du département Informatique de l'IUT "A" de l'Université de Lille - Sciences & Technologies. L'objectif de cette semaine est l'initiation à la démarche agile via la conception d'une application web reposant sur un serveur `REST`, un client web (HTML, CSS et *JavaScript*) et un client mobile (*Androïd*).
+
 
 Ce projet implique plusieurs technologies permettant de mettre en oeuvre une intégration continue, c'est-à-dire une automatisation de la vérification (via des tests) et du déploiement du logiciel en production.
 
