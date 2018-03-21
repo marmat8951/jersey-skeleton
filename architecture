@@ -1,0 +1,95 @@
+PATH : localhost:8080/entreedetvous
+
+ POST :
+  
+  /etudiant   Création d'un etudiant
+  /senior     Création d'un senior
+
+  {
+   "nom":"nom",
+   "prenom":"prenom",
+   "telepone":"telephone",
+   "login":"login",
+   "mail":"mail",
+   "mdp":"mdp"
+   "planning" {
+    "horaire"{
+       "jour":"jour",
+       "moment":"moment"
+    }
+   }
+  }
+
+  /service    Création d'un service
+
+  { 
+   "libelle":"libelle"
+  }
+
+  /rdv     Création d'un rdv
+  
+  {
+   "senior":"senior",
+   "etudiant":"etudiant",
+   "jour":"jour",
+   "moment":"moment",
+   "service":"service",
+   "description":"descriptio"
+  }
+
+ GET :
+  
+  /etudiant       Obtenir la liste des etudiants
+  /senior         Obtenir la liste des seniors
+  /etudiant/{id}  Obtenir l'etudiant suivant l'id
+  /senior/{id}    Obtenir l'etudiant suivant l'id
+
+  /etudiant?senior-id=id  Obtenir la liste des etudiants correspondants au senior
+
+  /etudiant?hobby=1,2,..   Obtenir la liste des etudiants qui ont les hobbies passés en paramétres   
+
+  /etudiant?jour=jour&moment=moment  Obtenir la liste des etudiants disponibles à cette plage horaire
+  
+  /service        Obtenir la liste des services
+  /service/{id}   Obtenir le service suivant l'id
+  /rdv            Obtenir la liste des rdv
+  /rdv/{id}       Obtenir le rdv suivant l'id
+  
+
+
+ DELETE :
+  
+  /utilisateur/{id}  Suppression d'un utilisateur
+  /service/{id}      Suppression d'un service
+  /rdv/{id}          Suppression d'un rdv
+
+ PUT :
+ 
+  /etudiant/{id}  Mise a jour d'un etudiant
+  /senior/{id}    Mise a jour d'un senior
+
+  {
+   "nom":"nom",
+   "prenom":"prenom",    
+   "telepone":"telephone",
+   "login":"login",
+   "mail":"mail",
+   "mdp":"mdp"
+  }
+
+  /service/{id}   Mise a jour d'un service
+
+  {
+   "libelle":"libelle"
+  }
+
+  /rdv/{id}  Mise a jour d'un rdv
+
+  {
+   "senior":"senior",
+   "etudiant":"etudiant",
+   "jour":"jour",
+   "moment":"moment",
+   "service":"service",
+   "description":"descriptio"
+  }
