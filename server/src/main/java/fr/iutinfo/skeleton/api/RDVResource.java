@@ -1,29 +1,37 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.common.dto.RDVDto;
+import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
+import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
-import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import fr.iutinfo.skeleton.common.dto.RDVDto;
 
 @Path("/RDV")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RDVResource {
-	final static Logger logger = LoggerFactory.getLogger(UserResource.class);
+	final static Logger logger = LoggerFactory.getLogger(RDVResource.class);
 	public static final RDVDao dao = getDbi().open(RDVDao.class);
 
 	public RDVResource() throws SQLException {
 	    if (!tableExist("RDV")) {
-	        logger.debug("Crate table RDV");
+	        logger.debug("Create table RDV");
 	        dao.createRDVTable();
 	    }
 	}
@@ -32,7 +40,8 @@ public class RDVResource {
     public RDVDto createRDV(RDVDto dto) {
         RDV rdv = new RDV();
         rdv.initFromDto(dto);
-        dao.insert(rdv);
+        int id = dao.insert(rdv);
+        dto.setId_senior(id);
         return dto;
     }
     
