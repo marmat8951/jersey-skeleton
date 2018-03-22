@@ -18,13 +18,10 @@ public interface ServiceDao {
 	    @GetGeneratedKeys
 	    String insert(@BindBean() Service service);
 	 
-	 @SqlQuery("select * from users where login = :login")
-	    @RegisterMapperFactory(BeanMapperFactory.class)
-	    Service findByLogin(@Bind("login") String login);
-
 	 @SqlQuery("select * from service where libelle = :libelle")
 	    @RegisterMapperFactory(BeanMapperFactory.class)
-	    Service findById(@Bind("libelle") String libelle);
+	    Service findByLibelle(@Bind("libelle") String libelle);
+
 	 
 	 @SqlUpdate("drop table if exists service")
 	    void dropServiceTable();
