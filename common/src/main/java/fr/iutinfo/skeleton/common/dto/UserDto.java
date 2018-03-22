@@ -8,6 +8,11 @@ public class UserDto {
 	private int id = 0;
 	private String password;
 	private String login;
+	private String nom;
+	private String prenom;
+	private String mail;
+	private String numero;
+	private String statut;
 
 	public String getLogin() {
 		return login;
@@ -33,4 +38,24 @@ public class UserDto {
 		this.password = password;
 	}
 
+	public String getNom() {
+		return nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+	
 }
