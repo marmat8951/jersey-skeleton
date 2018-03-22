@@ -43,6 +43,7 @@ PATH : localhost:8080/entreedetvous
   /user/senior         Obtenir la liste des seniors
   /user/etudiant/{id}  Obtenir l'etudiant suivant l'id
   /user/senior/{id}    Obtenir l'etudiant suivant l'id
+  /user/{login}        Obtenir l'utilisateur selon le login
 
   /user/etudiant?senior-id=id  Obtenir la liste des etudiants correspondants au senior
 
