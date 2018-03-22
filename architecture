@@ -12,11 +12,11 @@ PATH : localhost:8080/entreedetvous
    "login":"login",
    "mail":"mail",
    "mdp":"mdp"
-   "planning" {
-    "horaire"{
+   "planning" :
+      ["horaire"{
        "jour":"jour",
        "moment":"moment"
-    }
+    }]
    }
   }
 
