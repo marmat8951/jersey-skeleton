@@ -20,7 +20,27 @@ public class UserDto {
 
 
 
-    public int getId() {
+    public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
+	public int getId() {
         return id;
     }
 
