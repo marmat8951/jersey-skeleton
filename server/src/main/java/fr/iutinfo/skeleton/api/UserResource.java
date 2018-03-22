@@ -30,6 +30,7 @@ public class UserResource {
     @POST
     public UserDto createUser(UserDto dto) {
         User user = new User();
+        
         user.initFromDto(dto);
         user.resetPasswordHash();
         int id = dao.insert(user);
