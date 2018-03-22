@@ -1,7 +1,7 @@
 package fr.iutinfo.skeleton.common.dto;
 
 public class ServiceDto {
-	private String libelle; 
+	private String libelle=""; 
 	
 	public String getLibelle() {
 		return libelle; 

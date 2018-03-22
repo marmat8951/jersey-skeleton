@@ -2,8 +2,8 @@ PATH : localhost:8080/entreedetvous
 
  POST :
   
-  /etudiant   Création d'un etudiant
-  /senior     Création d'un senior
+  /user/etudiant   Création d'un etudiant
+  /user/senior     Création d'un senior
 
   {
    "nom":"nom",

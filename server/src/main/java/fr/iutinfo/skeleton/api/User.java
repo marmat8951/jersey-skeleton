@@ -11,26 +11,16 @@ import java.security.Principal;
 import java.security.SecureRandom;
 
 public class User implements Principal {
-    final static Logger logger = LoggerFactory.getLogger(User.class);
-    private static User anonymous = new User(-1, "Anonymous", "anonym");
-    private String name;
-    private String alias;
+    private static User anonymous = new User(-1, "Anonymous");
     private int id = 0;
-    private String email;
+    private String login;
     private String password;
     private String passwdHash;
     private String salt;
-    private String search;
 
-    public User(int id, String name) {
+    public User(int id, String login) {
         this.id = id;
-        this.name = name;
-    }
-
-    public User(int id, String name, String alias) {
-        this.id = id;
-        this.name = name;
-        this.alias = alias;
+        this.login = name;
     }
 
     public User() {
@@ -40,13 +30,6 @@ public class User implements Principal {
         return anonymous;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public int getId() {
         return id;
@@ -56,12 +39,12 @@ public class User implements Principal {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -100,16 +83,14 @@ public class User implements Principal {
         if (getClass() != arg.getClass())
             return false;
         User user = (User) arg;
-        return name.equals(user.name) && alias.equals(user.alias) && email.equals(user.email) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
+        return login.equals(user.login) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((alias == null) ? 0 : alias.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((alias == null) ? 0 : login.hashCode());
         result = prime * result + ((passwdHash == null) ? 0 : passwdHash.hashCode());
         result = prime * result + ((salt == null) ? 0 : salt.hashCode());
         return result;
@@ -117,15 +98,7 @@ public class User implements Principal {
     
     @Override
     public String toString() {
-        return id + ": " + alias + ", " + name + " <" + email + ">";
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
+        return id + ": " + login;
     }
 
     public String getSalt() {
@@ -160,29 +133,17 @@ public class User implements Principal {
         return this.getId() == getAnonymousUser().getId();
     }
 
-    public String getSearch() {
-        search = name + " " + alias + " " + email;
-        return search;
-    }
-
-    public void setSearch(String search) {
-        this.search = search;
-    }
 
     public void initFromDto(UserDto dto) {
-        this.setAlias(dto.getAlias());
-        this.setEmail(dto.getEmail());
+        this.setLogin(dto.getLogin());
         this.setId(dto.getId());
-        this.setName(dto.getName());
         this.setPassword(dto.getPassword());
     }
 
     public UserDto convertToDto() {
         UserDto dto = new UserDto();
-        dto.setAlias(this.getAlias());
-        dto.setEmail(this.getEmail());
+        dto.setLogin(this.getLogin());
         dto.setId(this.getId());
-        dto.setName(this.getName());
         dto.setPassword(this.getPassword());
         return dto;
     }

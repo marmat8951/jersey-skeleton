@@ -9,7 +9,8 @@ drop table if exists service;
 -- Table des utilisateurs avec leur login et leur mdp qu'ils donnent lors de la création du compte
 create table users(id_user serial primary key,
        	           login text,
-		    mdp text
+		    mdp text,
+		    salt text
 		  ); 
 
 -- Table contenant les informations liées à un utilisateur donné, avec son statut (étudiant, senior)
