@@ -16,15 +16,15 @@ public interface ServiceDao {
 	 
 	 @SqlUpdate("insert into service (libelle) values (:libelle)")
 	    @GetGeneratedKeys
-	    int insert(@BindBean() Service service);
+	    String insert(@BindBean() Service service);
 	 
 	 @SqlQuery("select * from users where login = :login")
 	    @RegisterMapperFactory(BeanMapperFactory.class)
-	    User findByLogin(@Bind("login") String login);
+	    Service findByLogin(@Bind("login") String login);
 
 	 @SqlQuery("select * from service where libelle = :libelle")
 	    @RegisterMapperFactory(BeanMapperFactory.class)
-	    User findById(@Bind("libelle") String libelle);
+	    Service findById(@Bind("libelle") String libelle);
 	 
 	 @SqlUpdate("drop table if exists service")
 	    void dropServiceTable();
