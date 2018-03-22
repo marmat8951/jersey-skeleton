@@ -24,12 +24,13 @@ public class UserResource {
         if (!tableExist("users")) {
             logger.debug("Crate table users");
             dao.createUserTable();
-            dao.insert(new User(0, "Margaret Thatcher", "la Dame de fer"));
+            dao.insert(new User(0, "UtilisateurTest"));
         }
     }
 
     @POST
-    public UserDto createUser(UserDto dto) {
+    @Path("/etudiant")
+    public UserDto createEtudiant(UserDto dto) {
         User user = new User();
         user.initFromDto(dto);
         user.resetPasswordHash();
@@ -37,11 +38,24 @@ public class UserResource {
         dto.setId(id);
         return dto;
     }
+    
+    @POST
+    @Path("/senior")
+    public UserDto createSenior(UserDto dto) {
+        User user = new User();
+        user.initFromDto(dto);
+        user.resetPasswordHash();
+        int id = dao.insert(user);
+        dto.setId(id);
+        return dto;
+    }
+    
+    
 
     @GET
-    @Path("/{name}")
-    public UserDto getUser(@PathParam("name") String name) {
-        User user = dao.findByName(name);
+    @Path("etudiant/{id}")
+    public UserDto getEtudiantById(@PathParam("id") int id) {
+        User user = dao.findById(id);
         if (user == null) {
             throw new WebApplicationException(404);
         }
@@ -49,14 +63,9 @@ public class UserResource {
     }
 
     @GET
-    public List<UserDto> getAllUsers(@QueryParam("q") String query) {
+    public List<UserDto> getAllUsers() {
         List<User> users;
-        if (query == null) {
             users = dao.all();
-        } else {
-            logger.debug("Search users with query: " + query);
-            users = dao.search("%" + query + "%");
-        }
         return users.stream().map(User::convertToDto).collect(Collectors.toList());
     }
 
