@@ -27,7 +27,7 @@ public interface RDVDao {
     
     @SqlUpdate("insert into RDV (id_senior, jour, matin, aprem, soir, libelle) values (:id_senior, :jour, :matin, :aprem, :soir, :libelle)")
     @GetGeneratedKeys
-    int insert(@BindBean() User user);
+    int insert(@BindBean() RDV rdv);
 
     @SqlQuery("select * from RDV where id_senior = :id_senior")
     @RegisterMapperFactory(BeanMapperFactory.class)
@@ -35,6 +35,11 @@ public interface RDVDao {
     
     @SqlUpdate("drop table if exists RDV")
     void dropRDVTable();
+    
+    /*
+    @SqlUpdate("UPDATE RDV\n SET id_etu = :id_etu WHERE id_senior = :id_senior")
+    void ValideRdv(@Bind("id_senior") int id_senior, @Bind("id_etu") int id_etu);
+    */
     
     @SqlUpdate("delete from RDV where id_senior = :id_senior")
     void delete(@Bind("id_senior") int id);
