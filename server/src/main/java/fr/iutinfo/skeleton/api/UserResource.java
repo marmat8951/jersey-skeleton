@@ -52,7 +52,22 @@ public class UserResource {
     
     @POST
     @Path("/test")
-    public UserDto dtoTest() {
+    public UserDto dtoTestPost() {
+    	UserDto udto = new UserDto();
+    	udto.setId(1);
+    	udto.setLogin("yoloswag");
+    	udto.setMail("etudiant@etudiant");
+    	udto.setNom("Machta");
+    	udto.setPrenom("Ossama");
+    	udto.setStatut("Etudiant");
+    	return udto;
+   
+    	
+    }
+    
+    @GET
+    @Path("/test")
+    public UserDto dtoTestGet() {
     	UserDto udto = new UserDto();
     	udto.setId(1);
     	udto.setLogin("yoloswag");
