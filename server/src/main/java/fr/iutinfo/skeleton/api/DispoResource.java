@@ -47,7 +47,7 @@ public class DispoResource {
     }
 	
 	 @GET
-	    @Path("dispo/{id}")
+	    @Path("dispo/{id_user}")
 	    public DispoDto getDispoById(@PathParam("id") int id) {
 	        Dispo dispo= dao.findByIdUser(id);
 	        if (dispo == null) {
@@ -65,7 +65,7 @@ public class DispoResource {
 	    
 	    
 	    @DELETE
-	    @Path("/{id}")
+	    @Path("/{id_user}")
 	    public void deleteDispo(@PathParam("id") int id) {
 	        dao.delete(id);
 	    }
