@@ -18,10 +18,22 @@ public class Information implements Principal {
     private String mail;
     private String numero;
     private Type type;
-    
+    private String password;
+    final static Logger logger = LoggerFactory.getLogger(UserDto.class);
 
 
-    @Override
+    public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	@Override
     public String toString() {
         return uid+": "+nom + ", " +prenom+", "+mail+", "+numero;
     }
