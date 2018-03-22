@@ -1,7 +1,7 @@
 package fr.iutinfo.skeleton.api;
-import fr.iutinfo.skeleton.api.User;
+
 import fr.iutinfo.skeleton.common.dto.DispoDto;
-import fr.iutinfo.skeleton.common.dto.UserDto;
+
 
 public class Dispo {
 	private static Dispo disponibilité = new Dispo();

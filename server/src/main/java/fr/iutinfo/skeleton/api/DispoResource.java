@@ -21,8 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.iutinfo.skeleton.common.dto.DispoDto;
-import fr.iutinfo.skeleton.common.dto.RDVDto;
-import fr.iutinfo.skeleton.common.dto.ServiceDto;
 
 @Path("/dispo")
 @Produces(MediaType.APPLICATION_JSON)
