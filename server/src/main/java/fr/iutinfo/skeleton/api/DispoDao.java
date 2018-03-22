@@ -12,7 +12,7 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface DispoDao {
 	
-	 @SqlUpdate("create table disponibilité (id_user int not null,\n" + 
+	 @SqlUpdate("create table disponibilité (id_user int not null" + 
 	 		"       	     		   jour text,\n" + 
 	 		"			   matin boolean,\n" + 
 	 		"			   aprem boolean,\n" + 
