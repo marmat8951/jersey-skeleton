@@ -6,20 +6,19 @@ import org.slf4j.LoggerFactory;
 import java.security.Principal;
 
 public class UserDto {
-    final static Logger logger = LoggerFactory.getLogger(UserDto.class);
-    private String name;
-    private String alias;
-    private int id = 0;
-    private String email;
-    private String password;
 
-    public String getEmail() {
-        return email;
-    }
+	final static Logger logger = LoggerFactory.getLogger(UserDto.class);
+	private int id = 0;
+	private String password;
+	private String login;
+	private String nom;
+	private String prenom;
+	private String mail;
+	private String numero;
+	private String statut;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
+
 
     public int getId() {
         return id;
@@ -29,13 +28,6 @@ public class UserDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPassword() {
         return this.password;
@@ -45,12 +37,26 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getAlias() {
-        return alias;
-    }
+    
 
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
+	public String getNom() {
+		return nom;
+	}
 
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+	
 }

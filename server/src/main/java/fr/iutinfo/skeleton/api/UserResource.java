@@ -24,7 +24,6 @@ public class UserResource {
         if (!tableExist("users")) {
             logger.debug("Crate table users");
             dao.createUserTable();
-            dao.insert(new User(0, "UtilisateurTest"));
         }
     }
 
@@ -32,6 +31,7 @@ public class UserResource {
     @Path("/etudiant")
     public UserDto createEtudiant(UserDto dto) {
         User user = new User();
+        
         user.initFromDto(dto);
         user.resetPasswordHash();
         int id = dao.insert(user);
