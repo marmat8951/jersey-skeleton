@@ -23,14 +23,9 @@ public class Helper {
         return createUser(user);
     }
 
-    static User createUserWithAlias(String name, String alias) {
-        User user = new User(0, name, alias);
-        return createUser(user);
-    }
 
     static User createUserWithEmail(String name, String email) {
         User user = new User(0, name);
-        user.setEmail(email);
         return createUser(user);
     }
 
@@ -51,8 +46,6 @@ public class Helper {
 
     private static User createFullUSer(String name, String alias, String email, String paswword) {
         User user = new User(0, name);
-        user.setAlias(alias);
-        user.setEmail(email);
         user.setPassword(paswword);
         int id = dao.insert(user);
         user.setId(id);
