@@ -1,14 +1,11 @@
 package fr.iutinfo.skeleton.api;
 
-import com.google.common.base.Charsets;
-import com.google.common.hash.Hasher;
-import com.google.common.hash.Hashing;
-import fr.iutinfo.skeleton.common.dto.UserDto;
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.security.Principal;
-import java.security.SecureRandom;
+import fr.iutinfo.skeleton.common.dto.UserDto;
 
 public class Information implements Principal {
 

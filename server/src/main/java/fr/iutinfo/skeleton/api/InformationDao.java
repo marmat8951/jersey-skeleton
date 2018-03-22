@@ -22,17 +22,17 @@ public interface InformationDao {
     int insert(@BindBean() Information info);
 
     
-    @SqlQuery("select * from informations where uid = :id")
+    @SqlQuery("select * from informations where id_user = :id")
     @RegisterMapperFactory(BeanMapperFactory.class)
     Information findById(@Bind("id") int id);
 
     @SqlUpdate("drop table if exists informations")
     void dropUserTable();
 
-    @SqlUpdate("delete from informations where uid = :id")
+    @SqlUpdate("delete from informations where id_user = :id")
     void delete(@Bind("id") int id);
 
-    @SqlQuery("select * from informations order by id")
+    @SqlQuery("select * from informations order by id_user")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<Information> all();
 

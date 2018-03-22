@@ -27,6 +27,22 @@ public class UserResource {
             logger.debug("Crate table users");
             dao.createUserTable();
         }
+        if (!tableExist("informations")) {
+        	logger.debug("Create table information");
+        	infodao.createInfoTable();
+        }
+        User u1 = new User();
+        Information ui1 = new Information();
+        u1.setId(1);
+        u1.setLogin("test");
+        u1.setPassword("pass");
+        ui1.setUid(1);
+        ui1.setMail("mail@mail");
+        ui1.setNom("nom");
+        ui1.setNumero("0606060606");
+        ui1.setType("ETUDIANT");
+        dao.insert(u1);
+        infodao.insert(ui1);
     }
 
     @POST
