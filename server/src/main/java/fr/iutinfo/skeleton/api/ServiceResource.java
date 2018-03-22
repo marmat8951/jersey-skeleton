@@ -49,7 +49,7 @@ public class ServiceResource {
     
     @GET
     @Path("service/{libelle}")
-    public ServiceDto getEtudiantById(@PathParam("libelle") String libelle) {
+    public ServiceDto getServiceById(@PathParam("libelle") String libelle) {
         Service service = dao.findById(libelle);
         if (service == null) {
             throw new WebApplicationException(404);
