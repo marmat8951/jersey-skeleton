@@ -5,11 +5,13 @@ import java.sql.Time;
 public class RDVDto {
 	//final static Logger logger = LoggerFactory.getLogger(RDVDto.class);
 	private int id_senior ;
+	private int id_etu;
 	private Time jour;
 	private boolean matin;
 	private boolean aprem;
 	private boolean soir;
 	private String libelle;
+	
 	public int getId_senior() {
 		return id_senior;
 	}
@@ -45,6 +47,12 @@ public class RDVDto {
 	}
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+	public int getId_etu() {
+		return id_etu;
+	}
+	public void setId_etu(int id_etu) {
+		this.id_etu = id_etu;
 	}
 	
 	
