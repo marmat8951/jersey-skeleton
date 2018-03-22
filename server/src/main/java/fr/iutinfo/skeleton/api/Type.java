@@ -5,16 +5,16 @@ public enum Type {
 	public String toString() {
 		String res;
 		if(this.equals(ADMIN)) {
-			return "admin";
+			return "ADMIN";
 		}else if(this.equals(ETUDIANT)) {
-			return "etudiant";
+			return "ETUDIANT";
 		}else {
-			return "senior";
+			return "SENIOR";
 		}
 	}
 	
 	
-	public Type getString(String role) {
+	public static Type getRole(String role) {
 		if(role.equalsIgnoreCase("admin")) {
 			return ADMIN;
 		}else if(role.equalsIgnoreCase("etudiant")) {

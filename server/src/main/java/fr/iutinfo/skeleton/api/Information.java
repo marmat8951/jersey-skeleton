@@ -28,12 +28,19 @@ public class Information implements Principal {
 
 
     public void initFromDto(UserDto dto) {
-    	//TODO
-       
+    	setMail(dto.getMail());
+    	setNom(dto.getNom());
+    	setPrenom(dto.getPrenom());
+    	setNumero(dto.getNumero());
+    	setType(Type.getRole(dto.getStatut()));
     }
 
     public void pushToDto(UserDto dto) {
-    	//TODO
+    	dto.setMail(getMail());
+    	dto.setNom(getNom());
+    	dto.setPrenom(getPrenom());
+    	dto.setNumero(getNumero());
+    	dto.setStatut(getType().toString());
     }
 
 
@@ -87,11 +94,19 @@ public class Information implements Principal {
 	}
 
 
-	public Type getType() {
+	public Type getType2() {
 		return type;
 	}
+	
+	public String getType() {
+		return type.toString();
+	}
 
-
+	public void setType(String type) {
+		this.type = Type.getRole(type);
+	}
+	
+	
 	public void setType(Type type) {
 		this.type = type;
 	}

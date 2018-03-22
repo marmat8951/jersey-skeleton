@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,7 @@ import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 public class UserResource {
     final static Logger logger = LoggerFactory.getLogger(UserResource.class);
     private static UserDao dao = getDbi().open(UserDao.class);
+    private static InformationDao infodao = getDbi().open(InformationDao.class);
 
     public UserResource() throws SQLException {
         if (!tableExist("users")) {
@@ -31,11 +33,14 @@ public class UserResource {
     @Path("/etudiant")
     public UserDto createEtudiant(UserDto dto) {
         User user = new User();
-        
+        Information info = new Information();
         user.initFromDto(dto);
         user.resetPasswordHash();
         int id = dao.insert(user);
         dto.setId(id);
+        info.setUid(id);
+        info.setType("ETUDIANT");
+        infodao.insert(info);
         return dto;
     }
     
@@ -43,10 +48,14 @@ public class UserResource {
     @Path("/senior")
     public UserDto createSenior(UserDto dto) {
         User user = new User();
+        Information info = new Information();
         user.initFromDto(dto);
         user.resetPasswordHash();
         int id = dao.insert(user);
         dto.setId(id);
+        info.setUid(id);
+        info.setType("SENIOR");
+        infodao.insert(info);
         return dto;
     }
     
@@ -59,7 +68,7 @@ public class UserResource {
     	udto.setMail("etudiant@etudiant");
     	udto.setNom("Machta");
     	udto.setPrenom("Ossama");
-    	udto.setStatut("Etudiant");
+    	udto.setStatut("ETUDIANT");
     	return udto;
    
     	
@@ -74,7 +83,7 @@ public class UserResource {
     	udto.setMail("etudiant@etudiant");
     	udto.setNom("Machta");
     	udto.setPrenom("Ossama");
-    	udto.setStatut("Etudiant");
+    	udto.setStatut("ETUDIANT");
     	return udto;
    
     	
@@ -84,23 +93,36 @@ public class UserResource {
     @Path("etudiant/{id}")
     public UserDto getEtudiantById(@PathParam("id") int id) {
         User user = dao.findById(id);
+        Information i = infodao.findById(id);
         if (user == null) {
             throw new WebApplicationException(404);
         }
-        return user.convertToDto();
+        UserDto udto = user.convertToDto();
+        i.pushToDto(udto);
+        return udto;
     }
 
     @GET
     public List<UserDto> getAllUsers() {
         List<User> users;
             users = dao.all();
-        return users.stream().map(User::convertToDto).collect(Collectors.toList());
+        List<UserDto> res = new ArrayList<>();
+        
+            
+        for(User i : users) {
+        	UserDto udto = i.convertToDto();
+        	Information info = infodao.findById(udto.getId());
+        	info.pushToDto(udto);
+        	res.add(udto);        	
+        }
+        return res;
     }
 
     @DELETE
     @Path("/{id}")
     public void deleteUser(@PathParam("id") int id) {
         dao.delete(id);
+        infodao.delete(id);
     }
 
 }
