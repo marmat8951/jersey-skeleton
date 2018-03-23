@@ -39,7 +39,7 @@ public class Helper {
 
     private static User createUser(User user) {
         int id = dao.insert(user);
-        user.setId(id);
+        user.setUserId(id);
         return user;
     }
 
@@ -48,7 +48,7 @@ public class Helper {
         User user = new User(0, name);
         user.setPassword(paswword);
         int id = dao.insert(user);
-        user.setId(id);
+        user.setUserId(id);
         return user;
     }
 

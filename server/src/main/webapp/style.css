@@ -9,6 +9,9 @@ footer{
 	border :2px solid #0f223d;
 	margin-top: 8%;
 	bottom: 0;
+    text-align: center;
+    color:white;
+    background-color:#354665; 
 }
 
 button {
@@ -43,6 +46,8 @@ header{
   	position: fixed;
   	top:0;
   	background-color: rgba(53, 70, 101, 1); 
+    z-index: 1000;
+    opacity: 0.95;
  /* 	padding-top: 5px;*/
 }
 
@@ -51,6 +56,7 @@ h2{
 }
 
 #recherche>p{
+    margin-top: 2.5%;
 	font-size: 2em;
 	color:white;
 }
@@ -75,11 +81,14 @@ h2{
 #entete {
 	text-align: center;
 	margin :auto;
-	padding: 5%;
+	padding: 4%;
 	background-image: url(image/etu.jpg); 
 	color:white;
-	font-size: 25px;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+}
+
+#entete>h1{
+    font-size: 3.5em;
 }
 
 #btn {
@@ -110,19 +119,21 @@ h2{
 }
 
 #explication{
-	color:#354665;
+	color:white;
 	width: 100%;
 }
 
-#explication_precis{
+#explication_precis1, #explication_precis2, #explication_precis3{
+    background-color: #354665;
     display: inline-block;
     vertical-align: top;
-    margin-left: 8%;
+    margin-left: 9%;
     margin-top: 2%;
     border: 2px solid #F95B53;
     border-radius: 10px;
     text-align: center;
     padding:1%;
+    padding-top: 1.7%;
     font-size: 20px;
 }
 
@@ -234,8 +245,9 @@ label.label-floatlabel {
     Toute les infos gridster sont sur : https://dsmorse.github.io/gridster.js/
 */
 .gridster{
-    margin-left: 12%;
-    margin-top: 3%;
+    margin-top: 4%;
+    margin-right: 2%;
+    text-align: center;
 }
 
 .gridster>ul>li>img:hover{

@@ -6,15 +6,17 @@ drop table if exists hobbies;
 drop table if exists service;
 
 -- Table des utilisateurs avec leur login et leur mdp qu'ils donnent lors de la création du compte
-create table user(id_user serial primary key,
-       	           login text,
-		    mdp text,
-		    nom text,
-		    prenom text,
-		    telephone text,
-		    statut text,
-		    mail text		    
-		  ); 
+create table user (
+       nom varchar(100),
+       prenom varchar(100),
+       login varchar(100) primary key,
+       numero varchar(100),
+       statut varchar(100),
+       email varchar(100),
+       passwdHash varchar(64),
+       salt varchar(64),
+       search varchar(1024)
+       )
 
 -- Table contenant les différents hobbies possibles qui seront listés dans la gestion du profil
 create table hobbies(id_hobbie serial primary key,

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Users</title>
+        <meta charset='utf-8'>
+        <!-- jQuery -->
+        <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <h1>Liste des utilisateurs</h1>
+        <button type='button' onClick='listeUsers()' name='buttonListe'>Liste des utilisateurs</button>
+        <script>
+
+
+
+
+
+            function listeUsers(){
+                $.ajax({
+                    url: "http://localhost:8080/v1/user",
+                    type: "GET",
+                    dataType : "json",
+                    success: function( json ) {
+                        var tab = JSON.stringify(json);
+                        var js=JSON.parse(tab);
+                        var res="";
+                        for(var cpt=0;cpt<js.length;cpt++){
+                            res=res+ "<li>  Id : "+js[cpt].id +"    Login : "+js[cpt].alias+"    Nom : "+js[cpt].name+"    email : "+js[cpt].email+"</li>";
+                        }
+                        $('body').html(res);
+                    },
+                    error: function( xhr, status, errorThrown ) {
+                        alert( "Sorry, there was a problem!" );
+                        console.log( "Error: " + errorThrown );
+                        console.log( "Status: " + status );
+                        console.dir( xhr );
+                    },
+                    complete: function( xhr, status ) {
+                    }
+                });
+
+            }
+
+        </script>
+    </body>
+</html>

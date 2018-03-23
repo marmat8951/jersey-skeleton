@@ -10,9 +10,23 @@ $(document).ready(function() {
     $('#logo').click(function() {
         location.reload();
     });
+
+    $('.gridster').on('click','#conduite',function(){alert('it works');})
+    $('.gridster').on('click','#info',function(){alert('it works');})
+    $('.gridster').on('click','#lecon',function(){alert('it works');})
+    $('.gridster').on('click','#course',function(){alert('it works');})
+
     $('#onglet').hide();
     $('#deconnexion').hide();
     console.log( "ready!" );
+
+    $('#explication_precis1').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis2').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis3').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis1').animate({height: '150px', opacity: '1'}, "slow");
+    $('#explication_precis2').animate({height: '150px', opacity: '1'}, "slow");
+    $('#explication_precis3').animate({height: '150px', opacity: '1'}, "slow");
+
 });
 
 function checkValue(element){
@@ -81,12 +95,40 @@ function inscription(){
         }),
         success : function(data, textStatus, jqXHR) {
             alert("Utilisateur créé");
-	      $('#conteneurAccueil').show();
-       
-        $('#deconnexion').show();
-        $('#onglet').hide();
+            $('#conteneurAccueil').show();
+
+            $('#deconnexion').show();
+            $('#onglet').hide();
         },
         error : function(jqXHR, textStatus, errorThrown) {
+            console.log('postUser error: ' + textStatus);
+        }
+    });
+
+}
+
+function connexion(){
+
+    var login=document.getElementById("login").value;
+    var mdp=document.getElementById("pass").value;
+
+    <!--changer le type en menu deroulant (senior/etudiant)-->
+        var url="v1/user/"+login; 
+    $.ajax({
+        type : 'GET',
+        url : url,
+        dataType : "json",
+        success : function(data, textStatus, jqXHR) {
+            var tab = JSON.stringify(json);
+            var js=JSON.parse(tab);
+                alert("Connexion OK !");
+                $('#conteneurAccueil').show();
+                $('#deconnexion').show();
+                $('#onglet').hide();
+          
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            alert("Login non valide !")
             console.log('postUser error: ' + textStatus);
         }
     });

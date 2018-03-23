@@ -26,7 +26,7 @@ public interface DispoDao {
 
 	@SqlQuery("select * from dispo where iduser = :iduser")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	Dispo findByIduser(@Bind("iduser") int id);
+	List<Dispo> findByIduser(@Bind("iduser") int id);
 
 	@SqlUpdate("drop table if exists dispo")
 	void dropDispoTable();
