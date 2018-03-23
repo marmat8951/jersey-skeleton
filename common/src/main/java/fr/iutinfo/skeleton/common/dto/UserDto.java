@@ -6,41 +6,22 @@ import org.slf4j.LoggerFactory;
 import java.security.Principal;
 
 public class UserDto {
+    final static Logger logger = LoggerFactory.getLogger(UserDto.class);
+    private String name;
+    private String alias;
+    private int id = 0;
+    private String email;
+    private String password;
 
-	final static Logger logger = LoggerFactory.getLogger(UserDto.class);
-	private int id = 0;
-	private String password;
-	private String login;
-	private String nom;
-	private String prenom;
-	private String mail;
-	private String numero;
-	private String statut;
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-
-
-    public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
-
-	public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -48,6 +29,13 @@ public class UserDto {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getPassword() {
         return this.password;
@@ -57,34 +45,12 @@ public class UserDto {
         this.password = password;
     }
 
-    
+    public String getAlias() {
+        return alias;
+    }
 
-	public String getNom() {
-		return nom;
-	}
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
 
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public String getStatut() {
-		return statut;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	
 }

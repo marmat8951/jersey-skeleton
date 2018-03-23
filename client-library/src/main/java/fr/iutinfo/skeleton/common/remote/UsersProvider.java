@@ -39,7 +39,7 @@ public class UsersProvider {
     }
 
     public UserDto addUser(UserDto user) {
-        logger.debug("Create user : " + user.getLogin());
+        logger.debug("Create user : " + user.getName());
         Entity<UserDto> userEntity = Entity.entity(user, MediaType.APPLICATION_JSON);
 
         return ClientBuilder.newClient()

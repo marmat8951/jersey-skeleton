@@ -41,7 +41,7 @@ public class Main {
 
     private static void addUser() {
         UserDto user = new UserDto();
-        user.setLogin(queryAndReadLine("Quel est ton nom ?"));
+        user.setName(queryAndReadLine("Quel est ton nom ?"));
         usersProvider.addUser(user);
     }
 
