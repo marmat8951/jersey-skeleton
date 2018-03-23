@@ -12,6 +12,14 @@ $(document).ready(function() {
     $('#onglet').hide();
     $('#deconnexion').hide();
     console.log( "ready!" );
+
+    $('#explication_precis1').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis2').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis3').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis1').animate({height: '150px', opacity: '1'}, "slow");
+    $('#explication_precis2').animate({height: '150px', opacity: '1'}, "slow");
+    $('#explication_precis3').animate({height: '150px', opacity: '1'}, "slow");
+
 });
 
 function checkValue(element){
