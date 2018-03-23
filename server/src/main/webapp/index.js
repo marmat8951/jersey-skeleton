@@ -4,14 +4,29 @@ $(document).ready(function() {
         $('#connexion').hide();
         $('#deconnexion').show();
         $('#onglet').show();
+    document.body.style.backgroundColor = "#354665";
     });
 
     $('#logo').click(function() {
         location.reload();
     });
+
+    $('.gridster').on('click','#conduite',function(){alert('it works');})
+    $('.gridster').on('click','#info',function(){alert('it works');})
+    $('.gridster').on('click','#lecon',function(){alert('it works');})
+    $('.gridster').on('click','#course',function(){alert('it works');})
+
     $('#onglet').hide();
     $('#deconnexion').hide();
     console.log( "ready!" );
+
+    $('#explication_precis1').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis2').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis3').animate({height: '150px', opacity: '0.4'}, "slow");
+    $('#explication_precis1').animate({height: '150px', opacity: '1'}, "slow");
+    $('#explication_precis2').animate({height: '150px', opacity: '1'}, "slow");
+    $('#explication_precis3').animate({height: '150px', opacity: '1'}, "slow");
+
 });
 
 function checkValue(element){
@@ -27,9 +42,9 @@ ong1 = document.getElementById('inscription_login_page');
 ong2 = document.getElementById('connexion_login_page');
 contenu = document.getElementById('content_login_page');
 
-const identificationPage = "<div class='container'><div class='row centered-form'><div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'><div class='panel'><div class='panel-body'><form role='form'><div class='form-group'><input type='text' name='login' id='login' class='form-control input-sm' placeholder='login'></div><div class='form-group'><input type='password' name='pass' id='pass' class='form-control input-sm' placeholder='password'></div></div><button type='button' onClick='connexion()' name='buttonConnexion' class='btn btn-info btn-block'>Connexion</button></form></div></div></div></div></div>";
+const identificationPage = "<div class='container'><div class='row centered-form'><div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'><div class='panel'><div class='panel-body'><div class='form-group'><input type='text' name='login' id='login' class='form-control input-sm' placeholder='login'></div><div class='form-group'><input type='password' name='pass' id='pass' class='form-control input-sm' placeholder='password'></div><input type='submit' value='Connexion' class='btn btn-info btn-block'></div></div></div></div></div>";
 
-const inscriptionPage = "<div class='container'><div class='row centered-form'><div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'><div class='panel'><div class='panel-body'><form role='form'><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='first_name' id='first_name' class='form-control input-sm floatlabel' placeholder='First Name'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='last_name' id='last_name' class='form-control input-sm' placeholder='Last Name'></div></div></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='numero' id='numero' class='form-control input-sm floatlabel' placeholder='Number'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><select name='type' id='type'><option>etudiant</option><option>senior</option></select></div></div></div><div class='form-group'><input type='email' name='email' id='email' class='form-control input-sm' placeholder='Email Address'></div><div class='form-group'><input type='text' name='login' id='login' class='form-control input-sm' placeholder='Login'></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password' id='password' class='form-control input-sm' placeholder='Password'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password_confirmation' id='password_confirmation' class='form-control input-sm' placeholder='Confirm Password'></div></div></div><button type='button' onClick='inscription()' name='buttonInscription' class='btn btn-info btn-block'>Inscription</button></form></div></div></div></div></div>";
+const inscriptionPage = "<div class='container'><div class='row centered-form'><div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'><div class='panel'><div class='panel-body'><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='first_name' id='first_name' class='form-control input-sm floatlabel' placeholder='First Name'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='last_name' id='last_name' class='form-control input-sm' placeholder='Last Name'></div></div></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='numero' id='numero' class='form-control input-sm floatlabel' placeholder='Number'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><select name='type' id='type' class='form-control'><option>etudiant</option><option>senior</option></select></div></div></div><div class='form-group'><input type='email' name='email' id='email' class='form-control input-sm' placeholder='Email Address'></div><div class='form-group'><input type='text' name='login' id='login' class='form-control input-sm' placeholder='Login'></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password' id='password' class='form-control input-sm' placeholder='Password'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password_confirmation' id='password_confirmation' class='form-control input-sm' placeholder='Confirm Password'></div></div></div><button type='button' onClick='inscription()' name='buttonInscription' class='btn btn-info btn-block'>Inscription</button></div></div></div></div></div>";
 contenu.innerHTML = identificationPage;
 
 function nonactive(){
