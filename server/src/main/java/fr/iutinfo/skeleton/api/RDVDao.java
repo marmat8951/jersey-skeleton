@@ -11,10 +11,10 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface RDVDao {
-    @SqlUpdate("create table rdv(id_senior int not null,\n" + 
-    		"       	         jour text, matin boolean, aprem boolean, soir boolean"
-    		+ " id_etu int, foreign key(libelle) references service(libelle), foreign key(id_senior) references users(id_user)"
-    		+ "constraint pk_rdv primary key(id_senior,jour,matin,aprem,soir)") void createRDVTable();
+    @SqlUpdate("create table rdv(id_senior int not null," + 
+    		"jour text, matin boolean, aprem boolean, soir boolean,"
+    		+ " id_etu int, libelle text, foreign key(libelle) references service(libelle), foreign key(id_senior) references users(id_user)"
+    		+ "constraint pk_rdv primary key(id_senior,jour,matin,aprem,soir))") void createRDVTable();
     	
 
     
