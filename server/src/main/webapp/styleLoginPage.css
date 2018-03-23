@@ -20,7 +20,7 @@
     display: block;
     color: black;
     text-align: center;
-    width: 10px;
+    width: 100px;
     height: 30px;
     line-height: 30px;
     text-decoration: none;
@@ -52,7 +52,7 @@
 }
 
 #form-groupe-login-page{
-    width : 100px;
+    width : 100%;
 }
 
 #btn_login_page{
