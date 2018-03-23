@@ -137,7 +137,7 @@ function connexion(){
 
         },
         error : function(jqXHR, textStatus, errorThrown) {
-            alert("Login non valide !")
+            alert("Login ou mot de passe incorrect !")
             console.log('postUser error: ' + textStatus);
         }
     });
