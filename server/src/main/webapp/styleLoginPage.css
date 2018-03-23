@@ -20,7 +20,7 @@
     display: block;
     color: black;
     text-align: center;
-    width: 10px;
+    width: 100px;
     height: 30px;
     line-height: 30px;
     text-decoration: none;
@@ -51,21 +51,6 @@
     border-radius: 8% 8% 8% 8%;
 }
 
-#form-groupe-login-page{
-    width : 100px;
-}
-
-#btn_login_page{
-    position: absolute; /* postulat de départ */
-    left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
-    padding: 5px;
-}
-
-.div_inline_block{
-    width: 50%;
-}
-
 .centered-form{
     margin-top: 60px;
     width: 10%;
@@ -75,10 +60,4 @@
     background: #0f223d;
     width: 3450%;
     transform: translate(-27%,-10%); 
-}
-
-label.label-floatlabel {
-    font-weight: bold;
-    color: #46b8da;
-    font-size: 11px;
 }
