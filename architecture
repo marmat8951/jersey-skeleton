@@ -1,24 +1,18 @@
-PATH : localhost:8080/entreedetvous
+PATH : localhost:8080/v1/
 
  POST :
   
-  /user/etudiant   Création d'un etudiant
-  /user/senior     Création d'un senior
+  /user Création d'un utilisateur
 
-  {
-   "nom":"nom",
-   "prenom":"prenom",
-   "telepone":"telephone",
-   "login":"login",
-   "mail":"mail",
-   "mdp":"mdp"
-   "planning" :
-      ["horaire"{
-       "jour":"jour",
-       "moment":"moment"
-    }]
-   }
-  }
+{
+"nom" : "{nom}",
+"prenom" : "{prenom}",
+"login" : "{login}",	(CLE PRIMAIRE)
+"numero" : "{tnumero}",
+"statut" : "{ETUDIANT|SENIOR}",
+"email" : "{mail}",
+"password" : "{password}"
+}
 
   /service    Création d'un service
 
@@ -39,23 +33,18 @@ PATH : localhost:8080/entreedetvous
 
  GET :
   
-  /user/etudiant       Obtenir la liste des etudiants
-  /user/senior         Obtenir la liste des seniors
-  /user/etudiant/{id}  Obtenir l'etudiant suivant l'id
-  /user/senior/{id}    Obtenir l'etudiant suivant l'id
+  /user/etudiant       Obtenir la liste des etudiants //TODO
+  /user/senior         Obtenir la liste des seniors   //TODO
   /user/{login}        Obtenir l'utilisateur selon le login
 
-  /user/etudiant?senior-id=id  Obtenir la liste des etudiants correspondants au senior
+  /user/etudiant?senior-id=id  Obtenir la liste des etudiants correspondants au senior //TODO
 
-  /user/etudiant?hobby=1,2,..   Obtenir la liste des etudiants qui ont les hobbies passés en paramétres   
+  /user/etudiant?hobby=1,2,..   Obtenir la liste des etudiants qui ont les hobbies passés en paramétres //TODO  
 
-  /user/etudiant?jour=jour&moment=moment  Obtenir la liste des etudiants disponibles à cette plage horaire
+  /user/etudiant?jour=jour&moment=moment  Obtenir la liste des etudiants disponibles à cette plage horaire //TODO
   
   /service        Obtenir la liste des services
-  /service/{id}   Obtenir le service suivant l'id
-  /rdv            Obtenir la liste des rdv
-  /rdv/{id}       Obtenir le rdv suivant l'id
-  
+  /service/{id}   Obtenir le service suivant le libelle 
 
 
  DELETE :
@@ -66,17 +55,15 @@ PATH : localhost:8080/entreedetvous
 
  PUT :
  
-  /user/etudiant/{id}  Mise a jour d'un etudiant
-  /user/senior/{id}    Mise a jour d'un senior
+  /user/{login} mise a jour d'un utilisateur
 
-  {
-   "nom":"nom",
-   "prenom":"prenom",    
-   "telepone":"telephone",
-   "login":"login",
-   "mail":"mail",
-   "mdp":"mdp"
-  }
+{
+  "nom" : "{nom}",
+  "prenom" : "{prenom}",
+  "numero" : "{tnumero}",
+  "email" : "{mail}",
+  "password" : "{password}"
+}
 
   /service/{id}   Mise a jour d'un service
 
@@ -84,6 +71,8 @@ PATH : localhost:8080/entreedetvous
    "libelle":"libelle"
   }
 
+
+	<!-- BETA
   /rdv/{id}  Mise a jour d'un rdv
 
   {
@@ -98,5 +87,5 @@ PATH : localhost:8080/entreedetvous
 
   /rdv/{id}/done  Passe un rdv a Fait
   /rdv/{id}/undone   Passe  un rdv a non Fait
- 
+       -->
  
