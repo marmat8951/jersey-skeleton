@@ -6,7 +6,7 @@ public class RDVDto {
 	//final static Logger logger = LoggerFactory.getLogger(RDVDto.class);
 	private int id_senior ;
 	private int id_etu;
-	private Time jour;
+	private String jour;
 	private boolean matin;
 	private boolean aprem;
 	private boolean soir;
@@ -18,10 +18,10 @@ public class RDVDto {
 	public void setId_senior(int id_senior) {
 		this.id_senior = id_senior;
 	}
-	public Time getJour() {
+	public String getJour() {
 		return jour;
 	}
-	public void setJour(Time jour) {
+	public void setJour(String jour) {
 		this.jour = jour;
 	}
 	public boolean getMatin() {

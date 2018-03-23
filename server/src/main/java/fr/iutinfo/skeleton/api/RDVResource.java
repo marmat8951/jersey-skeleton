@@ -4,6 +4,8 @@ import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
 import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.iutinfo.skeleton.common.dto.DispoDto;
 import fr.iutinfo.skeleton.common.dto.RDVDto;
 
 @Path("/RDV")
@@ -44,6 +47,20 @@ public class RDVResource {
         dto.setId_senior(id);
         return dto;
     }
+    
+    @GET
+	@Path("/test")
+	public RDVDto rdvTest() {
+		RDVDto dto = new RDVDto();
+		dto.setAprem(true);
+		dto.setId_etu(1);
+		dto.setId_senior(1);
+		dto.setJour("lundi");
+		dto.setLibelle("conduite");
+		dto.setMatin(true);
+		dto.setSoir(false);
+		return dto;
+	}
     
     @GET
     @Path("/{id_senior}")

@@ -12,60 +12,123 @@ import java.security.SecureRandom;
 
 public class User implements Principal {
     final static Logger logger = LoggerFactory.getLogger(User.class);
-    private static User anonymous = new User(-1, "Anonymous", "anonym");
-    private String name;
-    private String alias;
-    private int id = 0;
+    private static User anonymous = new User("anony", "Anonymous", "anonym");
+    private String nom;
+    private String prenom;
+    private String login;
+    private String numero;
+    private String statut;
     private String email;
     private String password;
     private String passwdHash;
     private String salt;
     private String search;
 
-    public User(int id, String name) {
-        this.id = id;
-        this.name = name;
+	public User(String login, String name) {
+        this.login = login;
+        this.nom = name;
     }
 
-    public User(int id, String name, String alias) {
-        this.id = id;
-        this.name = name;
-        this.alias = alias;
+    public User(String login, String name, String alias) {
+        this.login = login;
+        this.nom = name;
+        this.statut = alias;
     }
 
-    public User() {
+    public User(String nom, String numero, String prenom, String login, String statut, int userId, String email) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.statut = statut;
+		this.email = email;
+		this.numero = numero;
+	}
+
+	public User() {
     }
+
+	public String getPasswdHash() {
+		return passwdHash;
+	}
+
+	public void setPasswdHash(String passwdHash) {
+		this.passwdHash = passwdHash;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSalt() {
+		if(salt == null) {
+			salt = generateSalt();
+		}
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getPassword() {
+		return password;
+	}
 
     public static User getAnonymousUser() {
         return anonymous;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return this.password;
     }
 
     public void setPassword(String password) {
@@ -87,29 +150,21 @@ public class User implements Principal {
         return hash.equals(getPasswdHash());
     }
 
-    public String getPasswdHash() {
-        return passwdHash;
-    }
-
-    public void setPasswdHash(String passwdHash) {
-        this.passwdHash = passwdHash;
-    }
-
     @Override
     public boolean equals(Object arg) {
         if (getClass() != arg.getClass())
             return false;
         User user = (User) arg;
-        return name.equals(user.name) && alias.equals(user.alias) && email.equals(user.email) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
+        return nom.equals(user.nom) && statut.equals(user.statut) && email.equals(user.email) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((alias == null) ? 0 : alias.hashCode());
+        result = prime * result + ((statut == null) ? 0 : statut.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((nom == null) ? 0 : nom.hashCode());
         result = prime * result + ((passwdHash == null) ? 0 : passwdHash.hashCode());
         result = prime * result + ((salt == null) ? 0 : salt.hashCode());
         return result;
@@ -117,26 +172,7 @@ public class User implements Principal {
     
     @Override
     public String toString() {
-        return id + ": " + alias + ", " + name + " <" + email + ">";
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public String getSalt() {
-        if (salt == null) {
-            salt = generateSalt();
-        }
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
+        return login + ": " + statut + ", " + nom + " <" + email + ">";
     }
 
     private String generateSalt() {
@@ -153,37 +189,38 @@ public class User implements Principal {
     }
 
     public boolean isInUserGroup() {
-        return !(id == anonymous.getId());
+        return !(login == anonymous.getLogin());
     }
 
     public boolean isAnonymous() {
-        return this.getId() == getAnonymousUser().getId();
-    }
-
-    public String getSearch() {
-        search = name + " " + alias + " " + email;
-        return search;
-    }
-
-    public void setSearch(String search) {
-        this.search = search;
+        return this.getLogin() == getAnonymousUser().getLogin();
     }
 
     public void initFromDto(UserDto dto) {
-        this.setAlias(dto.getAlias());
-        this.setEmail(dto.getEmail());
-        this.setId(dto.getId());
-        this.setName(dto.getName());
-        this.setPassword(dto.getPassword());
+    	this.setNom(dto.getNom());
+    	this.setPrenom(dto.getPrenom());
+    	this.setLogin(dto.getLogin());
+    	this.setNumero(dto.getNumero());
+    	this.setStatut(dto.getStatut());
+    	this.setEmail(dto.getEmail());
+    	this.setPassword(dto.getPassword());
     }
 
     public UserDto convertToDto() {
         UserDto dto = new UserDto();
-        dto.setAlias(this.getAlias());
-        dto.setEmail(this.getEmail());
-        dto.setId(this.getId());
-        dto.setName(this.getName());
-        dto.setPassword(this.getPassword());
+    	dto.setNom(this.getNom());
+    	dto.setPrenom(this.getPrenom());
+    	dto.setLogin(this.getLogin());
+    	dto.setNumero(this.getNumero());
+    	dto.setStatut(this.getStatut());
+    	dto.setEmail(this.getEmail());
+    	dto.setPassword(this.getPassword());
         return dto;
     }
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return nom;
+	}
 }

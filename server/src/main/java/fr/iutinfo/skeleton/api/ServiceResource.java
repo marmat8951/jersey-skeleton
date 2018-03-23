@@ -32,7 +32,7 @@ public class ServiceResource {
 
 	public ServiceResource() throws SQLException {
         if (!tableExist("service")) {
-            logger.debug("Crate table service");
+            logger.debug("Create table service");
             dao.createServiceTable();
         }
     }
