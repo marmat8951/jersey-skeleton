@@ -11,7 +11,7 @@ footer{
 	bottom: 0;
     text-align: center;
     color:white;
-    background-color:#354665; 
+    background-color:#0f223d; 
 }
 
 button {
@@ -53,6 +53,33 @@ header{
 
 h2{
 	color:#F95B53;
+}
+
+body>h1{
+    background-color:#354665; 
+    color:white;
+    text-align: center;
+    padding: 1%;
+}
+
+table{
+    margin:auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,td{
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+th{
+    background-color: #354665;
+    color:white;
 }
 
 #recherche>p{
@@ -135,6 +162,7 @@ h2{
     padding:1%;
     padding-top: 1.7%;
     font-size: 20px;
+    box-shadow: 5px 5px 0px black;
 }
 
 #conteneurAccueil{
