@@ -87,11 +87,21 @@ function inscription(){
         url : url,
         dataType : "json",
         data : JSON.stringify({
+<<<<<<< HEAD
             "name" : nom,
             "alias" : login,
             "email" : mail,
             "password" : mdp,
             "id" : 0
+=======
+            "nom" : nom,
+            "prenom" : prenom,
+            "login" : login,
+            "numero" : numero,
+            "statut" : statut,
+            "email" : email,
+            "password":mdp
+>>>>>>> 871d78b42d83a77be042ab598dd175c0da2acb75
         }),
         success : function(data, textStatus, jqXHR) {
             alert("Utilisateur créé");
@@ -101,6 +111,8 @@ function inscription(){
             $('#onglet').hide();
         },
         error : function(jqXHR, textStatus, errorThrown) {
+            console.log("jqXHR" +jqXHR);
+            console.log("error"+errorThrown);
             console.log('postUser error: ' + textStatus);
         }
     });
@@ -118,7 +130,16 @@ function connexion(){
         type : 'GET',
         url : url,
         dataType : "json",
+<<<<<<< HEAD
         success : function(data, textStatus, jqXHR) {
+=======
+        beforeSend : function(req) {
+            req.setRequestHeader("Authorization", "Basic " + btoa(login + ":" + mdp));
+        },
+
+        success : function(json) {
+            document.body.style.backgroundColor = "white";
+>>>>>>> 871d78b42d83a77be042ab598dd175c0da2acb75
             var tab = JSON.stringify(json);
             var js=JSON.parse(tab);
                 alert("Connexion OK !");
@@ -128,7 +149,7 @@ function connexion(){
           
         },
         error : function(jqXHR, textStatus, errorThrown) {
-            alert("Login non valide !")
+            alert("Login ou mot de passe incorrect !")
             console.log('postUser error: ' + textStatus);
         }
     });

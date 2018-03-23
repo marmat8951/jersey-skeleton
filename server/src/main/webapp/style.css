@@ -28,7 +28,7 @@ button {
     margin-top: 10%;
 }
 
-button:hover{
+.buttonIndex:hover{
 	background-color: #FFFFFF;
     border: none;
     color: #354665;

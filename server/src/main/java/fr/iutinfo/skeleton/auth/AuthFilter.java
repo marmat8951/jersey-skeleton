@@ -35,8 +35,9 @@ public class AuthFilter implements ContainerRequestFilter {
             if (user.isGoodPassword(password)) {
                 logger.debug("good password !");
                 containerRequest.setSecurityContext(new AppSecurityContext(user, scheme));
-            } else {
-                containerRequest.setSecurityContext(new AppSecurityContext(User.getAnonymousUser(), scheme));
+            } 
+            else {
+            	throw new WebApplicationException(Status.NOT_ACCEPTABLE);
             }
         } else {
             containerRequest.setSecurityContext(new AppSecurityContext(User.getAnonymousUser(), scheme));
