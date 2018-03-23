@@ -84,7 +84,7 @@ public class User implements Principal {
 		User user = (User) arg;
 		return login.equals(user.login) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

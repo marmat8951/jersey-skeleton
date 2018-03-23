@@ -14,7 +14,7 @@ public class Information implements Principal {
     private String prenom;
     private String mail;
     private String numero;
-    private Type type;
+    private String type;
     private String password;
     final static Logger logger = LoggerFactory.getLogger(UserDto.class);
 
@@ -103,7 +103,7 @@ public class Information implements Principal {
 	}
 
 
-	public Type getType2() {
+	public String getType2() {
 		return type;
 	}
 	
@@ -112,11 +112,11 @@ public class Information implements Principal {
 	}
 
 	public void setType(String type) {
-		this.type = Type.getRole(type);
+		this.type = String.getRole(type);
 	}
 	
 	
-	public void setType(Type type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
