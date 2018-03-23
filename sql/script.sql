@@ -1,28 +1,20 @@
 drop table if exists list_hobbies;
 drop table if exists disponibilité;
-drop table if exists rdv; 
-drop table if exists informations; 
-drop table if exists users ;
+drop table if exists rdv;  
+drop table if exists user;
 drop table if exists hobbies;
 drop table if exists service;
 
 -- Table des utilisateurs avec leur login et leur mdp qu'ils donnent lors de la création du compte
-create table users(id_user serial primary key,
+create table user(id_user serial primary key,
        	           login text,
 		    mdp text,
-		    salt text
+		    nom text,
+		    prenom text,
+		    telephone text,
+		    statut text,
+		    mail text		    
 		  ); 
-
--- Table contenant les informations liées à un utilisateur donné, avec son statut (étudiant, senior)
-create table informations(id_user int not null primary key,
-       	     	          nom text,
-			  prenom text,
-			  mail text,
-			  numero text,
-			  statut text check(statut in ('ETUDIANT','SENIOR','	ADMIN')),
-			  foreign key(id_user) references users(id_user)
-			  );
-
 
 -- Table contenant les différents hobbies possibles qui seront listés dans la gestion du profil
 create table hobbies(id_hobbie serial primary key,
