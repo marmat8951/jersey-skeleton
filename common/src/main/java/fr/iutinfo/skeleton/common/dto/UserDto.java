@@ -3,38 +3,74 @@ package fr.iutinfo.skeleton.common.dto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.security.Principal;
-
 public class UserDto {
     final static Logger logger = LoggerFactory.getLogger(UserDto.class);
-    private String name;
-    private String alias;
-    private int id = 0;
+    private String nom;
+    private String prenom;
+    private String login;
+    private String numero;
+    private String statut;
     private String email;
     private String password;
+    
+    /*
+     * {
+"nom" : "tnom",
+"prenom" : "tprenom",
+"login" : "tlogin",
+"numero" : "tnumero",
+"statut" : "tstatut",
+"email" : "tmail",
+"password" : "pass"
+}
+     */
 
-    public String getEmail() {
+    public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
+	public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {
@@ -45,12 +81,5 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
 
 }

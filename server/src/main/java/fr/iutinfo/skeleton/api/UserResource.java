@@ -31,10 +31,9 @@ public class UserResource {
     private static UserDao dao = getDbi().open(UserDao.class);
 
     public UserResource() throws SQLException {
-        if (!tableExist("users")) {
-            logger.debug("Crate table users");
+        if (!tableExist("user")) {
+            logger.debug("Create table user");
             dao.createUserTable();
-            dao.insert(new User(0, "Margaret Thatcher", "la Dame de fer"));
         }
     }
 
@@ -43,15 +42,15 @@ public class UserResource {
         User user = new User();
         user.initFromDto(dto);
         user.resetPasswordHash();
-        int id = dao.insert(user);
-        dto.setId(id);
+        String key = (String) dao.insert(user);
+        dto.setLogin(key);;
         return dto;
     }
 
     @GET
-    @Path("/{name}")
-    public UserDto getUser(@PathParam("name") String name) {
-        User user = dao.findByName(name);
+    @Path("/{login}")
+    public UserDto getUser(@PathParam("login") String login) {
+        User user = dao.findByLogin(login);
         if (user == null) {
             throw new WebApplicationException(404);
         }
@@ -59,21 +58,16 @@ public class UserResource {
     }
 
     @GET
-    public List<UserDto> getAllUsers(@QueryParam("q") String query) {
+    public List<UserDto> getAllUsers() {
         List<User> users;
-        if (query == null) {
-            users = dao.all();
-        } else {
-            logger.debug("Search users with query: " + query);
-            users = dao.search("%" + query + "%");
-        }
+        users = dao.all();
         return users.stream().map(User::convertToDto).collect(Collectors.toList());
     }
 
     @DELETE
-    @Path("/{id}")
-    public void deleteUser(@PathParam("id") int id) {
-        dao.delete(id);
+    @Path("/{login}")
+    public void deleteUser(@PathParam("login") String login) {
+        dao.delete(login);
     }
 
 }

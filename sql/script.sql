@@ -6,7 +6,7 @@ drop table if exists hobbies;
 drop table if exists service;
 
 -- Table des utilisateurs avec leur login et leur mdp qu'ils donnent lors de la création du compte
-create table user(id_user serial primary key,
+create table user(userId serial primary key,
        	           login text,
 		    mdp text,
 		    nom text,
