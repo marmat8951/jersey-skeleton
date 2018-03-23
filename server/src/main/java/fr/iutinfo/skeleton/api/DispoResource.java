@@ -58,12 +58,12 @@ public class DispoResource {
 
 	@GET
 	@Path("/{iduser}")
-	public DispoDto getDispoById(@PathParam("iduser") int id) {
-		Dispo dispo = dao.findByIduser(id);
-		if (dispo == null) {
+	public List<DispoDto> getDispoById(@PathParam("iduser") int id) {
+		List<Dispo> dispos = dao.findByIduser(id);
+		if (dispos == null) {
 			throw new WebApplicationException(404);
 		}
-		return dispo.convertToDto();
+		return dispos.stream().map(Dispo::convertToDto).collect(Collectors.toList());
 	}
 
 	@GET
