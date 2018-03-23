@@ -92,7 +92,8 @@ function inscription(){
             "login" : login,
             "numero" : numero,
             "statut" : statut,
-            "email" : email
+            "email" : email,
+            "password":mdp
         }),
         success : function(data, textStatus, jqXHR) {
             alert("Utilisateur créé");
@@ -102,6 +103,8 @@ function inscription(){
             $('#onglet').hide();
         },
         error : function(jqXHR, textStatus, errorThrown) {
+            console.log("jqXHR" +jqXHR);
+            console.log("error"+errorThrown);
             console.log('postUser error: ' + textStatus);
         }
     });
@@ -119,8 +122,11 @@ function connexion(){
         type : 'GET',
         url : url,
         dataType : "json",
-        success : function(json) {
+        beforeSend : function(req) {
+            req.setRequestHeader("Authorization", "Basic " + btoa(login + ":" + mdp));
+        },
 
+        success : function(json) {
             document.body.style.backgroundColor = "white";
             var tab = JSON.stringify(json);
             var js=JSON.parse(tab);
