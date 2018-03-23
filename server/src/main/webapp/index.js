@@ -1,26 +1,26 @@
 $(document).ready(function() {
-	$("button").click(function () {
-		$('#conteneurAccueil').hide();
-		$('#connexion').hide();
-		$('#deconnexion').show();
-		$('#onglet').show();
-	});
+    $("button").click(function () {
+        $('#conteneurAccueil').hide();
+        $('#connexion').hide();
+        $('#deconnexion').show();
+        $('#onglet').show();
+    });
 
-	$('#logo').click(function() {
-		location.reload();
-	});
-	$('#onglet').hide();
-	$('#deconnexion').hide();
-	console.log( "ready!" );
+    $('#logo').click(function() {
+        location.reload();
+    });
+    $('#onglet').hide();
+    $('#deconnexion').hide();
+    console.log( "ready!" );
 });
 
 function checkValue(element){
-	var champ = document.getElementById(element);
-	if(champ.value == 'Recherche..'){
-		champ.value = '';
-	}else{
-		champ.value = 'Recherche..';
-	}
+    var champ = document.getElementById(element);
+    if(champ.value == 'Recherche..'){
+        champ.value = '';
+    }else{
+        champ.value = 'Recherche..';
+    }
 }
 
 ong1 = document.getElementById('inscription_login_page');
@@ -33,8 +33,8 @@ const inscriptionPage = "<div class='container'><div class='row centered-form'><
 contenu.innerHTML = identificationPage;
 
 function nonactive(){
-	ong1.className = "";
-	ong2.className = "";
+    ong1.className = "";
+    ong2.className = "";
 }
 
 function active(moi){
@@ -43,49 +43,51 @@ function active(moi){
 }
 
 ong1.addEventListener("click",function(){
-	contenu.innerHTML = inscriptionPage;
-	active(this);
+    contenu.innerHTML = inscriptionPage;
+    active(this);
 })
 
 ong2.addEventListener("click",function(){
-	contenu.innerHTML = identificationPage;
-	active(this);
+    contenu.innerHTML = identificationPage;
+    active(this);
 })
 
 
 
- function inscription(){
-                    var nom=document.getElementById("last_name").value;
-                    var prenom=document.getElementById("first_name").value;
-                    var telephone=document.getElementById("numero").value;
-                    var login=document.getElementById("login").value;
-                    var mail=document.getElementById("email").value;
-                    var mdp=document.getElementById("password").value;
-                    var planning=null;
-                    var type=document.getElementById("type").value;
+function inscription(){
+    var nom=document.getElementById("last_name").value;
+    var prenom=document.getElementById("first_name").value;
+    var telephone=document.getElementById("numero").value;
+    var login=document.getElementById("login").value;
+    var mail=document.getElementById("email").value;
+    var mdp=document.getElementById("password").value;
+    var planning=null;
+    var type=document.getElementById("type").value;
 
-                    <!--changer le type en menu deroulant (senior/etudiant)-->
-                        var url="v1/user/"+type; 
-                    $.ajax({
-                        type: 'GET',
-                        url: "http://localhost:8080/v1/service",          
-                        dataType : "json",
-                        success: function( json ) {
-                            alert("Inscription reussie !!!");
-			    $('#conteneurAccueil').show();
-		            $('#connexion').hide();
-		            $('#deconnexion').show();
-		            $('#onglet').hide();
+    <!--changer le type en menu deroulant (senior/etudiant)-->
+        var url="v1/user/"; 
+    $.ajax({
+        type : 'POST',
+        contentType : 'application/json',
+        url : url,
+        dataType : "json",
+        data : JSON.stringify({
+            "name" : nom,
+            "alias" : login,
+            "email" : mail,
+            "password" : mdp,
+            "id" : 0
+        }),
+        success : function(data, textStatus, jqXHR) {
+            alert("Utilisateur créé");
+	      $('#conteneurAccueil').show();
+       
+        $('#deconnexion').show();
+        $('#onglet').hide();
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            console.log('postUser error: ' + textStatus);
+        }
+    });
 
-                        },
-                        error: function( xhr, status, errorThrown ) {
-
-                            console.log( "Error: " + errorThrown );
-                            console.log( "Status: " + status );
-                            console.dir( xhr );
-                        },
-                        complete: function( xhr, status ) {
-
-                        }
-                    });
-                }
+}
