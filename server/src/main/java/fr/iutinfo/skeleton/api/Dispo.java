@@ -22,9 +22,9 @@ public class Dispo {
 	public Dispo(int id, String jour, boolean matin, boolean aprem, boolean soir) {
 		this.id=id; 
 		this.jour = jour;
-		this.matin = matin;
-		this.aprem = aprem;
-		this.soir = soir;
+		//this.matin = matin;
+		//this.aprem = aprem;
+		//this.soir = soir;
 	}
 
 
@@ -70,18 +70,18 @@ public class Dispo {
 	public void initFromDto(DispoDto dto) {
 		this.setJour(dto.getJour());
 		this.setId(dto.getId());
-		this.setMatin(dto.isMatin());
+		/*this.setMatin(dto.isMatin());
 		this.setAprem(dto.isAprem());
-		this.setSoir(dto.isSoir());
+		this.setSoir(dto.isSoir());*/
 	}
 
 	public DispoDto convertToDto() {
 		DispoDto dto = new DispoDto();
 		dto.setJour(this.getJour());
 		dto.setId(this.getId());
-		this.setMatin(dto.isMatin());
+		/*this.setMatin(dto.isMatin());
 		this.setAprem(dto.isAprem());
-		this.setSoir(dto.isSoir());
+		this.setSoir(dto.isSoir());*/
 		return dto;
 	}
 

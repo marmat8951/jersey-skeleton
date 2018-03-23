@@ -26,12 +26,12 @@ import fr.iutinfo.skeleton.common.dto.DispoDto;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class DispoResource {
-	final static Logger logger = LoggerFactory.getLogger(UserResource.class);
+	final static Logger logger = LoggerFactory.getLogger(DispoResource.class);
 	public static final DispoDao dao = getDbi().open(DispoDao.class);
 	
 	public DispoResource() throws SQLException {
 	    if (!tableExist("disponibilité")) {
-	        logger.debug("Create table disponibilité");
+	        logger.debug("Create table dispo");
 	        dao.createDispoTable();
 	    }
 	}
@@ -40,13 +40,14 @@ public class DispoResource {
     public DispoDto createDispo(DispoDto dto) {
         Dispo dispo = new Dispo();
         dispo.initFromDto(dto);
-        dao.insert(dispo);
+        int id = dao.insert(dispo);
+        dto.setId(id);
         return dto;
     }
 	
 	 @GET
-	    @Path("dispo/{id_user}")
-	    public DispoDto getDispoById(@PathParam("id") int id) {
+	    @Path("{id_user}")
+	    public DispoDto getDispoById(@PathParam("id_user") int id) {
 	        Dispo dispo= dao.findByIdUser(id);
 	        if (dispo == null) {
 	            throw new WebApplicationException(404);
@@ -64,7 +65,7 @@ public class DispoResource {
 	    
 	    @DELETE
 	    @Path("/{id_user}")
-	    public void deleteDispo(@PathParam("id") int id) {
+	    public void deleteDispo(@PathParam("id_user") int id) {
 	        dao.delete(id);
 	    }
 
