@@ -28,45 +28,55 @@ import fr.iutinfo.skeleton.common.dto.DispoDto;
 public class DispoResource {
 	final static Logger logger = LoggerFactory.getLogger(DispoResource.class);
 	public static final DispoDao dao = getDbi().open(DispoDao.class);
-	
+
 	public DispoResource() throws SQLException {
-	    if (!tableExist("disponibilité")) {
-	        logger.debug("Create table dispo");
-	        dao.createDispoTable();
-	    }
+		if (!tableExist("dispo")) {
+			logger.debug("Create table dispo");
+			dao.createDispoTable();
+		}
 	}
-	
+
+	@GET
+	@Path("/test")
+	public DispoDto dispoTest() {
+		DispoDto dto = new DispoDto();
+		dto.setIduser(1);
+		dto.setJour("lundi");
+		dto.setMatin(true);
+		dto.setAprem(false);
+		dto.setSoir(false);
+		return dto;
+	}
+
 	@POST
-    public DispoDto createDispo(DispoDto dto) {
-        Dispo dispo = new Dispo();
-        dispo.initFromDto(dto);
-        int id = dao.insert(dispo);
-        dto.setId(id);
-        return dto;
-    }
-	
-	 @GET
-	    @Path("{id_user}")
-	    public DispoDto getDispoById(@PathParam("id_user") int id) {
-	        Dispo dispo= dao.findByIdUser(id);
-	        if (dispo == null) {
-	            throw new WebApplicationException(404);
-	        }
-	        return dispo.convertToDto();
-	    }
-	    
-	    @GET
-	    public List<DispoDto> getAllDispo() {
-	        List<Dispo> dispos;
-	            dispos = dao.all();
-	        return dispos.stream().map(Dispo::convertToDto).collect(Collectors.toList());
-	    }
-	    
-	    
-	    @DELETE
-	    @Path("/{id_user}")
-	    public void deleteDispo(@PathParam("id_user") int id) {
-	        dao.delete(id);
-	    }
+	public DispoDto createDispo(DispoDto dto) {
+		Dispo dispo = new Dispo();
+		dispo.initFromDto(dto);
+		dao.insert(dispo);
+		return dto;
+	}
+
+	@GET
+	@Path("/{iduser}")
+	public DispoDto getDispoById(@PathParam("iduser") int id) {
+		Dispo dispo = dao.findByIduser(id);
+		if (dispo == null) {
+			throw new WebApplicationException(404);
+		}
+		return dispo.convertToDto();
+	}
+
+	@GET
+	public List<DispoDto> getAllDispo() {
+		List<Dispo> dispos;
+		dispos = dao.all();
+		return dispos.stream().map(Dispo::convertToDto).collect(Collectors.toList());
+	}
+
+	@DELETE
+	@Path("/{iduser}")
+	public void deleteDispo(@PathParam("iduser") int id) {
+		dao.delete(id);
+	}
 
 }

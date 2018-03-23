@@ -1,17 +1,17 @@
 package fr.iutinfo.skeleton.common.dto;
 
 public class DispoDto {
-	private int id = 0;
+	private int iduser = 0;
 	private String jour;
 	private boolean matin;
 	private boolean aprem;
 	private boolean soir;
 	
-	public int getId() {
-		return id;
+	public int getIduser() {
+		return iduser;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIduser(int iduser) {
+		this.iduser = iduser;
 	}
 	public String getJour() {
 		return jour;
@@ -37,6 +37,9 @@ public class DispoDto {
 	public void setSoir(boolean soir) {
 		this.soir = soir;
 	}
+	
+
+	
 	
 	
 }
