@@ -8,7 +8,7 @@ import fr.iutinfo.skeleton.common.dto.UserDto;
 
 public class Service {
 	
-	final static Logger logger = LoggerFactory.getLogger(User.class);
+	
     private static Service conduite = new Service("Conduite");
     private String libelle ="";
     private String search;
