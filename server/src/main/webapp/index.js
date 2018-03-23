@@ -97,8 +97,8 @@ function inscription(){
         }),
         success : function(data, textStatus, jqXHR) {
             alert("Utilisateur créé");
+            document.body.style.backgroundColor = "white";
             $('#conteneurAccueil').show();
-
             $('#deconnexion').show();
             $('#onglet').hide();
         },
@@ -127,10 +127,10 @@ function connexion(){
         },
 
         success : function(json) {
-            document.body.style.backgroundColor = "white";
             var tab = JSON.stringify(json);
             var js=JSON.parse(tab);
             alert("Connexion OK !");
+            document.body.style.backgroundColor = "white";
             $('#conteneurAccueil').show();
             $('#deconnexion').show();
             $('#onglet').hide();
