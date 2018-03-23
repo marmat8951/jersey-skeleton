@@ -1,7 +1,5 @@
 # Rétrospective de sprint
 
-Nom du scrum master du sprint : 
-
 ## Ce que nous avons fait durant ce sprint
 Donnez ici la liste des histoires utilisateurs que vous avez livrés durant ce sprint.
 
