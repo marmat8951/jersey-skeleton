@@ -27,7 +27,7 @@
                         var js=JSON.parse(tab);
                         var res="";
                         for(var cpt=0;cpt<js.length;cpt++){
-                            res=res+ "<li>  Id : "+js[cpt].id +"    Login : "+js[cpt].alias+"    Nom : "+js[cpt].name+"    email : "+js[cpt].email+"</li>";
+                            res=res+ "<li>  Nom : "+js[cpt].nom +"   Prenom : "+js[cpt].prenom+"    Login : "+js[cpt].login+"    Numero : "+js[cpt].numero+"   Statut : "+js[cpt].statut+"    Email : "+js[cpt].email+"</li>";
                         }
                         $('body').html(res);
                     },

@@ -19,18 +19,18 @@ public class Helper {
     }
 
     static User createUserWithName(String name) {
-        User user = new User(0, name);
+        User user = new User("0", name);
         return createUser(user);
     }
 
 
     static User createUserWithEmail(String name, String email) {
-        User user = new User(0, name);
+        User user = new User("0", name);
         return createUser(user);
     }
 
     public static User createUserWithPassword(String name, String passwd, String salt) {
-        User user = new User(0, name);
+        User user = new User("0", name);
         user.setSalt(salt);
         user.setPassword(passwd);
         logger.debug("createUserWithPassword Hash : " + user.getPasswdHash());
@@ -38,17 +38,17 @@ public class Helper {
     }
 
     private static User createUser(User user) {
-        int id = dao.insert(user);
-        user.setUserId(id);
+        String id = dao.insert(user);
+        user.setLogin(id);
         return user;
     }
 
 
     private static User createFullUSer(String name, String alias, String email, String paswword) {
-        User user = new User(0, name);
+        User user = new User("0", name);
         user.setPassword(paswword);
-        int id = dao.insert(user);
-        user.setUserId(id);
+        String id = dao.insert(user);
+        user.setLogin(id);
         return user;
     }
 

@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.common.dto;
 
-public class HobbyDto {
+public class HobbieDto {
 	private String libelle;
 	
 	public String getLibelle() {
