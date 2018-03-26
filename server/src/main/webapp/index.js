@@ -203,11 +203,11 @@ var page_de_base = "";
 function init_page_login_whit_get(){
     for(var i=0; i<labels.length; i++) {
         if(i === 0){
-            page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "' class='div_profil'></div></div><br/>"
+            page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get'></div></div><br/><br/>"
         } else if(i === labels.length-1){
-            page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get' style='display:none'></div><div id='div_" + labels[i] + "' class='div_profil'><button class='button_profil' onclick=\"display_input_update('" + labels[i] + "')\">Modifier</button></div></div><br/>"
+            page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get' style='display:none'></div><div id='div_" + labels[i] + "' class='div_profil'><button class='button_profil' onclick=\"display_input_update('" + labels[i] + "')\">Modifier</button></div></div><br/><br/>"
         } else {
-            page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get'></div><div id='div_" + labels[i] + "' class='div_profil'><button class='button_profil' onclick=\"display_input_update('" + labels[i] + "')\">Modifier</button></div></div><br/>"
+            page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get'></div><div id='div_" + labels[i] + "' class='div_profil'><button class='button_profil' onclick=\"display_input_update('" + labels[i] + "')\">Modifier</button></div></div><br/><br/>"
         }
     }             
     page_de_base += "<br/><button class='button_profil' onclick=\"send_update()\">Confirmer et envoyer les modifications</button>"

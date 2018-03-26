@@ -14,7 +14,7 @@ footer{
     background-color:#0f223d; 
 }
 
-button {
+.buttonIndex {
     background-color: #354665;
     border: none;
     color: white;
@@ -310,4 +310,94 @@ label.label-floatlabel {
 #course{
     width: 50%;
     height:300px;
+}
+
+/*
+CSS Page de profil
+*/
+
+.body_login_page {
+    background-color : #354665;
+}
+
+.show_profil {
+    width: 100%;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.inline_profil{
+    /*float: left;*/
+    display: inline-block;
+}
+
+.ul_login_page li a{
+    display: block;
+    color: black;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+    background-color: #F95B53;
+    color : #FFFFFF;
+    margin-left: 5px;
+    border-radius: 10px 10px 0 0;
+}
+
+.ul_login_page li a:hover{
+    opacity: 0.7;
+}
+
+.ul_login_page li:first-child a{
+    margin-left: 0;
+}
+
+.ul_login_page .active{
+    background-color: #0f223d;
+}
+
+#content_login_page{
+    clear: both;
+    width: 280px;
+    background-color: #0f223d;
+    color : #FFFFFF;
+    padding: 24px;
+    border-radius: 8% 8% 8% 8%;
+}
+
+#form-groupe-login-page{
+    width : 100%;
+}
+
+#btn_login_page{
+    position: absolute; /* postulat de départ */
+    left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+    padding: 5px;
+}
+
+.div_inline_block{
+    width: 50%;
+}
+
+.centered-form{
+    margin-top: 60px;
+    width: 10%;
+}
+
+.centered-form .panel{
+    background: #0f223d;
+    width: 275px;
+    transform: translate(-75px,-30px); 
+}
+
+label.label-floatlabel {
+    font-weight: bold;
+    color: #46b8da;
+    font-size: 11px;
+}
+
+.ul_login_page{
+    margin-bottom: 0px;
 }
