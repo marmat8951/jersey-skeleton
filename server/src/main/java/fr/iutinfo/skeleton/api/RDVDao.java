@@ -44,6 +44,15 @@ public interface RDVDao {
     		@Bind("etudiant") String etudiant
     		);
     
+    @SqlUpdate("UPDATE rdv SET etudiant = null WHERE jour = :jour AND matin = :matin AND aprem = :aprem AND soir = :soir AND service = :service AND senior = :senior")
+    void unvalide(@Bind("senior") String senior,
+    		@Bind("jour") String jour, 
+    		@Bind("matin") boolean matin, 
+    		@Bind("aprem") boolean aprem, 
+    		@Bind("soir") boolean soir, 
+    		@Bind("service") String service
+    		);
+    
     /*
      * 	private String senior ;
 	private String jour;
