@@ -62,8 +62,16 @@ contenu = document.getElementById('content_login_page');
 
 const identificationPage = "<div class='container'><div class='row centered-form'><div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'><div class='panel'><div class='panel-body'><div class='form-group'><input type='text' name='login' id='login' class='form-control input-sm' placeholder='Addresse mail'></div><div class='form-group'><input type='password' name='pass' id='pass' class='form-control input-sm' placeholder='password'></div><button type='button' onClick='connexion()' name='buttonConnexion' class='btn btn-info btn-block'>Connexion</button></div></div></div></div></div>";
 
-const inscriptionPage = "<div class='container'><div class='row centered-form'><div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'><div class='panel'><div class='panel-body'><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='first_name' id='first_name' class='form-control input-sm floatlabel' placeholder='First Name'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='last_name' id='last_name' class='form-control input-sm' placeholder='Last Name'></div></div></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='numero' id='numero' class='form-control input-sm floatlabel' placeholder='Number'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><select name='type' id='type' class='form-control'><option>etudiant</option><option>senior</option></select></div></div></div><div class='form-group'><div class='form-group'><input type='email' name='login' id='login' class='form-control input-sm' placeholder='Addresse Mail'></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password' id='password' class='form-control input-sm' placeholder='Password'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password_confirmation' id='password_confirmation' class='form-control input-sm' placeholder='Confirm Password'></div></div></div><button type='button' onClick='inscription()' name='buttonInscription' class='btn btn-info btn-block'>Inscription</button></div></div></div></div></div>";
+const inscriptionPage = "<div class='container'><div class='row centered-form'><div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'><div class='panel'><div class='panel-body'><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='first_name' id='first_name' class='form-control input-sm floatlabel' placeholder='First Name'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='last_name' id='last_name' class='form-control input-sm' placeholder='Last Name'></div></div></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='text' name='numero' id='numero' class='form-control input-sm floatlabel' placeholder='Number'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><select name='type' id='type' class='form-control'><option>etudiant</option><option>senior</option></select></div></div></div><div class='form-group'><div class='form-group'><input type='email' name='login' id='login' class='form-control input-sm' placeholder='Addresse Mail'></div><div class='row'><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password' id='password' class='form-control input-sm' placeholder='Password'></div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='form-group'><input type='password' name='password_confirmation' id='password_confirmation' class='form-control input-sm' placeholder='Confirm Password' onfocus='checkMdp()' onblur='checkMdp()'></div></div></div><button type='button' onClick='inscription()' name='buttonInscription' class='btn btn-info btn-block'>Inscription</button></div></div></div></div></div>";
 contenu.innerHTML = identificationPage;
+
+function checkMdp(){
+    if($('#password').val() == $('#password_confirmation').val() && $('#password').val().length > 0 ){
+        $('#password_confirmation').css('border','3px solid green');
+    } else {
+        $('#password_confirmation').css('border','3px solid red'); 
+    }
+}
 
 function nonactive(){
     ong1.className = "";
@@ -88,42 +96,46 @@ ong2.addEventListener("click",function(){
 
 
 function inscription(){
-    var nom=document.getElementById("last_name").value;
-    var prenom=document.getElementById("first_name").value;
-    var numero=document.getElementById("numero").value;
-    var login=document.getElementById("login").value;
-    var mdp=document.getElementById("password").value;
-    var planning=null;
-    var statut=document.getElementById("type").value;
+    if($('#password').val() == $('#password_confirmation').val() && $('#password').val().length > 0 ){   
+        var nom=document.getElementById("last_name").value;
+        var prenom=document.getElementById("first_name").value;
+        var numero=document.getElementById("numero").value;
+        var login=document.getElementById("login").value;
+        var mdp=document.getElementById("password").value;
+        var planning=null;
+        var statut=document.getElementById("type").value;
 
-    <!--changer le type en menu deroulant (senior/etudiant)-->
-        var url="v1/user/"; 
-    $.ajax({
-        type : 'POST',
-        contentType : 'application/json',
-        url : url,
-        dataType : "json",
-        data : JSON.stringify({
-            "nom" : nom,
-            "prenom" : prenom,
-            "login" : login,
-            "numero" : numero,
-            "statut" : statut,
-            "password":mdp
-        }),
-        success : function(data, textStatus, jqXHR) {
-            alert("Profil créé avec succés. Il sera accessible lorsqu'il aura été validé par le modérateur.");
-            document.body.style.backgroundColor = "white";
-            $('#conteneurAccueil').show();
-            $('#onglet').hide();
-        },
-        error : function(jqXHR, textStatus, errorThrown) {
-            alert("Erreur lors de la création de compte. Le login choisi peut-être déjà utilisé.");
-            console.log("jqXHR" +jqXHR);
-            console.log("error"+errorThrown);
-            console.log('postUser error: ' + textStatus);
-        }
-    });
+        <!--changer le type en menu deroulant (senior/etudiant)-->
+            var url="v1/user/"; 
+        $.ajax({
+            type : 'POST',
+            contentType : 'application/json',
+            url : url,
+            dataType : "json",
+            data : JSON.stringify({
+                "nom" : nom,
+                "prenom" : prenom,
+                "login" : login,
+                "numero" : numero,
+                "statut" : statut,
+                "password":mdp
+            }),
+            success : function(data, textStatus, jqXHR) {
+                alert("Profil créé avec succés. Il sera accessible lorsqu'il aura été validé par le modérateur.");
+                document.body.style.backgroundColor = "white";
+                $('#conteneurAccueil').show();
+                $('#onglet').hide();
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                alert("Erreur lors de la création de compte. Le login choisi peut-être déjà utilisé.");
+                console.log("jqXHR" +jqXHR);
+                console.log("error"+errorThrown);
+                console.log('postUser error: ' + textStatus);
+            }
+        });
+    } else {
+        alert("Mot de passe incorrect !");
+    }
 
 }
 
