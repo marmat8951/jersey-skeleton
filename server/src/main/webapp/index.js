@@ -130,6 +130,7 @@ function connexion(){
             var tab = JSON.stringify(json);
             var js=JSON.parse(tab);
             alert("Connexion OK !");
+            $('#loginUser').val(login);
             document.body.style.backgroundColor = "white";
             $('#conteneurAccueil').show();
             $('#deconnexion').show();
