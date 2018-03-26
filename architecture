@@ -36,6 +36,8 @@ cd PATH : localhost:8080/v1/
   
   /user/etudiants       Obtenir la liste des etudiants
   /user/seniors         Obtenir la liste des seniors
+  /user/valide		Obetnir la liste des utilisateurs validés
+  /user/!valide		Obtenir la liste des utilisateurs non validés
   /user/{login}         Obtenir l'utilisateur selon le login
 
   /user/etudiant?senior-id=id  Obtenir la liste des etudiants correspondants au senior //TODO
