@@ -1,10 +1,10 @@
-## Classe *Service* :
+## Classe *Hobbies* :
 
 * String libelle
 
 #### Create
 
-POST http://localhost:8080/v1/service
+POST http://localhost:8080/v1/hobbies
 
 	{
 	"libelle" : "{libelle}"
@@ -16,9 +16,9 @@ return :
 
 #### Read
 
-Obtenir la liste des services:
+Obtenir la liste des hobbies:
 
-	GET http://localhost:8080/v1/service
+	GET http://localhost:8080/v1/hobbies
 
 return : 
 * 500 : Server Error
@@ -29,8 +29,10 @@ return :
 
 #### Delete
 
-	DELETE http://localhost:8080/v1/service/{libelle}
+	DELETE http://localhost:8080/v1/hobbies/{libelle}
 	
 return :
 * 204 : No Content
 * 404 : Not Found
+
+
