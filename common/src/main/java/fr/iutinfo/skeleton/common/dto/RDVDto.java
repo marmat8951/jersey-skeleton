@@ -2,6 +2,7 @@ package fr.iutinfo.skeleton.common.dto;
 
 public class RDVDto {
 	//final static Logger logger = LoggerFactory.getLogger(RDVDto.class);
+	private int id_rdv; 
 	private String senior ;
 	private String etudiant;
 	private String jour;
@@ -9,6 +10,14 @@ public class RDVDto {
 	private boolean aprem;
 	private boolean soir;
 	private String service;
+	
+	
+	public int getId_rdv() {
+		return id_rdv;
+	}
+	public void setId_rdv(int id_rdv) {
+		this.id_rdv = id_rdv;
+	}
 	public String getSenior() {
 		return senior;
 	}

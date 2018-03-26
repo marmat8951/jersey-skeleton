@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -47,13 +48,33 @@ public class RDVResource {
     
     @GET
     @Path("/{senior}")
-    public RDVDto getRDV(@PathParam("id_senior") String senior) {
+    public RDVDto getRDV(@PathParam("senior") String senior) {
         RDV rdv = dao.findBySenior(senior);
         if (rdv == null) {
             throw new WebApplicationException(404);
         }
         return rdv.convertToDto();
     }
+    
+    
+    //Méthode pour récuperer un rendez vous validé, c'est à dire qu'un étudiant a été ajouté au rendez vous. 
+    @GET
+    @Path("/{senior}&{etudiant}")
+    public RDVDto getRdvValide(@PathParam("senior") String senior, @PathParam("etudiant") String etudiant) {
+        RDV rdv = dao.findRdvValide(senior,etudiant);
+        if (rdv == null) {
+            throw new WebApplicationException(404);
+        }
+        return rdv.convertToDto();
+    }
+    
+    
+    @PUT
+    @Path("/validate/{login}")
+    public void valideRDV(@PathParam("login") String login) {
+    	dao.ValideRdv(login);
+    }
+    
     
     @GET
     public List<RDVDto> getAllRDV() {

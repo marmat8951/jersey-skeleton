@@ -13,7 +13,7 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 public interface RDVDao {
     @SqlUpdate("create table rdv(senior varchar(100) not null," + 
     		"jour text, matin boolean, aprem boolean, soir boolean,"
-    		+ " etudiant varchar(100), service text, foreign key(service) references service(libelle), foreign key(senior) references users(login)"
+    		+ "etudiant varchar(100), service text, foreign key(service) references service(libelle), foreign key(senior) references users(login)"
     		+ "constraint pk_rdv primary key(senior,jour,matin,aprem,soir))") void createRDVTable();
     	
 
@@ -26,13 +26,17 @@ public interface RDVDao {
     @RegisterMapperFactory(BeanMapperFactory.class)
     RDV findBySenior(@Bind("senior") String id);
     
+    @SqlQuery("select * from rdv where senior = :senior AND etudiant = :etudiant")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    RDV findRdvValide(@Bind("senior") String id, @Bind("etudiant") String etudiant );
+    
     @SqlUpdate("drop table if exists rdv")
     void dropRDVTable();
     
-    /*
-    @SqlUpdate("UPDATE RDV\n SET id_etu = :id_etu WHERE id_senior = :id_senior")
-    void ValideRdv(@Bind("id_senior") int id_senior, @Bind("id_etu") int id_etu);
-    */
+    
+    @SqlUpdate("UPDATE rdv SET etudiant = :etudiant WHERE senior = :senior")
+    void ValideRdv(@Bind("senior") String login);
+    
     
     @SqlUpdate("delete from rdv where senior = :senior")
     void delete(@Bind("senior") String id);
@@ -42,4 +46,6 @@ public interface RDVDao {
     List<RDV> all();
     
     void close();
+
+
 }

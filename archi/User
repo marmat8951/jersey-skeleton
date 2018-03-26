@@ -1,12 +1,12 @@
 ## Classe *user* :
 
+/!\ LE LOGIN EST MAINTENANT L'ADRESSE EMAIL /!\
 
 * String nom
 * String prenom
 * String login
 * String numero
 * String statut
-* String email
 * String password
 * String valide
 
@@ -20,7 +20,6 @@ POST http://localhost:8080/user
 	"login" : "{login}",	(CLE PRIMAIRE)
 	"numero" : "{tnumero}",
 	"statut" : "{ETUDIANT|SENIOR}",
-	"email" : "{mail}",
 	"password" : "{password}"
 	}
 
