@@ -48,25 +48,46 @@ public class RDVResource {
     }
     
     @GET
-    @Path("/{senior}")
-    public RDVDto getRDV(@PathParam("senior") String senior) {
-        RDV rdv = dao.findBySenior(senior);
-        if (rdv == null) {
+    @Path("/senior/{senior}")
+    public List<RDVDto> getRDVbySenior(@PathParam("senior") String senior) {
+    	List<RDV> l = dao.findBySenior(senior);
+        if (l == null) {
             throw new WebApplicationException(404);
         }
-        return rdv.convertToDto();
+        return l.stream().map(RDV::convertToDto).collect(Collectors.toList());
+    }
+    /*
+    @GET
+    @Path("/etudiant/")
+    public List<RDVDto> getRDValide() {
+    	List<RDV> l = dao.findRdvValide();
+        if (l == null) {
+            throw new WebApplicationException(404);
+        }
+        return l.stream().map(RDV::convertToDto).collect(Collectors.toList());
+    }
+    */
+    
+    @GET
+    @Path("/etudiant/{etudiant}")
+    public List<RDVDto> getRDVbyEtudiant(@PathParam("etudiant") String etudiant) {
+    	List<RDV> l = dao.findByEtudiant(etudiant);
+        if (l == null) {
+            throw new WebApplicationException(404);
+        }
+        return l.stream().map(RDV::convertToDto).collect(Collectors.toList());
     }
     
     
     //Méthode pour récuperer un rendez vous validé, c'est à dire qu'un étudiant a été ajouté au rendez vous. 
     @GET
     @Path("/{senior}&{etudiant}")
-    public RDVDto getRdvValide(@PathParam("senior") String senior, @PathParam("etudiant") String etudiant) {
-        RDV rdv = dao.findRdvValide(senior,etudiant);
-        if (rdv == null) {
+    public List<RDVDto> getRdvByCouple(@PathParam("senior") String senior, @PathParam("etudiant") String etudiant) {
+    	List<RDV> l = dao.findRdvValide(senior, etudiant);
+        if (l == null) {
             throw new WebApplicationException(404);
         }
-        return rdv.convertToDto();
+        return l.stream().map(RDV::convertToDto).collect(Collectors.toList());
     }
     
     

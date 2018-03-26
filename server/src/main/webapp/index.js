@@ -66,7 +66,7 @@ const inscriptionPage = "<div class='container'><div class='row centered-form'><
 contenu.innerHTML = identificationPage;
 
 function checkMdp(){
-    if($('#password').val() == $('#password_confirmation').val() && $('#password').val().length > 0 ){
+    if($('#password').val() == $('#password_confirmation').val() && $('#password').val().length > 5 ){
         $('#password_confirmation').css('border','3px solid green');
     } else {
         $('#password_confirmation').css('border','3px solid red'); 
@@ -96,7 +96,8 @@ ong2.addEventListener("click",function(){
 
 
 function inscription(){
-    if($('#password').val() == $('#password_confirmation').val() && $('#password').val().length > 0 ){   
+
+    if($('#password').val() == $('#password_confirmation').val() && $('#password').val().length > 5 ){   
         var nom=document.getElementById("last_name").value;
         var prenom=document.getElementById("first_name").value;
         var numero=document.getElementById("numero").value;
@@ -105,36 +106,50 @@ function inscription(){
         var planning=null;
         var statut=document.getElementById("type").value;
 
-        <!--changer le type en menu deroulant (senior/etudiant)-->
-            var url="v1/user/"; 
-        $.ajax({
-            type : 'POST',
-            contentType : 'application/json',
-            url : url,
-            dataType : "json",
-            data : JSON.stringify({
-                "nom" : nom,
-                "prenom" : prenom,
-                "login" : login,
-                "numero" : numero,
-                "statut" : statut,
-                "password":mdp
-            }),
-            success : function(data, textStatus, jqXHR) {
-                alert("Profil créé avec succés. Il sera accessible lorsqu'il aura été validé par le modérateur.");
-                document.body.style.backgroundColor = "white";
-                $('#conteneurAccueil').show();
-                $('#onglet').hide();
-            },
-            error : function(jqXHR, textStatus, errorThrown) {
-                alert("Erreur lors de la création de compte. Le login choisi peut-être déjà utilisé.");
-                console.log("jqXHR" +jqXHR);
-                console.log("error"+errorThrown);
-                console.log('postUser error: ' + textStatus);
-            }
-        });
+
+        var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$','i');
+
+        if(!regEmail.test(login)){
+
+            alert("Addresse mail incorrect !");
+            $('login').css('border','3px solid red'); 
+        } else {
+
+
+            <!--changer le type en menu deroulant (senior/etudiant)-->
+                var url="v1/user/"; 
+            $.ajax({
+                type : 'POST',
+                contentType : 'application/json',
+                url : url,
+                dataType : "json",
+                data : JSON.stringify({
+                    "nom" : nom,
+                    "prenom" : prenom,
+                    "login" : login,
+                    "numero" : numero,
+                    "statut" : statut,
+                    "password":mdp
+                }),
+                success : function(data, textStatus, jqXHR) {
+                    alert("Profil créé avec succés. Il sera accessible lorsqu'il aura été validé par le modérateur.");
+                    document.body.style.backgroundColor = "white";
+                    $('#conteneurAccueil').show();
+                    $('#onglet').hide();
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    alert("Erreur lors de la création de compte. Le login choisi peut-être déjà utilisé.");
+                    console.log("jqXHR" +jqXHR);
+                    console.log("error"+errorThrown);
+                    console.log('postUser error: ' + textStatus);
+                }
+            });
+        }
+    } else if ($('#password').val().length <= 5){
+        alert("Le mot de passe doit contenir au moins 6 caractéres");
     } else {
         alert("Mot de passe incorrect !");
+
     }
 
 }
