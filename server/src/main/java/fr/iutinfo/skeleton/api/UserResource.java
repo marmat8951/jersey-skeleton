@@ -54,7 +54,15 @@ public class UserResource {
     public void valideUser(@PathParam("login") String login) {
     	dao.valide(login);
     }
-
+    
+    /* TODO
+    @PUT
+    @Path("/{login}")
+    public UserDto modifyUser(@PathParam("login") String login, UserDto dto) {
+    	User user = dao.findByLogin(name)
+    }
+	*/
+    
     @GET
     @Path("/{login}")
     public UserDto getUser(@PathParam("login") String login) {
