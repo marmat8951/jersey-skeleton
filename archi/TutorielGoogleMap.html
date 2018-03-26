@@ -1,0 +1,40 @@
+<!-- Source : https://developers.google.com/maps/documentation/javascript/marker-clustering -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <!-- Définit une zone de la page destinée à la carte Google. Au début n'affiche qu'un bloc gris dans la page, a modifier en fonction de la taille nécessaire à la carte qu'on veut mettre dans le site dans la balise style plus haut -->
+    <script>
+      function initMap() {
+        var uluru = {lat: 50.633333, lng: 3.066667}; <!--Les coordonnées de la carte sont définies dans l'ordre suivant : latitude, longitude. -->
+        var map = new google.maps.Map(document.getElementById('map'), { <!-- Ajoutez ce nouvel objet Google Maps pour créer une carte dans l'élément div. -->
+          zoom: 2, <!-- le zoom zero affiche normaleemnt la totalité de la terre-->
+      center: uluru<!-- La propriété center indique à l'API où centrer la carte. -->
+        });
+        var marker = new google.maps.Marker({ <!-- Code pour placer un marqueur sur la carte. -->
+          position: uluru, <!--  position - cette propriété définit la position du marqueur -->
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlMGV4uzAAihqxz0zoN7dTx08MDO6ewlU&callback=initMap"> <!-- Le callback appelle la fonction initMap() définit plus haut -->
+       <!-- L'attribut async autorise le navigateur à continuer à rendre le reste de votre page pendant le chargement de l'API, Le paramètre key contient votre clé d'API. -->
+    </script>
+  </body>
+</html>
+
+<!-- Pour avoir une Api KEY : GO sur ce lien : https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&reusekey=true
+et suivre les indications pour avoir son API key, la resteindre et la renommer
+-->
