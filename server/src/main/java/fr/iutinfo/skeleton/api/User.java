@@ -22,7 +22,9 @@ public class User implements Principal {
     private String password;
     private String passwdHash;
     private String salt;
-    private String search;
+    
+	private String search;
+    private String valide;
 
 	public User(String login, String name) {
         this.login = login;
@@ -121,6 +123,14 @@ public class User implements Principal {
 
 	public void setSearch(String search) {
 		this.search = search;
+	}    
+	
+	public String getValide() {
+		return valide;
+	}
+
+	public void setValide(String valide) {
+		this.valide = valide;
 	}
 
 	public String getPassword() {
@@ -204,6 +214,7 @@ public class User implements Principal {
     	this.setStatut(dto.getStatut());
     	this.setEmail(dto.getEmail());
     	this.setPassword(dto.getPassword());
+    	this.setValide(dto.getValide());
     }
 
     public UserDto convertToDto() {
@@ -215,6 +226,7 @@ public class User implements Principal {
     	dto.setStatut(this.getStatut());
     	dto.setEmail(this.getEmail());
     	dto.setPassword(this.getPassword());
+    	dto.setValide(this.getValide());
         return dto;
     }
 

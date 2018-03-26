@@ -1,4 +1,4 @@
-PATH : localhost:8080/v1/
+cd PATH : localhost:8080/v1/
 
  POST :
   
@@ -22,20 +22,23 @@ PATH : localhost:8080/v1/
 
   /rdv     Création d'un rdv
   
-  {
-   "senior":"senior",
-   "etudiant":"etudiant",
-   "jour":"jour",
-   "moment":"moment",
-   "service":"service",
-   "description":"descriptio"
-  }
+{
+"senior" : "papy",
+"jour" : "lundi",
+"matin" : "true",
+"aprem" : "true",
+"soir" : "true",
+"etudiant" : "Cyril",
+"service" : "poney"
+}
 
  GET :
   
-  /user/etudiant       Obtenir la liste des etudiants //TODO
-  /user/senior         Obtenir la liste des seniors   //TODO
-  /user/{login}        Obtenir l'utilisateur selon le login
+  /user/etudiants       Obtenir la liste des etudiants
+  /user/seniors         Obtenir la liste des seniors
+  /user/valide		Obetnir la liste des utilisateurs validés
+  /user/!valide		Obtenir la liste des utilisateurs non validés
+  /user/{login}         Obtenir l'utilisateur selon le login
 
   /user/etudiant?senior-id=id  Obtenir la liste des etudiants correspondants au senior //TODO
 
@@ -56,6 +59,7 @@ PATH : localhost:8080/v1/
  PUT :
  
   /user/{login} mise a jour d'un utilisateur
+  /user/validate/{login} valide le compte d'utilisateur
 
 {
   "nom" : "{nom}",

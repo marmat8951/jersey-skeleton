@@ -1,14 +1,31 @@
 $(document).ready(function() {
-    $("button").click(function () {
-        $('#conteneurAccueil').hide();
-        $('#connexion').hide();
-        $('#deconnexion').show();
-        $('#onglet').show();
-        document.body.style.backgroundColor = "#354665";
-    });
 
     $('#logo').click(function() {
         location.reload();
+    });
+
+    $('#connexion').click(function() {
+        $('#conteneurAccueil').hide();
+        $('#onglet').show();
+        contenu.innerHTML = identificationPage;
+        active(ong2);
+        document.body.style.backgroundColor = "#354665";
+    });
+
+    $('#inscription').click(function() {
+        $('#conteneurAccueil').hide();
+        $('#onglet').show();
+        contenu.innerHTML = inscriptionPage;
+        active(ong1);
+        document.body.style.backgroundColor = "#354665";
+    });
+    
+     $('#deconnexion').click(function() {
+        $('#loginUser').val("");
+          $('#connexion').show();
+            $('#inscription').show();
+            $('#profil').hide();
+            $('#deconnexion').hide();
     });
 
     $('.gridster').on('click','#conduite',function(){alert('it works');})
@@ -18,6 +35,7 @@ $(document).ready(function() {
 
     $('#onglet').hide();
     $('#deconnexion').hide();
+    $('#profil').hide();
     console.log( "ready!" );
 
     $('#explication_precis1').animate({height: '150px', opacity: '0.4'}, "slow");
@@ -26,7 +44,6 @@ $(document).ready(function() {
     $('#explication_precis1').animate({height: '150px', opacity: '1'}, "slow");
     $('#explication_precis2').animate({height: '150px', opacity: '1'}, "slow");
     $('#explication_precis3').animate({height: '150px', opacity: '1'}, "slow");
-
 });
 
 function checkValue(element){
@@ -98,9 +115,14 @@ function inscription(){
         success : function(data, textStatus, jqXHR) {
             alert("Utilisateur créé");
             document.body.style.backgroundColor = "white";
+            $('#loginUser').val(login);
             $('#conteneurAccueil').show();
+            $('#connexion').hide();
+            $('#inscription').hide();
+            $('#profil').show();
             $('#deconnexion').show();
             $('#onglet').hide();
+                   $('#loginUser').val(login);
         },
         error : function(jqXHR, textStatus, errorThrown) {
             console.log("jqXHR" +jqXHR);
@@ -130,10 +152,15 @@ function connexion(){
             var tab = JSON.stringify(json);
             var js=JSON.parse(tab);
             alert("Connexion OK !");
+            $('#loginUser').val(login);
             document.body.style.backgroundColor = "white";
             $('#conteneurAccueil').show();
+            $('#connexion').hide();
+            $('#inscription').hide();
+            $('#profil').show();
             $('#deconnexion').show();
             $('#onglet').hide();
+
 
         },
         error : function(jqXHR, textStatus, errorThrown) {

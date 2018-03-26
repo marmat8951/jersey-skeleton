@@ -12,6 +12,7 @@ public class UserDto {
     private String statut;
     private String email;
     private String password;
+    private String valide;
     
     /*
      * {
@@ -80,6 +81,14 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public String getValide() {
+		return valide;
+	}
+
+	public void setValide(String valide) {
+		this.valide = valide;
+	}
 
 
 }
