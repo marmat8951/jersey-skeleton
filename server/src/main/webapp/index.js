@@ -146,6 +146,9 @@ function connexion(){
         success : function(json) {
             var tab = JSON.stringify(json);
             var js=JSON.parse(tab);
+            var valide=js.valide;
+            console.log(valide);
+            if(valide == "oui"){
             alert("Connexion OK !");
             $('#loginUser').val(login);
             document.body.style.backgroundColor = "white";
@@ -155,8 +158,9 @@ function connexion(){
             $('#profil').show();
             $('#deconnexion').show();
             $('#onglet').hide();
-
-
+            } else {
+                alert("Votre profil n'a pas encore été validé par le modérateur.");
+            }
         },
         error : function(jqXHR, textStatus, errorThrown) {
             alert("Login ou mot de passe incorrect !")
