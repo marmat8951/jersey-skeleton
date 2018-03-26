@@ -63,8 +63,13 @@ public interface RDVDao {
 	private String etudiant=null;
      */
     
-    @SqlUpdate("delete from rdv where senior = :senior")
-    void delete(@Bind("senior") String id);
+    @SqlUpdate("delete from rdv where jour = :jour AND matin = :matin AND aprem = :aprem AND soir = :soir AND service = :service AND senior = :senior")
+    void delete(@Bind("senior") String senior,
+    		@Bind("jour") String jour, 
+    		@Bind("matin") boolean matin, 
+    		@Bind("aprem") boolean aprem, 
+    		@Bind("soir") boolean soir, 
+    		@Bind("service") String service);
     
     @SqlQuery("select * from rdv order by senior")
     @RegisterMapperFactory(BeanMapperFactory.class)
