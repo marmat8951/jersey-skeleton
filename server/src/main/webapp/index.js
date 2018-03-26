@@ -26,7 +26,6 @@ $(document).ready(function() {
     $('#explication_precis1').animate({height: '150px', opacity: '1'}, "slow");
     $('#explication_precis2').animate({height: '150px', opacity: '1'}, "slow");
     $('#explication_precis3').animate({height: '150px', opacity: '1'}, "slow");
-
 });
 
 function checkValue(element){
@@ -98,6 +97,7 @@ function inscription(){
         success : function(data, textStatus, jqXHR) {
             alert("Utilisateur créé");
             document.body.style.backgroundColor = "white";
+            $('#loginUser').val(login);
             $('#conteneurAccueil').show();
             $('#deconnexion').show();
             $('#onglet').hide();
