@@ -16,12 +16,36 @@
             text-decoration: none;
             color:red;
         }
+        th,td{
+            text-align: center;
+        }
+        button:hover{
+            color: white;
+            background-color: #0f223d;
+        }
+        button{
+            margin-top: 0;
+        }
+        #retour{
+            margin-top:0;
+            margin-left: 5%;
+        }
+        #but{
+            margin-top: 0;
+        }
+        .buttons{
+            text-align: center;
+            padding: 5%;
+        }
     </style>
 </head>
 <body>
     <h1>Page Modération</h1>
-    <button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button>
-    <button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button>
+    <div class="buttons">
+        <button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button>
+        <button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button>
+        <button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button>
+    </div>
     <script>
         function listeUsers(){
             $.ajax({
@@ -31,9 +55,9 @@
                 success: function( json ) {
                     var tab = JSON.stringify(json);
                     var js=JSON.parse(tab);
-                    var res="<h1>Liste des Utilisateurs</h1><table id=\"tableUser\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a  href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a  href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a  href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a  href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Statut</th><th><a  href=\"javascript:sortTable('tableUser',5, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Validation</th></tr>";
+                    var res="<h1>Utilisateurs en attente<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableUser\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a  href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a  href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a  href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a  href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Statut</th><th><a  href=\"javascript:sortTable('tableUser',5, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Validation</th></tr>";
                     for(var cpt=0;cpt<js.length;cpt++){
-                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"validate('"+js[cpt].login+"')\" >Valider</button></td></tr>";
+                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\"  id='but' onClick=\"validate('"+js[cpt].login+"')\" >Valider</button></td></tr>";
                     }
                     $('body').html(res);
                 },
@@ -74,9 +98,9 @@
                 success: function( json ) {
                     var tab = JSON.stringify(json);
                     var js=JSON.parse(tab);
-                    var res="<h1>Liste des Utilisateurs</h1><table id=\"tableUser\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a  href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a  href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a  href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a  href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Statut</th><th><a  href=\"javascript:sortTable('tableUser',5, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Gestion</th></tr>";
+                    var res="<h1>Liste des Utilisateurs<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableUser\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a  href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a  href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a  href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a  href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Statut</th><th><a  href=\"javascript:sortTable('tableUser',5, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Gestion</th></tr>";
                     for(var cpt=0;cpt<js.length;cpt++){
-                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"suppression('"+js[cpt].login+"')\" >Supprimer</button></td></tr>";
+                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" id='but' onClick=\"suppression('"+js[cpt].login+"')\" >Supprimer</button></td></tr>";
                     }
                     $('body').html(res);
                 },
@@ -106,6 +130,11 @@
                     console.dir( xhr );
                 }
             })
+        }
+
+        function retour(){
+            var res = "<h1>Page Modération</h1><div class=\"buttons\"><button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button><button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button><button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button></div>"
+             $('body').html(res);
         }
 
         function sortTable(tid, col, ord){
@@ -165,6 +194,34 @@
            while(sorter[++j]){
                mybody.append(sorter[j][0]); 
            }
+        }
+
+        function listRdv(){
+           $.ajax({
+               url:"http://localhost:8080/v1/rdv",
+               type:"GET",
+               dataType :"json",
+               success:function(json){
+                   var tab = JSON.stringify(json);
+                   var js = JSON.parse(tab);
+                   var res="<h1>Liste des rendez-vous<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableRDV\"><tr><th><a  href=\"javascript:sortTable('tableRDV',0, 'asc')\" value=\"tri alphanum asc col1\">Etudiant</th><th><a  href=\"javascript:sortTable('tableRDV',1, 'asc')\" value=\"tri alphanum asc col1\">Senior</th><th><a  href=\"javascript:sortTable('tableRDV',2, '?asc')\" value=\"tri alphanum asc col1\">Jour</th><th><a  href=\"javascript:sortTable('tableRDV',3, '?asc')\" value=\"tri alphanum asc col1\">Service </th><th><a  href=\"javascript:sortTable('tableRDV',4, '?asc')\" value=\"tri alphanum asc col1\">Matin</th><th><a  href=\"javascript:sortTable('tableRDV',5, '?asc')\" value=\"tri alphanum asc col1\">Aprem</th><th><a  href=\"javascript:sortTable('tableRDV',6, '?asc')\" value=\"tri alphanum asc col1\">Soir</th></tr>";
+                   for(var cpt=0;cpt<js.length;cpt++){
+                       var moment = function(){
+                           
+                       }
+                       res=res+"<tr class=\"ligne\"><td>"+js[cpt].senior +"</td>"+"<td>"+js[cpt].etudiant+"</td>"+"<td>"+js[cpt].jour+"</td><td>"+js[cpt].service+"</td><td>"+js[cpt].matin+"</td><td>"+js[cpt].aprem+"</td><td>"+js[cpt].soir+"</td></tr>";
+                   }
+                   $('body').html(res);
+               },
+               error: function( xhr, status, errorThrown ) {
+                   alert( "Sorry, there was a problem!" );
+                   console.log( "Error: " + errorThrown );
+                   console.log( "Status: " + status );
+                   console.dir( xhr );
+               },
+               complete: function( xhr, status ) {
+               }
+           });
         }
     </script>
 </body>
