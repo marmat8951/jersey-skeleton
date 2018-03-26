@@ -11,28 +11,29 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface ListHobbieDao {
-    @SqlUpdate("create table list_hobbies(id_user int not null, id_hob text not null, " 
-    		+ " foreign key(id_hob) references hobbies(libelle), foreign key(id_user) references users(id_user)"
-    		+ "constraint pk_list_hob primary key(id_user,id_hob))") void createListHobbiesTable();
+    @SqlUpdate("create table list_hobbies(login varchar(100) not null, id_hob text not null, " 
+    		+ " foreign key(id_hob) references hobbies(libelle), foreign key(login) references user(login)"
+    		+ "constraint pk_list_hob primary key(login,id_hob))") void createListHobbiesTable();
     	
 
     
-    @SqlUpdate("insert into list_hobbies (id_user,id_hob ) values (:id_user, :id_hob)")
+    @SqlUpdate("insert into list_hobbies (login,id_hob ) values (:login, :id_hob)")
     @GetGeneratedKeys
-    int insert(@BindBean() ListHobbie liste);
+    String insert(@BindBean() ListHobbie liste);
 
-    @SqlQuery("select * from list_hobbies where id_user = :id_user")
+    //Affiche la liste des hobbies d'un utilisateur d'id login
+    @SqlQuery("select * from list_hobbies where login = :login")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    ListHobbie findByIdUser(@Bind("id_user") int id);
+    List<ListHobbie> findByIdUser(@Bind("login") String login);
     
     @SqlUpdate("drop table if exists list_hobbies")
     void dropListTable();
     
     
-    @SqlUpdate("delete from list_hobbies where id_user = :id_user AND id_hob = :id_hob")
-    void delete(@Bind("id_user") int id, @Bind("id_hob") String id_hob);
+    @SqlUpdate("delete from list_hobbies where login = :login AND id_hob = :id_hob")
+    void delete(@Bind("login") String login, @Bind("id_hob") String id_hob);
     
-    @SqlQuery("select * from list_hobbies order by id_user")
+    @SqlQuery("select * from list_hobbies order by login")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<ListHobbie> all();
     
