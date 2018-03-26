@@ -33,6 +33,9 @@ public interface UserDao {
     
     @SqlUpdate("UPDATE user SET valide = 'oui' WHERE login = :login")
     int valide(@Bind("login") String login);
+    
+    @SqlUpdate("UPDATE user SET valide = 'non' WHERE login = :login")
+    int invalide(@Bind("login") String login);
 
     @SqlQuery("select * from user order by login")
     @RegisterMapperFactory(BeanMapperFactory.class)

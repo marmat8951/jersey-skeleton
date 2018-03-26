@@ -59,6 +59,9 @@ Valider un compte d'utilisateur
 
 	PUT http://localhost:8080/v1/user/validate/{login}
 
+Enlever validation d'un compte utilisateur
+	PUT http://localhost:8080/v1/user/!validate/{login}
+
 
 return: 
 * 500 : Serveur Error

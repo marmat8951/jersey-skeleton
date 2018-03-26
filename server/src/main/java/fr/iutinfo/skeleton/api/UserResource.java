@@ -55,6 +55,12 @@ public class UserResource {
     	dao.valide(login);
     }
     
+    @PUT
+    @Path("/!validate/{login}")
+    public void invalideUser(@PathParam("login") String login) {
+    	dao.invalide(login);
+    }
+    
     /* TODO
     @PUT
     @Path("/{login}")
