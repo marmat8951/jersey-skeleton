@@ -14,10 +14,16 @@
     </head>
 
     <body>
+        <!-- A SUPRIMMER -->
+        <p id="loginUser" style="display:none" value="testA">testB</p>
+
         <h1>Profil</h1>
+
         <div id="init_div"></div>
 
         <script>
+            //<!-- A SUPRIMMER -->
+            $('#loginUser').val("MonLOGIN")
             var login = $('#loginUser').val()
             var labels = ["statut", "nom", "prenom", "numero", "email", "password"];
 
