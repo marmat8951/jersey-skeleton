@@ -1,3 +1,4 @@
+package fr.iutinfo.skeleton.api;
 import fr.iutinfo.skeleton.common.dto.ListHobbieDto;
 import fr.iutinfo.skeleton.common.dto.RDVDto;
 
