@@ -82,6 +82,17 @@ public class RDVResource {
     	dao.valide(senior,jour,matin,aprem,soir,service,etudiant);
     }
     
+    @PUT
+    @Path("/validate/{senior}&{jour}&{matin}&{aprem}&{soir}&{service}")
+    public void unvalide(@PathParam("senior") String senior,
+    		@PathParam("jour") String jour,
+    		@PathParam("matin") boolean matin,
+    		@PathParam("aprem") boolean aprem,
+    		@PathParam("soir") boolean soir,
+    		@PathParam("service") String service) {
+    	dao.unvalide(senior,jour,matin,aprem,soir,service);
+    }
+    
     
     @GET
     public List<RDVDto> getAllRDV() {
