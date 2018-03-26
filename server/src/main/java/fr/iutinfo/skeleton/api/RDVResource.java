@@ -102,8 +102,13 @@ public class RDVResource {
     }
     
     @DELETE
-    @Path("/{senior}")
-    public void deleteUser(@PathParam("senior") String id) {
-        dao.delete(id);
+    @Path("/{senior}&{jour}&{matin}&{aprem}&{soir}&{service}")
+    public void deleteUser(@PathParam("senior") String senior,
+    		@PathParam("jour") String jour,
+    		@PathParam("matin") boolean matin,
+    		@PathParam("aprem") boolean aprem,
+    		@PathParam("soir") boolean soir,
+    		@PathParam("service") String service){
+        dao.delete(senior,jour,matin,aprem,soir,service);
     }
 }
