@@ -10,9 +10,9 @@
 
     </head>
     <body>
-        <h1>Page Utilisateur</h1>
-        <button type='button' onClick='listeUsers()' name='buttonListe'>Liste des utilisateurs</button>
-        <button type='button' onClick='#' name='buttonAutre'>Gestion des utilisateurs</button>
+        <h1>Page Modération</h1>
+        <button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button>
+        <button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button>
         <script>
             function listeUsers(){
                 $.ajax({
@@ -22,9 +22,9 @@
                     success: function( json ) {
                         var tab = JSON.stringify(json);
                         var js=JSON.parse(tab);
-                        var res="<h1>Liste des Utilisateurs</h1><table><tr><th>Nom</th><th>Prenom</th><th>Login</th><th>Numero</th><th>Statut</th><th>Email</th></tr>";
+                        var res="<h1>Liste des Utilisateurs</h1><table><tr><th>Nom</th><th>Prenom</th><th>Login</th><th>Numero</th><th>Statut</th><th>Email</th><th>Validation</th></tr>";
                         for(var cpt=0;cpt<js.length;cpt++){
-                            res=res+"<tr><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td>"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td></tr>";
+                            res=res+"<tr><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"validate('"+js[cpt].login+"')\" >Valider</button></td></tr>";
                         }
                         $('body').html(res);
                     },
@@ -38,6 +38,47 @@
                     }
                 });
 
+            }
+
+            function validate(login){
+                $.ajax({
+                    url: "http://localhost:8080/v1/user/validate/" + login,
+                    type: "PUT",
+                    success: function(data) {
+                        alert('Utilisateur Validé');
+                    },
+                    error: function( xhr, status, errorThrown ) {
+                        alert( "Sorry, there was a problem!" );
+                        console.log( "Error: " + errorThrown );
+                        console.log( "Status: " + status );
+                        console.dir( xhr );
+                    }
+                })
+            }
+
+            function listValidUsers(){
+                $.ajax({
+                    url: "http://localhost:8080/v1/user",
+                    type: "GET",
+                    dataType : "json",
+                    success: function( json ) {
+                        var tab = JSON.stringify(json);
+                        var js=JSON.parse(tab);
+                        var res="<h1>Liste des Utilisateurs</h1><table><tr><th>Nom</th><th>Prenom</th><th>Login</th><th>Numero</th><th>Statut</th><th>Email</th><th>Validation</th></tr>";
+                        for(var cpt=0;cpt<js.length;cpt++){
+                            res=res+"<tr><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"validate('"+js[cpt].login+"')\" >Valider</button></td></tr>";
+                        }
+                        $('body').html(res);
+                    },
+                    error: function( xhr, status, errorThrown ) {
+                        alert( "Sorry, there was a problem!" );
+                        console.log( "Error: " + errorThrown );
+                        console.log( "Status: " + status );
+                        console.dir( xhr );
+                    },
+                    complete: function( xhr, status ) {
+                    }
+                });
             }
         </script>
     </body>

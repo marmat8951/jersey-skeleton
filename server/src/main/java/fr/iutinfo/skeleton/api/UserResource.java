@@ -81,6 +81,22 @@ public class UserResource {
     }
     
     @GET
+    @Path("/valide")
+    public List<UserDto> getListValide() {
+        List<User> users;
+        users = dao.isValideList();
+        return users.stream().map(User::convertToDto).collect(Collectors.toList());
+    }
+    
+    @GET
+    @Path("/!valide")
+    public List<UserDto> getListNotValide() {
+        List<User> users;
+        users = dao.isNotValideList();
+        return users.stream().map(User::convertToDto).collect(Collectors.toList());
+    }
+    
+    @GET
     @Path("/seniors")
     public List<UserDto> getSeniors() {
         List<User> users;

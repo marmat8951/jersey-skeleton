@@ -42,6 +42,14 @@ public interface UserDao {
     @SqlQuery("select * from user where statut = 'senior'")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<User> seniors();
+    
+    @SqlQuery("select * from user where valide = 'oui'")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    List<User> isValideList();
+    
+    @SqlQuery("select * from user where valide = 'non'")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    List<User> isNotValideList();
 
     @SqlQuery("select * from user where login = :login")
     @RegisterMapperFactory(BeanMapperFactory.class)

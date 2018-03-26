@@ -20,7 +20,9 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.iutinfo.skeleton.common.dto.DispoDto;
 import fr.iutinfo.skeleton.common.dto.ListHobbieDto;
+import fr.iutinfo.skeleton.common.dto.RDVDto;
 import fr.iutinfo.skeleton.common.dto.ServiceDto;
 
 @Path("/listhobbies")
@@ -37,24 +39,33 @@ public class ListHobbieResource {
         }
     }
 	
+	 @GET
+		@Path("/test")
+		public ListHobbieDto listhobTest() {
+			ListHobbieDto dto = new ListHobbieDto();
+			dto.setId_hob("poney");
+			dto.setLogin("jordaon");
+			return dto;
+		}
+	 
 	@POST
     public ListHobbieDto createListeHobbies(ListHobbieDto dto) {
         ListHobbie liste = new ListHobbie();
         liste.initFromDto(dto);
-        int id_user =  dao.insert(liste);
-        dto.setId_user(id_user);
+        String login =  (String) dao.insert(liste);
+        dto.setLogin(login);
         return dto;
     }
 	
 	@GET
-    @Path("{id_user}")
-    public ListHobbieDto getListById(@PathParam("id_user") int id) {
-        ListHobbie liste = dao.findByIdUser(id);
-        if (liste == null) {
-            throw new WebApplicationException(404);
-        }
-        return liste.convertToDto();
-    }
+	@Path("/{login}")
+	public List<ListHobbieDto> getByIdUser(@PathParam("login") String login) {
+		List<ListHobbie> liste = dao.findByIdUser(login);
+		if (liste == null) {
+			throw new WebApplicationException(404);
+		}
+		return liste.stream().map(ListHobbie::convertToDto).collect(Collectors.toList());
+	}
 	
 	@GET
     public List<ListHobbieDto> getAllHobbies() {
@@ -64,9 +75,9 @@ public class ListHobbieResource {
     }
 	
 	@DELETE
-    @Path("/{id_user}&{id_hob}")
-    public void deleteService(@PathParam("id_user") int id_user, @PathParam("id_hob") String id_hob) {
-        dao.delete(id_user,id_hob);
+    @Path("/{login}&{id_hob}")
+    public void deleteService(@PathParam("login") String login, @PathParam("id_hob") String id_hob) {
+        dao.delete(login,id_hob);
     }
 	
 	

@@ -3,47 +3,46 @@ import fr.iutinfo.skeleton.common.dto.ListHobbieDto;
 import fr.iutinfo.skeleton.common.dto.RDVDto;
 
 public class ListHobbie {
-	private int id_user=-1; 
+	//Le login est l'id user
+	private String login=""; 
 	//id_hob est le libelle du hobbie contenu dans la table Hobbie
 	private String id_hob=""; 
 	
-	public ListHobbie(int id_user, String id_hob) {
+	public ListHobbie(String login, String id_hob) {
 		
-		this.id_user = id_user;
+		this.login = login;
 		this.id_hob = id_hob;
 	}
 	
 	public ListHobbie() {}
 
-	public int getId_user() {
-		return id_user;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public String getId_hobbie() {
+	public String getId_hob() {
 		return id_hob;
 	}
 
-	public void setId_hobbie(String id_hob) {
+	public void setId_hob(String id_hob) {
 		this.id_hob = id_hob;
 	}
 	
 	public void initFromDto(ListHobbieDto dto) {
-		this.setId_hobbie(dto.getId_hob());
-		this.setId_user(dto.getId_user());
+		this.setId_hob(dto.getId_hob());
+		this.setLogin(dto.getLogin());
     }
     
-    public boolean isValide() {
-    	return id_user>0;
-    }
+  
 
     public ListHobbieDto convertToDto() {
         ListHobbieDto dto = new ListHobbieDto();
-        dto.setId_hob(this.getId_hobbie());
-        dto.setId_user(this.getId_user());
+        dto.setId_hob(this.getId_hob());
+        dto.setLogin(this.getLogin());
         return dto;
     }
 	
