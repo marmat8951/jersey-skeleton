@@ -113,18 +113,13 @@ function inscription(){
             "password":mdp
         }),
         success : function(data, textStatus, jqXHR) {
-            alert("Utilisateur créé");
+            alert("Profil créé avec succés. Il sera accessible lorsqu'il aura été validé par le modérateur.");
             document.body.style.backgroundColor = "white";
-            $('#loginUser').val(login);
             $('#conteneurAccueil').show();
-            $('#connexion').hide();
-            $('#inscription').hide();
-            $('#profil').show();
-            $('#deconnexion').show();
             $('#onglet').hide();
-                   $('#loginUser').val(login);
         },
         error : function(jqXHR, textStatus, errorThrown) {
+            alert("Erreur lors de la création de compte. Le login choisi peut-être déjà utilisé.");
             console.log("jqXHR" +jqXHR);
             console.log("error"+errorThrown);
             console.log('postUser error: ' + textStatus);
