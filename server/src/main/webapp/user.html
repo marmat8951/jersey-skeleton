@@ -25,6 +25,7 @@
         }
         button{
             margin-top: 0;
+            margin-left: 0.5%
         }
         #retour{
             margin-top:0;
@@ -45,6 +46,7 @@
         <button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button>
         <button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button>
         <button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button>
+        <button type='button' onClick='listService()' name='buttonAutre'>Liste des services</button>
     </div>
     <script>
         function listeUsers(){
@@ -100,7 +102,7 @@
                     var js=JSON.parse(tab);
                     var res="<h1>Liste des Utilisateurs<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableUser\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a  href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a  href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a  href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a  href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Statut</th><th><a  href=\"javascript:sortTable('tableUser',5, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Gestion</th></tr>";
                     for(var cpt=0;cpt<js.length;cpt++){
-                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" id='but' onClick=\"suppression('"+js[cpt].login+"')\" >Supprimer</button></td></tr>";
+                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" id='but' onClick=\"suppression('"+js[cpt].login+"')\" >Supprimer</button><button type=\"button\" id='but' onClick=\"suppressValid('"+js[cpt].login+"')\" >Invalider</button></td></tr>";
                     }
                     $('body').html(res);
                 },
@@ -132,8 +134,25 @@
             })
         }
 
+        function suppressValid(login){
+            $.ajax({
+                url: "http://localhost:8080/v1/user/!validate/" + login,
+                type: "PUT",
+                success: function(data) {
+                    alert('Utilisateur Invalidé');
+                    listValidUsers();
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                }
+            })
+        }
+
         function retour(){
-            var res = "<h1>Page Modération</h1><div class=\"buttons\"><button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button><button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button><button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button></div>"
+            var res = "<h1>Page Modération</h1><div class=\"buttons\"><button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button><button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button><button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button><button type='button' onClick='listService()' name='buttonAutre'>Liste des services</button></div>"
              $('body').html(res);
         }
 
@@ -222,6 +241,48 @@
                complete: function( xhr, status ) {
                }
            });
+        }
+
+        function listService(){
+            $.ajax({
+                url: "http://localhost:8080/v1/service",
+                type: "GET",
+                dataType : "json",
+                success: function( json ) {
+                    var tab = JSON.stringify(json);
+                    var js=JSON.parse(tab);
+                    var res="<h1>Liste des Services<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableService\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Libellé</th><th>Gestion</th></tr>";
+                    for(var cpt=0;cpt<js.length;cpt++){
+                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].libelle +"</td>"+"<td><button type=\"button\" id='but' onClick=\"suppressionService('"+js[cpt].libelle+"')\" >Supprimer</button></td></tr>";
+                    }
+                    $('body').html(res);
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                },
+                complete: function( xhr, status ) {
+                }
+            });
+        }
+
+        function suppressionService(libelle){
+            $.ajax({
+                url: "http://localhost:8080/v1/service/" + libelle,
+                type: "DELETE",
+                success: function(data) {
+                    alert('Service Supprimé');
+                    listService();
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                }
+            })
         }
     </script>
     
