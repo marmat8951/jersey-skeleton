@@ -19,13 +19,13 @@ $(document).ready(function() {
         active(ong1);
         document.body.style.backgroundColor = "#354665";
     });
-    
-     $('#deconnexion').click(function() {
+
+    $('#deconnexion').click(function() {
         $('#loginUser').val("");
-          $('#connexion').show();
-            $('#inscription').show();
-            $('#profil').hide();
-            $('#deconnexion').hide();
+        $('#connexion').show();
+        $('#inscription').show();
+        $('#profil').hide();
+        $('#deconnexion').hide();
     });
 
     $('.gridster').on('click','#conduite',function(){alert('it works');})
@@ -33,6 +33,7 @@ $(document).ready(function() {
     $('.gridster').on('click','#lecon',function(){alert('it works');})
     $('.gridster').on('click','#course',function(){alert('it works');})
 
+    $('#show_profil').hide();
     $('#onglet').hide();
     $('#deconnexion').hide();
     $('#profil').hide();
@@ -149,15 +150,15 @@ function connexion(){
             var valide=js.valide;
             console.log(valide);
             if(valide == "oui"){
-            alert("Connexion OK !");
-            $('#loginUser').val(login);
-            document.body.style.backgroundColor = "white";
-            $('#conteneurAccueil').show();
-            $('#connexion').hide();
-            $('#inscription').hide();
-            $('#profil').show();
-            $('#deconnexion').show();
-            $('#onglet').hide();
+                alert("Connexion OK !");
+                $('#loginUser').val(login);
+                document.body.style.backgroundColor = "white";
+                $('#conteneurAccueil').show();
+                $('#connexion').hide();
+                $('#inscription').hide();
+                $('#profil').show();
+                $('#deconnexion').show();
+                $('#onglet').hide();
             } else {
                 alert("Votre profil n'a pas encore été validé par le modérateur.");
             }
@@ -167,5 +168,112 @@ function connexion(){
             console.log('postUser error: ' + textStatus);
         }
     });
+}
 
+function generate_login_page(){
+    $('#conteneurAccueil').hide();
+    $('#show_profil').show();
+
+    var login = $('#loginUser').val()
+    var labels = ["statut", "email", "nom", "prenom", "numero", "password"];
+
+    var div_init = document.getElementById('init_div');
+    var page_de_base = "";
+
+    init_page_login_whit_get();
+    get_all_champs();
+
+    function get_all_champs(){
+        var url="v1/user/"+login; 
+        $.ajax({
+            type : 'GET',
+            url : url,
+            dataType : "json",
+            success : function(json) {
+                var tab = JSON.stringify(json);
+                var js=JSON.parse(tab);                      
+                $('#div_statut_get').text(js.statut)
+                $('#div_nom_get').text(js.nom)
+                $('#div_prenom_get').text(js.prenom)
+                $('#div_numero_get').text(js.numero)
+                $('#div_email_get').text(js.login)
+                $('#div_password_get').text(js.password)
+
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                alert("Login incorrect !")
+                console.log('postUser error: ' + textStatus);
+            }
+        });
+    }
+
+    function init_page_login_whit_get(){
+        for(var i=0; i<labels.length; i++) {
+            if(i === 0){
+                page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "' class='div_profil'></div></div><br/>"
+            } else if(i === labels.length-1){
+                page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get' style='display:none'></div><div id='div_" + labels[i] + "' class='div_profil'><button class='button_profil' onclick=\"display_input_update('" + labels[i] + "')\">Modifier</button></div></div><br/>"
+            } else {
+                page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get'></div><div id='div_" + labels[i] + "' class='div_profil'><button class='button_profil' onclick=\"display_input_update('" + labels[i] + "')\">Modifier</button></div></div><br/>"
+            }
+        }             
+        page_de_base += "<br/><button class='button_profil' onclick=\"send_update()\">Confirmer et envoyer les modifications</button>"
+        div_init.innerHTML = page_de_base;
+    }
+
+    function display_input_update(param){                
+        var display = ""
+        var div = "div_" + param
+        var div_display = document.getElementById(div)
+        var html_display = ""
+
+        if (param === "password"){
+            html_display = "<input type='password' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><br/><input type='password' name='" + param + "_check' id='" + param + "_check' placeholder='" + param + "_check' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
+        } else if (param === "numero"){
+            html_display = "<input type='tel' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
+        } else if (param === "email"){    
+            html_display = "<input type='email' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
+        } else {
+            html_display = "<input type='text' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
+        }
+        div_display.innerHTML = html_display
+    }
+
+    function display_update(param){
+        var div_name = "div_" + param + "_get"
+        var div_update_put = document.getElementById(div_name);
+        var input_changes = $("#"+param+"_input").val()
+        $("#"+div_name).text(input_changes)
+    }
+
+
+    function send_update(){
+        console.log("SEND UPDATES")
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            contentType : 'application/json',
+            data : JSON.stringify({
+                "nom":$("#div_nom_get").text(),
+                "prenom":$("#div_prenom_get").text(),
+                "numero":$("#div_numero_get").text(),
+                "email":$("#div_email_get").text(),
+                "password":$("#div_password_get").text()              
+            }),
+
+            dataType : "json",
+            success: function( json ) {
+                alert("Inscription reussie !!!");
+            },
+            error: function( xhr, status, errorThrown ) {
+
+                console.log( "Error: " + errorThrown );
+                console.log( "Status: " + status );
+                console.dir( xhr );
+            },
+            complete: function( xhr, status ) {
+
+            }
+        });
+    }
 }
