@@ -30,7 +30,7 @@
 
                 <button id="connexion" class="buttonIndex">Connexion</button>
                 <button id="inscription" class="buttonIndex">Inscription</button>
-                <button id="profil" class="buttonIndex">Profil</button>
+                <button id="profil" class="buttonIndex" onclick="generate_login_page()">Profil</button>
                 <button id="deconnexion" class="buttonIndex">Déconnexion</button>
 
 
@@ -87,6 +87,11 @@
             </ul>
             <div id="content_login_page"></div>
         </section>
+
+        <div class="show_profil" id="show_profil">
+            <h1>Profil</h1>
+            <div id="init_div"></div>
+        </div>
 
         <footer>
             <p>Contact information: +33623546942</p>
