@@ -11,20 +11,20 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface RDVDao {
-    @SqlUpdate("create table rdv(id_senior int not null," + 
+    @SqlUpdate("create table rdv(senior varchar(100) not null," + 
     		"jour text, matin boolean, aprem boolean, soir boolean,"
-    		+ " id_etu int, libelle text, foreign key(libelle) references service(libelle), foreign key(id_senior) references users(id_user)"
-    		+ "constraint pk_rdv primary key(id_senior,jour,matin,aprem,soir))") void createRDVTable();
+    		+ " etudiant varchar(100), service text, foreign key(service) references service(libelle), foreign key(senior) references users(login)"
+    		+ "constraint pk_rdv primary key(senior,jour,matin,aprem,soir))") void createRDVTable();
     	
 
     
-    @SqlUpdate("insert into rdv (id_senior, jour, matin, aprem, soir, id_etu ) values (:id_senior, :jour, :matin, :aprem, :soir, :id_etu )")
+    @SqlUpdate("insert into rdv (senior, jour, matin, aprem, soir, etudiant, service) values (:senior, :jour, :matin, :aprem, :soir, :etudiant, :service )")
     @GetGeneratedKeys
     int insert(@BindBean() RDV rdv);
 
-    @SqlQuery("select * from rdv where id_senior = :id_senior")
+    @SqlQuery("select * from rdv where senior = :senior")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    RDV findByIdSenior(@Bind("id_senior") int id);
+    RDV findBySenior(@Bind("senior") String id);
     
     @SqlUpdate("drop table if exists rdv")
     void dropRDVTable();
@@ -34,10 +34,10 @@ public interface RDVDao {
     void ValideRdv(@Bind("id_senior") int id_senior, @Bind("id_etu") int id_etu);
     */
     
-    @SqlUpdate("delete from rdv where id_senior = :id_senior")
-    void delete(@Bind("id_senior") int id);
+    @SqlUpdate("delete from rdv where senior = :senior")
+    void delete(@Bind("senior") String id);
     
-    @SqlQuery("select * from rdv order by id_senior")
+    @SqlQuery("select * from rdv order by senior")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<RDV> all();
     
