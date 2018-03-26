@@ -11,7 +11,6 @@ public class RDVDto {
 	private boolean soir;
 	private String service;
 	
-	
 	public int getId_rdv() {
 		return id_rdv;
 	}
