@@ -1,0 +1,36 @@
+## Classe *Service* :
+
+* String libelle
+
+#### Create
+
+POST http://localhost:8080/v1/service
+
+	{
+	"libelle" : "{libelle}"
+	}
+
+return :
+ * 500 : Server Error
+ * 200 : OK
+
+#### Read
+
+Obtenir la liste des services:
+
+	GET http://localhost:8080/v1/service
+
+return : 
+* 500 : Server Error
+* 200 : OK
+
+#### Update
+
+
+#### Delete
+
+	DELETE http://localhost:8080/v1/service/{service}
+	
+return :
+* 204 : No Content
+* 404 : Not Found
