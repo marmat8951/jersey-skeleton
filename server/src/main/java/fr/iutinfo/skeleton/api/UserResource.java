@@ -60,14 +60,16 @@ public class UserResource {
     public void invalideUser(@PathParam("login") String login) {
     	dao.invalide(login);
     }
-    
-    /* TODO
+
     @PUT
     @Path("/{login}")
     public UserDto modifyUser(@PathParam("login") String login, UserDto dto) {
-    	User user = dao.findByLogin(name)
+        User user = dao.findByLogin(login);
+        user.initFromDto(dto);
+        user.resetPasswordHash();
+        dao.update(user);
+        return dto;
     }
-	*/
     
     @GET
     @Path("/{login}")
