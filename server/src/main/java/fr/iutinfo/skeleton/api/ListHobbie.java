@@ -4,7 +4,8 @@ import fr.iutinfo.skeleton.common.dto.RDVDto;
 
 public class ListHobbie {
 	private int id_user=-1; 
-	private String id_hob;
+	//id_hob est le libelle du hobbie contenu dans la table Hobbie
+	private String id_hob=""; 
 	
 	public ListHobbie(int id_user, String id_hob) {
 		

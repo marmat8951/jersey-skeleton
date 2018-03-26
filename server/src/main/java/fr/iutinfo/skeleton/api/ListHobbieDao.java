@@ -19,18 +19,18 @@ public interface ListHobbieDao {
     
     @SqlUpdate("insert into list_hobbies (id_user,id_hob ) values (:id_user, :id_hob)")
     @GetGeneratedKeys
-    int insert(@BindBean() RDV rdv);
+    int insert(@BindBean() ListHobbie liste);
 
     @SqlQuery("select * from list_hobbies where id_user = :id_user")
     @RegisterMapperFactory(BeanMapperFactory.class)
     ListHobbie findByIdUser(@Bind("id_user") int id);
     
     @SqlUpdate("drop table if exists list_hobbies")
-    void dropRDVTable();
+    void dropListTable();
     
     
-    @SqlUpdate("delete from list_hobbies where id_senior = :id_senior AND id_hob = :id_hob")
-    void delete(@Bind("id_senior") int id);
+    @SqlUpdate("delete from list_hobbies where id_user = :id_user AND id_hob = :id_hob")
+    void delete(@Bind("id_user") int id, @Bind("id_hob") String id_hob);
     
     @SqlQuery("select * from list_hobbies order by id_user")
     @RegisterMapperFactory(BeanMapperFactory.class)

@@ -2,6 +2,7 @@ package fr.iutinfo.skeleton.common.dto;
 
 public class ListHobbieDto {
 	private int id_user; 
+	//id_hob est le libelle du hobbie contenu dans la table Hobbie
 	private String id_hob;
 	
 	public int getId_user() {
