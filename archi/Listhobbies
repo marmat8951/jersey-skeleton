@@ -1,0 +1,38 @@
+## Classe *ListHobbies* :
+
+* String login
+* String id_hob
+
+#### Create
+
+POST http://localhost:8080/v1/listhobbies
+
+	{
+	"login" : "{login}",
+	"id_hob" : "{hobbies}"
+	}
+
+return :
+ * 500 : Server Error
+ * 200 : OK
+
+#### Read
+
+Obtenir la liste des listhobbies (liaison hobbies avec un user):
+
+	GET http://localhost:8080/v1/listhobbies
+
+return : 
+* 500 : Server Error
+* 200 : OK
+
+#### Update
+
+
+#### Delete
+
+	DELETE http://localhost:8080/v1/listhobbies/{login}{id_hob}
+	
+return :
+* 204 : No Content
+* 404 : Not Found
