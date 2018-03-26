@@ -71,9 +71,26 @@ public class RDVResource {
     
     
     @PUT
-    @Path("/validate/{login}")
-    public void valideRDV(@PathParam("login") String login) {
-    	dao.ValideRdv(login);
+    @Path("/validate/{senior}&{jour}&{matin}&{aprem}&{soir}&{service}&{etudiant}")
+    public void valide(@PathParam("senior") String senior,
+    		@PathParam("jour") String jour,
+    		@PathParam("matin") boolean matin,
+    		@PathParam("aprem") boolean aprem,
+    		@PathParam("soir") boolean soir,
+    		@PathParam("service") String service,
+    		@PathParam("etudiant") String etudiant) {
+    	dao.valide(senior,jour,matin,aprem,soir,service,etudiant);
+    }
+    
+    @PUT
+    @Path("/validate/{senior}&{jour}&{matin}&{aprem}&{soir}&{service}")
+    public void unvalide(@PathParam("senior") String senior,
+    		@PathParam("jour") String jour,
+    		@PathParam("matin") boolean matin,
+    		@PathParam("aprem") boolean aprem,
+    		@PathParam("soir") boolean soir,
+    		@PathParam("service") String service) {
+    	dao.unvalide(senior,jour,matin,aprem,soir,service);
     }
     
     
@@ -85,8 +102,13 @@ public class RDVResource {
     }
     
     @DELETE
-    @Path("/{senior}")
-    public void deleteUser(@PathParam("senior") String id) {
-        dao.delete(id);
+    @Path("/{senior}&{jour}&{matin}&{aprem}&{soir}&{service}")
+    public void deleteUser(@PathParam("senior") String senior,
+    		@PathParam("jour") String jour,
+    		@PathParam("matin") boolean matin,
+    		@PathParam("aprem") boolean aprem,
+    		@PathParam("soir") boolean soir,
+    		@PathParam("service") String service){
+        dao.delete(senior,jour,matin,aprem,soir,service);
     }
 }

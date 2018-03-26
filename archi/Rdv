@@ -55,6 +55,9 @@ return :
 
 		PUT http://localhost:8080/v1/rdv/validate/{login senior}&{jour}&{matin}&{aprem}&{soir}&{service}&{login etudiant}
 
+* Dévalider un rdv
+  	    PUT http://localhost:8080/v1/rdv/validate/{login senior}&{jour}&{matin}&{aprem}&{soir}&{service}
+
 return: 
 * 500 : Serveur Error
 * 204 : No Content
@@ -62,6 +65,8 @@ return:
 #### Delete
 
 	DELETE http://localhost:8080/v1/rdv/{login senior}&{jour}&{matin}&{aprem}&{soir}&{service}
+
+
 	
 return :
 * 204 : No Content

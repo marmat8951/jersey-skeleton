@@ -34,13 +34,42 @@ public interface RDVDao {
     @SqlUpdate("drop table if exists rdv")
     void dropRDVTable();
     
+    @SqlUpdate("UPDATE rdv SET etudiant = :etudiant WHERE jour = :jour AND matin = :matin AND aprem = :aprem AND soir = :soir AND service = :service AND senior = :senior")
+    void valide(@Bind("senior") String senior,
+    		@Bind("jour") String jour, 
+    		@Bind("matin") boolean matin, 
+    		@Bind("aprem") boolean aprem, 
+    		@Bind("soir") boolean soir, 
+    		@Bind("service") String service,
+    		@Bind("etudiant") String etudiant
+    		);
     
-    @SqlUpdate("UPDATE rdv SET etudiant = :etudiant WHERE senior = :senior")
-    void ValideRdv(@Bind("senior") String login);
+    @SqlUpdate("UPDATE rdv SET etudiant = null WHERE jour = :jour AND matin = :matin AND aprem = :aprem AND soir = :soir AND service = :service AND senior = :senior")
+    void unvalide(@Bind("senior") String senior,
+    		@Bind("jour") String jour, 
+    		@Bind("matin") boolean matin, 
+    		@Bind("aprem") boolean aprem, 
+    		@Bind("soir") boolean soir, 
+    		@Bind("service") String service
+    		);
     
+    /*
+     * 	private String senior ;
+	private String jour;
+	private boolean matin;
+	private boolean aprem;
+	private boolean soir;
+	private String service;
+	private String etudiant=null;
+     */
     
-    @SqlUpdate("delete from rdv where senior = :senior")
-    void delete(@Bind("senior") String id);
+    @SqlUpdate("delete from rdv where jour = :jour AND matin = :matin AND aprem = :aprem AND soir = :soir AND service = :service AND senior = :senior")
+    void delete(@Bind("senior") String senior,
+    		@Bind("jour") String jour, 
+    		@Bind("matin") boolean matin, 
+    		@Bind("aprem") boolean aprem, 
+    		@Bind("soir") boolean soir, 
+    		@Bind("service") String service);
     
     @SqlQuery("select * from rdv order by senior")
     @RegisterMapperFactory(BeanMapperFactory.class)

@@ -1,0 +1,70 @@
+## Classe *rdv* :
+
+* String senior
+* String etudiant
+* String jour
+* boolean matin
+* boolean aprem
+* boolean soir
+* String service
+
+#### Create
+
+POST http://localhost:8080/rdv
+
+	{
+	"senior" : "{login senior}",
+	"jour" : "{lundi|mardi|...|dimanche}",
+	"matin" : "{true|false}",
+	"aprem" : "{true|false}",
+	"soir" : "{true|false}",
+	"etudiant" : "{login etudiant}",
+	"service" : "{poney|curling sur gazon|...}"
+	}
+
+return :
+ * 500 : Server Error
+ * 200 : OK
+
+#### Read
+
+Obtenir la liste des RDV :
+
+	GET http://localhost:8080/v1/rdv
+
+return : 
+* 500 : Server Error
+* 200 : OK
+
+#### Update
+
+* Modifier un rdv (tous les champs modifiables sauf {login etudiant}
+		
+		PUT http://localhost:8080/v1/rdv/{login senior}&{jour}&{matin}&{aprem}&{soir}&{service}
+			{
+			"senior" : "{login senior}",
+			"jour" : "{lundi|mardi|...|dimanche}",
+			"matin" : "{true|false}",
+			"aprem" : "{true|false}",
+			"soir" : "{true|false}",
+			"service" : "{poney|curling sur gazon|...}"
+			}
+
+
+* Valider un rdv (ajouter un etudiant au rdv)
+
+		PUT http://localhost:8080/v1/rdv/validate/{login senior}&{jour}&{matin}&{aprem}&{soir}&{service}&{login etudiant}
+
+
+
+return: 
+* 500 : Serveur Error
+* 204 : No Content
+
+#### Delete
+
+	DELETE http://localhost:8080/v1/rdv/{login senior}&{jour}&{matin}&{aprem}&{soir}&{service}
+	
+return :
+* 204 : No Content
+* 404 : Not Found
