@@ -7,10 +7,10 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import java.util.List;
 
 public interface UserDao {
-    @SqlUpdate("create table user (nom varchar(100), prenom varchar(100), login varchar(100) primary key, numero varchar(100), statut varchar(100), email varchar(100), passwdHash varchar(64), salt varchar(64), search varchar(1024), valide text)")
+    @SqlUpdate("create table user (nom varchar(100), prenom varchar(100), login varchar(100) primary key, numero varchar(100), statut varchar(100), passwdHash varchar(64), salt varchar(64), search varchar(1024), valide text)")
     void createUserTable();
 
-    @SqlUpdate("insert into user (nom, prenom, login, numero, statut, email, passwdHash, salt, search, valide) values (:nom, :prenom, :login, :numero, :statut, :email, :passwdHash, :salt, :search, 'non')")
+    @SqlUpdate("insert into user (nom, prenom, login, numero, statut, passwdHash, salt, search, valide) values (:nom, :prenom, :login, :numero, :statut, :passwdHash, :salt, :search, 'non')")
     @GetGeneratedKeys
     String insert(@BindBean() User user);
 
@@ -25,8 +25,8 @@ public interface UserDao {
     @SqlUpdate("drop table if exists user")
     void dropUserTable();
 
-    @SqlUpdate("UPDATE user SET nom=:nom, prenom=:prenom, numero=:numero, email=:email, password=:password WHERE login = :login")
-    int valide(@BindBean() User user);
+    @SqlUpdate("UPDATE user SET nom=:nom, prenom=:prenom, numero=:numero, passwdHash = :passwdHash, salt = :salt, search = :search WHERE login = :login")
+    void update(@BindBean() User user);
     
     @SqlUpdate("delete from user where login = :login")
     void delete(@Bind("login") String login);
