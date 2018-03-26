@@ -65,10 +65,10 @@ public class UserResource {
     @Path("/{login}")
     public UserDto modifyUser(@PathParam("login") String login, UserDto dto) {
         User user = dao.findByLogin(login);
-        System.out.println(dto.getNom());
-        user.initFromDto(dto);
-        System.out.println(user.getNom());
-        user.resetPasswordHash();
+        user.setNom(dto.getNom());
+        user.setPrenom(dto.getPrenom());
+        user.setNumero(dto.getNumero());
+        user.setPassword(dto.getPassword());
         dao.update(user);
         return dto;
     }

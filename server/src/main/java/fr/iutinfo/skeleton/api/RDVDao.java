@@ -25,11 +25,19 @@ public interface RDVDao {
 
     @SqlQuery("select * from rdv where senior = :senior")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    RDV findBySenior(@Bind("senior") String id);
+    List<RDV> findBySenior(@Bind("senior") String id);
+    
+    @SqlQuery("select * from rdv where etudiant = :etudiant")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    List<RDV> findByEtudiant(@Bind("etudiant") String id);
+    
+    @SqlQuery("select * from rdv where etudiant IS NOT NULL")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    List<RDV> findRDVValide();
     
     @SqlQuery("select * from rdv where senior = :senior AND etudiant = :etudiant")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    RDV findRdvValide(@Bind("senior") String id, @Bind("etudiant") String etudiant );
+    List<RDV> findRdvValide(@Bind("senior") String id, @Bind("etudiant") String etudiant );
     
     @SqlUpdate("drop table if exists rdv")
     void dropRDVTable();
