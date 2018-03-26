@@ -1,4 +1,4 @@
-PATH : localhost:8080/v1/
+cd PATH : localhost:8080/v1/
 
  POST :
   
@@ -33,9 +33,9 @@ PATH : localhost:8080/v1/
 
  GET :
   
-  /user/etudiant       Obtenir la liste des etudiants //TODO
-  /user/senior         Obtenir la liste des seniors   //TODO
-  /user/{login}        Obtenir l'utilisateur selon le login
+  /user/etudiants       Obtenir la liste des etudiants
+  /user/seniors         Obtenir la liste des seniors
+  /user/{login}         Obtenir l'utilisateur selon le login
 
   /user/etudiant?senior-id=id  Obtenir la liste des etudiants correspondants au senior //TODO
 
@@ -56,6 +56,7 @@ PATH : localhost:8080/v1/
  PUT :
  
   /user/{login} mise a jour d'un utilisateur
+  /user/validate/{login} valide le compte d'utilisateur
 
 {
   "nom" : "{nom}",
