@@ -1,85 +1,171 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <title>Users</title>
-        <meta charset='utf-8'>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <!-- jQuery -->
-        <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    </head>
-    <body>
-        <h1>Page Modération</h1>
-        <button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button>
-        <button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button>
-        <script>
-            function listeUsers(){
-                $.ajax({
-                    url: "http://localhost:8080/v1/user",
-                    type: "GET",
-                    dataType : "json",
-                    success: function( json ) {
-                        var tab = JSON.stringify(json);
-                        var js=JSON.parse(tab);
-                        var res="<h1>Liste des Utilisateurs</h1><table><tr><th>Nom</th><th>Prenom</th><th>Login</th><th>Numero</th><th>Statut</th><th>Email</th><th>Validation</th></tr>";
-                        for(var cpt=0;cpt<js.length;cpt++){
-                            res=res+"<tr><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"validate('"+js[cpt].login+"')\" >Valider</button></td></tr>";
-                        }
-                        $('body').html(res);
-                    },
-                    error: function( xhr, status, errorThrown ) {
-                        alert( "Sorry, there was a problem!" );
-                        console.log( "Error: " + errorThrown );
-                        console.log( "Status: " + status );
-                        console.dir( xhr );
-                    },
-                    complete: function( xhr, status ) {
+<head>
+    <title>Users</title>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style type="text/css">
+        th>a{
+            text-decoration: none;
+            color:white;
+        }
+        th>a:hover{
+            text-decoration: none;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Page Modération</h1>
+    <button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button>
+    <button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button>
+    <script>
+        function listeUsers(){
+            $.ajax({
+                url: "http://localhost:8080/v1/user/!valide",
+                type: "GET",
+                dataType : "json",
+                success: function( json ) {
+                    var tab = JSON.stringify(json);
+                    var js=JSON.parse(tab);
+                    var res="<h1>Liste des Utilisateurs</h1><table id=\"tableUser\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a  href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a  href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a  href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a  href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Statut</th><th><a  href=\"javascript:sortTable('tableUser',5, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Validation</th></tr>";
+                    for(var cpt=0;cpt<js.length;cpt++){
+                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"validate('"+js[cpt].login+"')\" >Valider</button></td></tr>";
                     }
-                });
+                    $('body').html(res);
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                },
+                complete: function( xhr, status ) {
+                }
+            });
 
-            }
+        }
 
-            function validate(login){
-                $.ajax({
-                    url: "http://localhost:8080/v1/user/validate/" + login,
-                    type: "PUT",
-                    success: function(data) {
-                        alert('Utilisateur Validé');
-                    },
-                    error: function( xhr, status, errorThrown ) {
-                        alert( "Sorry, there was a problem!" );
-                        console.log( "Error: " + errorThrown );
-                        console.log( "Status: " + status );
-                        console.dir( xhr );
+        function validate(login){
+            $.ajax({
+                url: "http://localhost:8080/v1/user/validate/" + login,
+                type: "PUT",
+                success: function(data) {
+                    alert('Utilisateur Validé');
+                    listeUsers();
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                }
+            })
+        }
+
+        function listValidUsers(){
+            $.ajax({
+                url: "http://localhost:8080/v1/user/valide",
+                type: "GET",
+                dataType : "json",
+                success: function( json ) {
+                    var tab = JSON.stringify(json);
+                    var js=JSON.parse(tab);
+                    var res="<h1>Liste des Utilisateurs</h1><table id=\"tableUser\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a  href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a  href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a  href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a  href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Statut</th><th><a  href=\"javascript:sortTable('tableUser',5, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Gestion</th></tr>";
+                    for(var cpt=0;cpt<js.length;cpt++){
+                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"suppression('"+js[cpt].login+"')\" >Supprimer</button></td></tr>";
                     }
-                })
-            }
+                    $('body').html(res);
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                },
+                complete: function( xhr, status ) {
+                }
+            });
+        }
 
-            function listValidUsers(){
-                $.ajax({
-                    url: "http://localhost:8080/v1/user",
-                    type: "GET",
-                    dataType : "json",
-                    success: function( json ) {
-                        var tab = JSON.stringify(json);
-                        var js=JSON.parse(tab);
-                        var res="<h1>Liste des Utilisateurs</h1><table><tr><th>Nom</th><th>Prenom</th><th>Login</th><th>Numero</th><th>Statut</th><th>Email</th><th>Validation</th></tr>";
-                        for(var cpt=0;cpt<js.length;cpt++){
-                            res=res+"<tr><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].statut+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" onClick=\"validate('"+js[cpt].login+"')\" >Valider</button></td></tr>";
-                        }
-                        $('body').html(res);
-                    },
-                    error: function( xhr, status, errorThrown ) {
-                        alert( "Sorry, there was a problem!" );
-                        console.log( "Error: " + errorThrown );
-                        console.log( "Status: " + status );
-                        console.dir( xhr );
-                    },
-                    complete: function( xhr, status ) {
-                    }
-                });
-            }
-        </script>
-    </body>
+        function suppression(login){
+            $.ajax({
+                url: "http://localhost:8080/v1/user/" + login,
+                type: "DELETE",
+                success: function(data) {
+                    alert('Utilisateur Supprimé');
+                    listValidUsers();
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                }
+            })
+        }
+
+        function sortTable(tid, col, ord){
+             var mybody = $("#"+tid).children('tbody'),
+             lines = mybody.children('.ligne'),
+             sorter = [],
+             i = -1,
+             j = -1;            
+             while(lines[++i]){
+                 sorter.push([lines.eq(i), lines.eq(i).children('td').eq(col).text()])
+             }            if (ord == 'asc') {
+                 sorter.sort();
+             } 
+             else if (ord == 'desc') {
+                 sorter.sort().reverse();
+             } 
+             else if (ord == 'nasc'){
+                 sorter.sort(function(a, b){return(a[1] - b[1]);});
+             } 
+             else if (ord == 'ndesc'){
+                 sorter.sort(function(a, b){return(b[1] - a[1]);});
+             } 
+             else if (ord == '?asc'){
+                 sorter.sort(function(a, b){
+                     var x = parseInt(a[1], 10),
+                     y = parseInt(b[1], 10);                    
+                     if (isNaN(x) || isNaN(y)){
+                         if (a[1] > b[1]){
+                             return 1;
+                         } else if(a[1] < b[1]){
+                             return -1;
+                         } else {
+                             return 0;
+                         }
+                     } else {
+                       return(a[1] - b[1]);
+                   }
+               });
+             }
+             else if (ord == '?desc'){
+               sorter.sort(function(a, b){
+                   var x = parseInt(a[1], 10),
+                   y = parseInt(b[1], 10);                    
+                   if (isNaN(x) || isNaN(y)){
+                       if (a[1] > b[1]){
+                           return -1;
+                       } else if(a[1] < b[1]){
+                           return 1;
+                       } else {
+                           return 0;
+                       }
+                   } else {
+                       return(b[1] - a[1]);
+                   }
+               });
+           } 
+           while(sorter[++j]){
+               mybody.append(sorter[j][0]); 
+           }
+        }
+    </script>
+</body>
 </html>
