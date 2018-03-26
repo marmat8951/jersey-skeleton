@@ -1,0 +1,73 @@
+## Classe *user* :
+
+
+* String nom
+* String prenom
+* String login
+* String numero
+* String statut
+* String email
+* String password
+* String valide
+
+#### Create
+
+POST http://localhost:8080/user
+
+	{
+	"nom" : "{nom}",
+	"prenom" : "{prenom}",
+	"login" : "{login}",	(CLE PRIMAIRE)
+	"numero" : "{tnumero}",
+	"statut" : "{ETUDIANT|SENIOR}",
+	"email" : "{mail}",
+	"password" : "{password}"
+	}
+
+return :
+ * 500 : Server Error
+ * 200 : OK
+
+#### Read
+Obtenir la liste des etudiants :
+
+	GET http://localhost:8080/v1/user/etudiants
+	
+Obtenir la liste des seniors: 
+
+	GET http://localhost:8080/v1/user/seniors
+
+Obtenir la liste des utilisateurs validés: 
+
+	GET http://localhost:8080/v1/user/valide
+
+Obtenir la liste des utilisateurs non validés: 
+
+	GET http://localhost:8080/v1/user/!valide
+
+Obtenir l'utilisateur selon le login :
+
+	GET http://localhost:8080/v1/user/{login}
+
+return : 
+* 404 : Not Found
+* 200 : OK
+
+#### Update
+
+Valider un compte d'utilisateur
+
+	PUT http://localhost:8080/v1/user/validate/{login}
+
+
+return: 
+* 500 : Serveur Error
+* 204 : No Content
+
+#### Delete
+
+	DELETE http://localhost:8080/v1/user/{login}
+return :
+* 200 : OK
+* 404 : Not Found
+
