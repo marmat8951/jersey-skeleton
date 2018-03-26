@@ -71,9 +71,15 @@ public class RDVResource {
     
     
     @PUT
-    @Path("/validate/{login}")
-    public void valideRDV(@PathParam("login") String login) {
-    	dao.ValideRdv(login);
+    @Path("/validate/{senior}&{jour}&{matin}&{aprem}&{soir}&{service}&{etudiant}")
+    public void valide(@PathParam("senior") String senior,
+    		@PathParam("jour") String jour,
+    		@PathParam("matin") boolean matin,
+    		@PathParam("aprem") boolean aprem,
+    		@PathParam("soir") boolean soir,
+    		@PathParam("service") String service,
+    		@PathParam("etudiant") String etudiant) {
+    	dao.valide(senior,jour,matin,aprem,soir,service,etudiant);
     }
     
     
