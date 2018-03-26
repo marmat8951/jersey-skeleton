@@ -22,14 +22,15 @@ cd PATH : localhost:8080/v1/
 
   /rdv     Création d'un rdv
   
-  {
-   "senior":"senior",
-   "etudiant":"etudiant",
-   "jour":"jour",
-   "moment":"moment",
-   "service":"service",
-   "description":"descriptio"
-  }
+{
+"senior" : "papy",
+"jour" : "lundi",
+"matin" : "true",
+"aprem" : "true",
+"soir" : "true",
+"etudiant" : "Cyril",
+"service" : "poney"
+}
 
  GET :
   
