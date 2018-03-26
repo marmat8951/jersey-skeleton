@@ -3,6 +3,7 @@ package fr.iutinfo.skeleton.api;
 import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
 import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -3,6 +3,7 @@ package fr.iutinfo.skeleton.api;
 
 import fr.iutinfo.skeleton.common.dto.RDVDto;
 
+
 public class RDV {
 	private String senior ;
 	private String jour;
