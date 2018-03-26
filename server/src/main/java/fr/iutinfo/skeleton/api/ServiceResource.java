@@ -71,5 +71,7 @@ public class ServiceResource {
         dao.delete(libelle);
     }
     
+    
+    
 	
 }

@@ -32,6 +32,8 @@ public interface HobbieDao {
     @SqlQuery("select * from hobbies order by libelle")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<Hobbie> all();
+    
+   
 
     void close();
 }
