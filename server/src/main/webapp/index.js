@@ -30,14 +30,11 @@ $(document).ready(function() {
     });
 
 
+
     $('#moderation').click(function() {
         window.location.href='http://localhost:8080/user.html';
     });
 
-    $('.gridster').on('click','#conduite',function(){alert('it works');})
-    $('.gridster').on('click','#info',function(){alert('it works');})
-    $('.gridster').on('click','#lecon',function(){alert('it works');})
-    $('.gridster').on('click','#course',function(){alert('it works');})
 
     $('#show_profil').hide();
     $('#onglet').hide();
