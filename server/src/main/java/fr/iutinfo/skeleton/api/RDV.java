@@ -15,7 +15,7 @@ public class RDV {
 	
 	public RDV() {
 	}
-	
+
 	public RDV(String senior, String jour, boolean matin, boolean aprem, boolean soir, String service,
 			String etudiant) {
 		super();
