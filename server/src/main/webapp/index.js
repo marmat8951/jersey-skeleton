@@ -29,6 +29,11 @@ $(document).ready(function() {
         $('#moderation').hide();
     });
 
+
+    $('#moderation').click(function() {
+        window.location.href='http://localhost:8080/user.html';
+    });
+
     $('.gridster').on('click','#conduite',function(){alert('it works');})
     $('.gridster').on('click','#info',function(){alert('it works');})
     $('.gridster').on('click','#lecon',function(){alert('it works');})
@@ -39,6 +44,8 @@ $(document).ready(function() {
     $('#deconnexion').hide();
     $('#profil').hide();
     $('#moderation').hide();
+    $('#mode').hide();
+    $('.buttons_mode').hide();
     console.log( "ready!" );
 
     $('#explication_precis1').animate({height: '150px', opacity: '0.4'}, "slow");
