@@ -100,7 +100,6 @@ th{
 #buttons{
 	float:right;
 	margin-right: 5%;
-	margin-top: 2%;
 	color:white;
 	font-size: 1.2em;
 }
@@ -400,4 +399,15 @@ label.label-floatlabel {
 
 .ul_login_page{
     margin-bottom: 0px;
+}
+
+
+/*
+CSS Page de services
+*/
+
+.show_services {
+    width: 100%;
+    margin-left: 10%;
+    margin-top: 10%;
 }

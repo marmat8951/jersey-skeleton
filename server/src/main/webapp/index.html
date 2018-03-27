@@ -31,7 +31,7 @@
 
                 <button id="connexion" class="buttonIndex">Connexion</button>
                 <button id="inscription" class="buttonIndex">Inscription</button>
-                <button id="profil" class="buttonIndex" onclick="init()">Profil</button>
+                <button id="profil" class="buttonIndex" onclick="generate_login_page()">Profil</button>
                 <button id="deconnexion" class="buttonIndex">Déconnexion</button>
 
 
@@ -65,21 +65,22 @@
                 <h2>Vous recherchez quel service ?</h2>
                 <ul>
                     <li data-row="1" data-col="1" data-sizex="1" data-sizey="">
-                        <img id="conduite" src="image/conduite.jpg" data-role="tile">
+                        <img id="conduite" src="image/conduite.jpg" data-role="tile" onclick="create_services('Conduite')">
                     </li>
-                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" onclick="create_services('Informatique')">
                         <img id="info" src="image/informatique.jpeg">
                     </li>
-                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" onclick="create_services('Leçon')">
                         <img id="lecon" src="image/lecon.jpg">
                     </li>
-                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" onclick="create_services('Course')">
                         <img id="course" src="image/course.jpg">
                     </li>
                 </ul>
             </div>
-
         </div>
+
+        <div class="show_services" id="show_services"></div>
 
         <section class="section_login_page" id="onglet">
             <ul class="ul_login_page">
