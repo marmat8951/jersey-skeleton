@@ -43,6 +43,7 @@ $(document).ready(function() {
     $('#onglet').hide();
     $('#deconnexion').hide();
     $('#profil').hide();
+    $('#show_services').hide();
     $('#moderation').hide();
     $('#mode').hide();
     $('.buttons_mode').hide();
@@ -207,14 +208,6 @@ function connexion(){
     });
 }
 
-function init(){
-
-    $('#conteneurAccueil').hide();
-    $('#show_profil').show();
-    init_page_login_whit_get();
-    get_all_champs(); 
-}
-
 function generate_login_page(){
     $('#conteneurAccueil').hide();
     $('#show_profil').show();
@@ -223,13 +216,12 @@ function generate_login_page(){
 }
 
 var labels = ["statut", "email", "nom", "prenom", "numero", "password"];
-
 var div_init = document.getElementById('init_div');
 var page_de_base = "";
 
 function init_page_login_whit_get(){
     for(var i=0; i<labels.length; i++) {
-        if(i === 0){
+        if(i <= 1){
             page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get'></div></div><br/><br/>"
         } else if(i === labels.length-1){
             page_de_base += "<div class='inline_profil'><label class='label_profil'>" + labels[i] +" : </label><div id='div_" + labels[i] + "_get' class='div_profil_get' style='display:none'></div><div id='div_" + labels[i] + "' class='div_profil'><button class='button_profil' onclick=\"display_input_update('" + labels[i] + "')\">Modifier</button></div></div><br/><br/>"
@@ -278,8 +270,6 @@ function display_input_update(param){
         html_display = "<input type='password' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><br/><input type='password' name='" + param + "_check' id='" + param + "_check' placeholder='" + param + "_check' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
     } else if (param === "numero"){
         html_display = "<input type='tel' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
-    } else if (param === "email"){    
-        html_display = "<input type='email' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
     } else {
         html_display = "<input type='text' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
     }
@@ -287,16 +277,13 @@ function display_input_update(param){
 }
 
 function display_update(param){
-    console.log("update")
     var div_name = "div_" + param + "_get"
     var div_update_put = document.getElementById(div_name);
     var input_changes = $("#"+param+"_input").val()
     $("#"+div_name).text(input_changes)
 }
 
-
 function send_update(){
-    console.log("SEND UPDATES")
     var url="v1/user/"+login; 
     $.ajax({
         type: 'PUT',
@@ -306,7 +293,6 @@ function send_update(){
             "nom":$("#div_nom_get").text(),
             "prenom":$("#div_prenom_get").text(),
             "numero":$("#div_numero_get").text(),
-            "login":$("#div_email_get").text(),
             "password":$("#div_password_get").text()              
         }),
 
@@ -326,3 +312,12 @@ function send_update(){
     });
 }
 
+function create_services(param){
+    $('#conteneurAccueil').hide();
+    $('#show_services').show();
+
+    var services_init = document.getElementById('show_services');
+
+    var html_services = "<h1>"+param+"</h1><br/><iframe name='InlineFrame1' id='InlineFrame1' style='width:180px;height:220px;' src='https://www.mathieuweb.fr/calendrier/calendrier-des-semaines.php?nb_mois=1&nb_mois_ligne=4&mois=&an=&langue=fr&texte_color=B9CBDD&week_color=DAE9F8&week_end_color=C7DAED&police_color=453413&sel=true' scrolling='no' frameborder='0' allowtransparency='true'></iframe>";
+    services_init.innerHTML = html_services;
+}

@@ -8,7 +8,7 @@
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style type="text/css">
-<<<<<<< HEAD
+
         th>a{
             text-decoration: none;
             color:white;
@@ -159,7 +159,7 @@
 
         function retour(){
             var res = "<h1>Page Modération</h1><div class=\"buttons\"><button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button><button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button><button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button><button type='button' onClick='listService()' name='buttonAutre'>Liste des services</button><button type='button' onClick='ajoutService()' name='buttonAutre'>Ajout d'un service</button></div>"
-             $('body').html(res);
+            $('body').html(res);
 
             var res = "<h1>Page Modération</h1><div class=\"buttons\"><button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button><button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button><button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button><button type='button' onClick='listService()' name='buttonAutre'>Liste des services</button></div>"
             $('body').html(res);
@@ -224,12 +224,12 @@
          }
      }
 
-     function listRdv(){
+       function listRdv(){
         $.ajax({
-          url:"http://localhost:8080/v1/rdv",
-          type:"GET",
-          dataType :"json",
-          success:function(json){
+              url:"http://localhost:8080/v1/rdv",
+              type:"GET",
+              dataType :"json",
+              success:function(json){
               var tab = JSON.stringify(json);
               var js = JSON.parse(tab);
               var res="<h1>Liste des rendez-vous<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableRDV\"><tr><th><a  href=\"javascript:sortTable('tableRDV',0, 'asc')\" value=\"tri alphanum asc col1\">Senior</th><th><a  href=\"javascript:sortTable('tableRDV',1, 'asc')\" value=\"tri alphanum asc col1\">Etudiant</th><th><a  href=\"javascript:sortTable('tableRDV',2, '?asc')\" value=\"tri alphanum asc col1\">Jour</th><th><a  href=\"javascript:sortTable('tableRDV',3, '?asc')\" value=\"tri alphanum asc col1\">Service </th><th><a  href=\"javascript:sortTable('tableRDV',4, '?asc')\" value=\"tri alphanum asc col1\">Matin</th><th><a  href=\"javascript:sortTable('tableRDV',5, '?asc')\" value=\"tri alphanum asc col1\">Aprem</th><th><a  href=\"javascript:sortTable('tableRDV',6, '?asc')\" value=\"tri alphanum asc col1\">Soir</th><th>Ajout Etudiant</th></tr>";
@@ -244,16 +244,16 @@
                res=res+"</tr>"
            }
            $('body').html(res);
-       },
-       error: function( xhr, status, errorThrown ) {
-          alert( "Sorry, there was a problem!" );
-          console.log( "Error: " + errorThrown );
-          console.log( "Status: " + status );
-          console.dir( xhr );
-      },
-      complete: function( xhr, status ) {
-      }
-  });
+            },
+           error: function( xhr, status, errorThrown ) {
+              alert( "Sorry, there was a problem!" );
+              console.log( "Error: " + errorThrown );
+              console.log( "Status: " + status );
+              console.dir( xhr );
+          },
+          complete: function( xhr, status ) {
+          }
+        });
     }
 
     function ajoutEtu(login){
@@ -266,21 +266,21 @@
                 var js=JSON.parse(tab);
                 var res="<h1>Liste des Utilisateurs<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableUser\"><tr><th><a href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Ajouter</th></tr>";
                 for(var cpt=0;cpt<js.length;cpt++){
-                    // if(js[cpt].status=="Etudiant"){
-                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" id='but' onClick=\"ajoutEtuFinal('"+login+","+js[cpt].jour+","+js[cpt].matin+","+js[cpt].aprem+","+js[cpt].soir+","+js[cpt].service+","+js[cpt].login+"')\" >Ajouter l'étudiant</button></td></tr>";
-                    // }
+                        // if(js[cpt].status=="Etudiant"){
+                            res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" id='but' onClick=\"ajoutEtuFinal('"+login+","+js[cpt].jour+","+js[cpt].matin+","+js[cpt].aprem+","+js[cpt].soir+","+js[cpt].service+","+js[cpt].login+"')\" >Ajouter l'étudiant</button></td></tr>";
+                        // }
+                    }
+                    $('body').html(res);
+                },
+                error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                },
+                complete: function( xhr, status ) {
                 }
-                $('body').html(res);
-            },
-            error: function( xhr, status, errorThrown ) {
-                alert( "Sorry, there was a problem!" );
-                console.log( "Error: " + errorThrown );
-                console.log( "Status: " + status );
-                console.dir( xhr );
-            },
-            complete: function( xhr, status ) {
-            }
-        });
+            });
     }
 
     function ajoutEtuFinal(login, jour, matin, aprem, soir, service, loginEtu){
@@ -313,41 +313,26 @@
                 for(var cpt=0;cpt<js.length;cpt++){
                     res=res+"<tr class=\"ligne\"><td>"+js[cpt].libelle +"</td>"+"<td><button type=\"button\" id='but' onClick=\"suppressionService('"+js[cpt].libelle+"')\" >Supprimer</button></td></tr>";
                 }
+            }
+         });
+    }
 
-            });
-        }
-
-        function ajoutService(libelle){
-            $.ajax({
-                url: "http://localhost:8080/v1/rdv/" + id + "/" + login,
-                type: "PUT",
-                success: function(data) {
-                    alert('Utilisateur Validé');
-                    listRdv();
-                },
-                error: function( xhr, status, errorThrown ) {
-                    alert( "Sorry, there was a problem!" );
-                    console.log( "Error: " + errorThrown );
-                    console.log( "Status: " + status );
-                    console.dir( xhr );
-                }
-            });
-        }
-
-    
-
-       /*         $('body').html(res);
+    function ajoutService(libelle){
+        $.ajax({
+            url: "http://localhost:8080/v1/rdv/" + id + "/" + login,
+            type: "PUT",
+            success: function(data) {
+                alert('Utilisateur Validé');
+                listRdv();
             },
             error: function( xhr, status, errorThrown ) {
                 alert( "Sorry, there was a problem!" );
                 console.log( "Error: " + errorThrown );
                 console.log( "Status: " + status );
                 console.dir( xhr );
-            },
-            complete: function( xhr, status ) {
             }
         });
-    }*/
+    }
 
     function suppressionService(libelle){
         $.ajax({

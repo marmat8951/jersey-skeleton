@@ -37,7 +37,7 @@ public class UserResource {
             logger.debug("Create table user");
             dao.createUserTable();
             UserDto dto = new UserDto();
-            dto.setLogin("admin@admin");
+            dto.setLogin("admin@admin.com");
             dto.setNom("Dhellemmes");
             dto.setPrenom("Edouard");
             dto.setNumero("0680859040");

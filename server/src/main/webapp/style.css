@@ -95,12 +95,14 @@ th{
 
 #recherche{
 	margin-left: 5%;
+    min-width: 200px;
+    max-width: 50%;
+    
 }
 
 #buttons{
 	float:right;
 	margin-right: 5%;
-	margin-top: 2%;
 	color:white;
 	font-size: 1.2em;
 }
@@ -116,6 +118,12 @@ th{
 
 #entete>h1{
     font-size: 3.5em;
+}
+
+#logo{
+    min-height: 50px;
+    max-width: 100%;
+    min-width: 50px;
 }
 
 #btn {
@@ -329,7 +337,18 @@ CSS Page de profil
 .inline_profil{
     /*float: left;*/
     display: inline-block;
+    width:100%;
 }
+
+.inline_profil * {
+    display: inline;
+}
+
+.inline_profil button{
+    position: absolute;
+    left: 30%;
+}
+
 
 .ul_login_page li a{
     display: block;
@@ -400,4 +419,15 @@ label.label-floatlabel {
 
 .ul_login_page{
     margin-bottom: 0px;
+}
+
+
+/*
+CSS Page de services
+*/
+
+.show_services {
+    width: 100%;
+    margin-left: 10%;
+    margin-top: 10%;
 }
