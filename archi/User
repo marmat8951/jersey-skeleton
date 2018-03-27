@@ -71,7 +71,18 @@ Valider un compte d'utilisateur
 	PUT http://localhost:8080/v1/user/validate/{login}
 
 Enlever validation d'un compte utilisateur
+
 	PUT http://localhost:8080/v1/user/!validate/{login}
+
+Modifier les champs d'un utilisateur
+
+	PUT http://localhost:8080/v1/user/{login}
+	{
+	"nom" : "{nom}",
+	"prenom" : "{prenom}",
+	"numero" : "{numero}",
+	"password" : "{pass}"
+	}
 
 
 return: 
