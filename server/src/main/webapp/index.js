@@ -205,7 +205,7 @@ function generate_login_page(){
     get_all_champs();
 }
 
-var labels = ["statut", "email", "nom", "prenom", "numero", "password"];
+var labels = ["statut", "email", "nom", "prenom", "numero"];
 var div_init = document.getElementById('init_div');
 var page_de_base = "";
 
@@ -256,9 +256,7 @@ function display_input_update(param){
     var div_display = document.getElementById(div)
     var html_display = ""
 
-    if (param === "password"){
-        html_display = "<input type='password' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><br/><input type='password' name='" + param + "_check' id='" + param + "_check' placeholder='" + param + "_check' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
-    } else if (param === "numero"){
+ if (param === "numero"){
         html_display = "<input type='tel' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
     } else {
         html_display = "<input type='text' name='" + param + "' id='" + param + "_input' placeholder='" + param + "' class='input_profil' required><button class='button_profil' onclick=\"display_update('" + param + "')\">Envoyer</button>"
