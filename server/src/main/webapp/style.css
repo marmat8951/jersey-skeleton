@@ -95,6 +95,9 @@ th{
 
 #recherche{
 	margin-left: 5%;
+    min-width: 200px;
+    max-width: 50%;
+    
 }
 
 #buttons{
@@ -116,6 +119,12 @@ th{
 
 #entete>h1{
     font-size: 3.5em;
+}
+
+#logo{
+    min-height: 50px;
+    max-width: 100%;
+    min-width: 50px;
 }
 
 #btn {
@@ -329,7 +338,18 @@ CSS Page de profil
 .inline_profil{
     /*float: left;*/
     display: inline-block;
+    width:100%;
 }
+
+.inline_profil * {
+    display: inline;
+}
+
+.inline_profil button{
+    position: absolute;
+    left: 30%;
+}
+
 
 .ul_login_page li a{
     display: block;
