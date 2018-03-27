@@ -1,9 +1,16 @@
-variables:
-  http_proxy: "http://cache.univ-lille1.fr:3128"
-  https_proxy: "http://cache.univ-lille1.fr:3128"
+build-cli:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
+    
+deploy:
+  stage: deploy
+  script:
+    - curl -X POST -data=""  https://deliverous.com/api/v1/trigger/$DELIVEROUS_TRIGGER
 
-before_script:
-  - apt-get update -qq && apt-get install -y maven openjdk-8-jdk 
 
-test:
-  script: "mvn test"
