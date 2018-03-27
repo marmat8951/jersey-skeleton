@@ -99,3 +99,4 @@ function afficheListUsers(data) {
 function userStringify(user) {
     return user.id + ". " + user.name + " &lt;" + user.email + "&gt;" + " (" + user.alias + ")";
 }
+

@@ -1,28 +1,6 @@
 <!DOCTYPE html>
 <html class="" lang="fr">
-<<<<<<< HEAD
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<title>Entre Ed Et Vous</title>
-</head>
 
-<body>
-
-	<header id="head">
-
-        <img src="image/logo_principal.jpg" alt="LOGO" id="logo"/>
-
-        <div id="recherche">
-            <p>Rechercher un service</p>
-            <form action="" id="recherche_form">
-                <input id="champ" type="text" value="Recherche.." onFocus="checkValue(this.id)"/>
-                <input id="btn_recherche" src="image/loup.png" type='image' Value='submit' align='middle' >
-            </form>
-        </div>
-=======
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -31,7 +9,7 @@
         <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
         <title>Entre Ed Et Vous</title>
     </head>
->>>>>>> 2256039d8d2283295447481136d72457a2937fe6
+
 
     <body>
 
@@ -55,10 +33,9 @@
 
                 <button id="connexion" class="buttonIndex">Connexion</button>
                 <button id="inscription" class="buttonIndex">Inscription</button>
-                <button id="profil" class="buttonIndex" onclick="init()">Profil</button>
+                <button id="profil" class="buttonIndex" onclick="generate_login_page()">Profil</button>
                 <button id="deconnexion" class="buttonIndex">Déconnexion</button>
                 <button id="moderation" class="buttonIndex">Moderation</button>
-
 
 
             </div>
@@ -91,21 +68,22 @@
                 <h2>Vous recherchez quel service ?</h2>
                 <ul>
                     <li data-row="1" data-col="1" data-sizex="1" data-sizey="">
-                        <img id="conduite" src="image/conduite.jpg" data-role="tile">
+                        <img id="conduite" src="image/conduite.jpg" data-role="tile" onclick="create_services('Conduite')">
                     </li>
-                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" onclick="create_services('Informatique')">
                         <img id="info" src="image/informatique.jpeg">
                     </li>
-                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" onclick="create_services('Leçon')">
                         <img id="lecon" src="image/lecon.jpg">
                     </li>
-                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" onclick="create_services('Course')">
                         <img id="course" src="image/course.jpg">
                     </li>
                 </ul>
             </div>
-
         </div>
+
+        <div class="show_services" id="show_services"></div>
 
         <section class="section_login_page" id="onglet">
             <ul class="ul_login_page">
@@ -119,6 +97,8 @@
             <h1>Profil</h1>
             <div id="init_div"></div>
         </div>
+
+
 
         <footer>
             <p>Contact information: +33623546942</p>
