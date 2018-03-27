@@ -29,11 +29,6 @@ $(document).ready(function() {
         $('#moderation').hide();
     });
 
-    $('.gridster').on('click','#conduite',function(){alert('it works');})
-    $('.gridster').on('click','#info',function(){alert('it works');})
-    $('.gridster').on('click','#lecon',function(){alert('it works');})
-    $('.gridster').on('click','#course',function(){alert('it works');})
-
     $('#show_profil').hide();
     $('#onglet').hide();
     $('#deconnexion').hide();
