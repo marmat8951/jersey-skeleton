@@ -21,15 +21,8 @@ $(document).ready(function() {
     });
 
     $('#deconnexion').click(function() {
-        $('#loginUser').val("");
-        $('#connexion').show();
-        $('#inscription').show();
-        $('#profil').hide();
-        $('#deconnexion').hide();
-        $('#moderation').hide();
+         location.reload();
     });
-
-
 
     $('#moderation').click(function() {
         window.location.href='http://localhost:8080/user.html';
@@ -289,8 +282,7 @@ function send_update(){
         data : JSON.stringify({
             "nom":$("#div_nom_get").text(),
             "prenom":$("#div_prenom_get").text(),
-            "numero":$("#div_numero_get").text(),
-            "password":$("#div_password_get").text()              
+            "numero":$("#div_numero_get").text()           
         }),
 
         dataType : "json",
