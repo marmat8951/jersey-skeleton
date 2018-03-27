@@ -37,7 +37,7 @@ public class RDVResource {
 	        dao.createRDVTable();
 	    }
 	}
-	
+
     @POST
     public RDVDto createRDV(RDVDto dto) {
         RDV rdv = new RDV();
@@ -56,17 +56,17 @@ public class RDVResource {
         }
         return l.stream().map(RDV::convertToDto).collect(Collectors.toList());
     }
-    /*
+    
     @GET
-    @Path("/etudiant/")
+    @Path("/valide/")
     public List<RDVDto> getRDValide() {
-    	List<RDV> l = dao.findRdvValide();
+    	List<RDV> l = dao.findRDVValide();
         if (l == null) {
             throw new WebApplicationException(404);
         }
         return l.stream().map(RDV::convertToDto).collect(Collectors.toList());
     }
-    */
+    
     
     @GET
     @Path("/etudiant/{etudiant}")
@@ -83,7 +83,7 @@ public class RDVResource {
     @GET
     @Path("/{senior}&{etudiant}")
     public List<RDVDto> getRdvByCouple(@PathParam("senior") String senior, @PathParam("etudiant") String etudiant) {
-    	List<RDV> l = dao.findRdvValide(senior, etudiant);
+    	List<RDV> l = dao.findRdvByCouple(senior, etudiant);
         if (l == null) {
             throw new WebApplicationException(404);
         }

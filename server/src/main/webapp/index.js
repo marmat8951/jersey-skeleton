@@ -26,6 +26,7 @@ $(document).ready(function() {
         $('#inscription').show();
         $('#profil').hide();
         $('#deconnexion').hide();
+        $('#moderation').hide();
     });
 
     $('.gridster').on('click','#conduite',function(){alert('it works');})
@@ -38,6 +39,7 @@ $(document).ready(function() {
     $('#deconnexion').hide();
     $('#profil').hide();
     $('#show_services').hide();
+    $('#moderation').hide();
     console.log( "ready!" );
 
     $('#explication_precis1').animate({height: '150px', opacity: '0.4'}, "slow");
@@ -185,6 +187,9 @@ function connexion(){
                 $('#profil').show();
                 $('#deconnexion').show();
                 $('#onglet').hide();
+                if(login == "admin@admin.com"){
+                    $('#moderation').show();
+                }
             } else {
                 alert("Votre profil n'a pas encore été validé par le modérateur.");
             }
