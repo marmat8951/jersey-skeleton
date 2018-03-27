@@ -19,7 +19,8 @@ UTILISATEUR ADMIN (créé par défaut) :
 "numero":"0680859040",
 "prenom":"Edouard",
 "statut":"admin",
-"valide":"oui"
+"valide":"oui",
+"mdp":"entreedetvous"
 }
 
 #### Create
