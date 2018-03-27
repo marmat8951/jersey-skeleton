@@ -10,6 +10,18 @@
 * String password
 * String valide
 
+
+UTILISATEUR ADMIN (créé par défaut) :
+
+{
+"login":"admin@admin.com",
+"nom":"Dhellemmes",
+"numero":"0680859040",
+"prenom":"Edouard",
+"statut":"admin",
+"valide":"oui"
+}
+
 #### Create
 
 POST http://localhost:8080/user
