@@ -44,7 +44,7 @@ public class UserResource {
             dto.setPassword("entreedetvous");
             dto.setStatut("admin");
             createUser(dto);
-            valideUser("admin@admin");
+            valideUser("admin@admin.com");
         }
     }
 
