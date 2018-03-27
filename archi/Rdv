@@ -32,6 +32,18 @@ Obtenir la liste des RDV :
 
 	GET http://localhost:8080/v1/rdv
 
+Obtenir la liste des RDV Valides :
+
+	GET http://localhost:8080/v1/rdv/valide
+
+Obtenir la liste des RDV correspondant à un étudiant
+
+	GET http://localhost:8080/v1/rdv/etudiant/{etudiant}
+
+Obtenir la liste des RDV correspondant à un senior
+
+	GET http://localhost:8080/v1/rdv/senior/{senior}
+
 return : 
 * 500 : Server Error
 * 200 : OK
