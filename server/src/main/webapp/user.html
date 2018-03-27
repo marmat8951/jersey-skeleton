@@ -338,6 +338,31 @@
             }
         });
     }
+
+    function ajoutService(){
+        $.ajax({
+                type : 'POST',
+                contentType : 'application/json',
+                url : url,
+                dataType : "json",
+                data : JSON.stringify({
+                   
+                }),
+                success : function(data, textStatus, jqXHR) {
+                    alert("service créé avec succés.");
+                    document.body.style.backgroundColor = "white";
+                    $('#conteneurAccueil').show();
+                    $('#onglet').hide();
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    alert("Erreur");
+                    console.log("jqXHR" +jqXHR);
+                    console.log("error"+errorThrown);
+                    console.log('postUser error: ' + textStatus);
+                }
+            });
+    }
+
 </script>
 
 </body>
