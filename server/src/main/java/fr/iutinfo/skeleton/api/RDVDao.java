@@ -37,7 +37,7 @@ public interface RDVDao {
     
     @SqlQuery("select * from rdv where senior = :senior AND etudiant = :etudiant")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<RDV> findRdvValide(@Bind("senior") String id, @Bind("etudiant") String etudiant );
+    List<RDV> findRdvByCouple(@Bind("senior") String senior, @Bind("etudiant") String etudiant );
     
     @SqlUpdate("drop table if exists rdv")
     void dropRDVTable();
