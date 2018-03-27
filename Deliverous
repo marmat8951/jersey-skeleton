@@ -1,6 +1,6 @@
 java:
-  image: tclavier/jersey-skeleton
+  image: registry.gitlab.com/jordaon/entre-ed-et-vous
   ports:
-  - ip: A.X.Y.Z
+  - ip: 51.255.131.196
     container_port: 8080
     host_port: 80
