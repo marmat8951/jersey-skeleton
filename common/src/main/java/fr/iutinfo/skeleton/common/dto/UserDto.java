@@ -10,8 +10,8 @@ public class UserDto {
     private String login;
     private String numero;
     private String statut;
-    private String email;
     private String password;
+    private String valide;
     
     /*
      * {
@@ -20,7 +20,6 @@ public class UserDto {
 "login" : "tlogin",
 "numero" : "tnumero",
 "statut" : "tstatut",
-"email" : "tmail",
 "password" : "pass"
 }
      */
@@ -64,15 +63,7 @@ public class UserDto {
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-
-	public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+	
     public String getPassword() {
         return this.password;
     }
@@ -80,6 +71,14 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public String getValide() {
+		return valide;
+	}
+
+	public void setValide(String valide) {
+		this.valide = valide;
+	}
 
 
 }

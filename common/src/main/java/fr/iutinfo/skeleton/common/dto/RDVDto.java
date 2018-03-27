@@ -1,22 +1,33 @@
 package fr.iutinfo.skeleton.common.dto;
 
-import java.sql.Time;
-
 public class RDVDto {
 	//final static Logger logger = LoggerFactory.getLogger(RDVDto.class);
-	private int id_senior ;
-	private int id_etu;
+	private int id_rdv; 
+	private String senior ;
+	private String etudiant;
 	private String jour;
 	private boolean matin;
 	private boolean aprem;
 	private boolean soir;
-	private String libelle;
+	private String service;
 	
-	public int getId_senior() {
-		return id_senior;
+	public int getId_rdv() {
+		return id_rdv;
 	}
-	public void setId_senior(int id_senior) {
-		this.id_senior = id_senior;
+	public void setId_rdv(int id_rdv) {
+		this.id_rdv = id_rdv;
+	}
+	public String getSenior() {
+		return senior;
+	}
+	public void setSenior(String senior) {
+		this.senior = senior;
+	}
+	public String getEtudiant() {
+		return etudiant;
+	}
+	public void setEtudiant(String etudiant) {
+		this.etudiant = etudiant;
 	}
 	public String getJour() {
 		return jour;
@@ -42,18 +53,12 @@ public class RDVDto {
 	public void setSoir(boolean soir) {
 		this.soir = soir;
 	}
-	public String getLibelle() {
-		return libelle;
+	public String getService() {
+		return service;
 	}
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
-	}
-	public int getId_etu() {
-		return id_etu;
-	}
-	public void setId_etu(int id_etu) {
-		this.id_etu = id_etu;
-	}
+	public void setService(String service) {
+		this.service = service;
+	}	
 	
 	
 }

@@ -1,0 +1,38 @@
+## Classe *Hobbies* :
+
+* String libelle
+
+#### Create
+
+POST http://localhost:8080/v1/hobbies
+
+	{
+	"libelle" : "{libelle}"
+	}
+
+return :
+ * 500 : Server Error
+ * 200 : OK
+
+#### Read
+
+Obtenir la liste des hobbies:
+
+	GET http://localhost:8080/v1/hobbies
+
+return : 
+* 500 : Server Error
+* 200 : OK
+
+#### Update
+
+
+#### Delete
+
+	DELETE http://localhost:8080/v1/hobbies/{libelle}
+	
+return :
+* 204 : No Content
+* 404 : Not Found
+
+

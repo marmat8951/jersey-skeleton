@@ -18,11 +18,12 @@ public class User implements Principal {
     private String login;
     private String numero;
     private String statut;
-    private String email;
     private String password;
     private String passwdHash;
     private String salt;
-    private String search;
+    
+	private String search;
+    private String valide;
 
 	public User(String login, String name) {
         this.login = login;
@@ -35,13 +36,12 @@ public class User implements Principal {
         this.statut = alias;
     }
 
-    public User(String nom, String numero, String prenom, String login, String statut, int userId, String email) {
+    public User(String nom, String numero, String prenom, String login, String statut, int userId) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;
 		this.statut = statut;
-		this.email = email;
 		this.numero = numero;
 	}
 
@@ -96,14 +96,6 @@ public class User implements Principal {
 		this.statut = statut;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getSalt() {
 		if(salt == null) {
 			salt = generateSalt();
@@ -121,6 +113,14 @@ public class User implements Principal {
 
 	public void setSearch(String search) {
 		this.search = search;
+	}    
+	
+	public String getValide() {
+		return valide;
+	}
+
+	public void setValide(String valide) {
+		this.valide = valide;
 	}
 
 	public String getPassword() {
@@ -155,7 +155,7 @@ public class User implements Principal {
         if (getClass() != arg.getClass())
             return false;
         User user = (User) arg;
-        return nom.equals(user.nom) && statut.equals(user.statut) && email.equals(user.email) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
+        return nom.equals(user.nom) && statut.equals(user.statut) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
     }
 
     @Override
@@ -163,7 +163,6 @@ public class User implements Principal {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((statut == null) ? 0 : statut.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((nom == null) ? 0 : nom.hashCode());
         result = prime * result + ((passwdHash == null) ? 0 : passwdHash.hashCode());
         result = prime * result + ((salt == null) ? 0 : salt.hashCode());
@@ -172,7 +171,7 @@ public class User implements Principal {
     
     @Override
     public String toString() {
-        return login + ": " + statut + ", " + nom + " <" + email + ">";
+        return login + ": " + statut + ", " + nom;
     }
 
     private String generateSalt() {
@@ -202,8 +201,8 @@ public class User implements Principal {
     	this.setLogin(dto.getLogin());
     	this.setNumero(dto.getNumero());
     	this.setStatut(dto.getStatut());
-    	this.setEmail(dto.getEmail());
     	this.setPassword(dto.getPassword());
+    	this.setValide(dto.getValide());
     }
 
     public UserDto convertToDto() {
@@ -213,8 +212,8 @@ public class User implements Principal {
     	dto.setLogin(this.getLogin());
     	dto.setNumero(this.getNumero());
     	dto.setStatut(this.getStatut());
-    	dto.setEmail(this.getEmail());
     	dto.setPassword(this.getPassword());
+    	dto.setValide(this.getValide());
         return dto;
     }
 

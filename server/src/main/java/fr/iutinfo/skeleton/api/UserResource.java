@@ -11,12 +11,14 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NoContentException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,10 +45,34 @@ public class UserResource {
         user.initFromDto(dto);
         user.resetPasswordHash();
         String key = (String) dao.insert(user);
-        dto.setLogin(key);;
+        dto.setLogin(key);
         return dto;
     }
+    
+    @PUT
+    @Path("/validate/{login}")
+    public void valideUser(@PathParam("login") String login) {
+    	dao.valide(login);
+    }
+    
+    @PUT
+    @Path("/!validate/{login}")
+    public void invalideUser(@PathParam("login") String login) {
+    	dao.invalide(login);
+    }
 
+    @PUT
+    @Path("/{login}")
+    public UserDto modifyUser(@PathParam("login") String login, UserDto dto) {
+        User user = dao.findByLogin(login);
+        user.setNom(dto.getNom());
+        user.setPrenom(dto.getPrenom());
+        user.setNumero(dto.getNumero());
+        user.setPassword(dto.getPassword());
+        dao.update(user);
+        return dto;
+    }
+    
     @GET
     @Path("/{login}")
     public UserDto getUser(@PathParam("login") String login) {
@@ -61,6 +87,38 @@ public class UserResource {
     public List<UserDto> getAllUsers() {
         List<User> users;
         users = dao.all();
+        return users.stream().map(User::convertToDto).collect(Collectors.toList());
+    }
+    
+    @GET
+    @Path("/etudiants")
+    public List<UserDto> getEtudiants() {
+        List<User> users;
+        users = dao.etudiants();
+        return users.stream().map(User::convertToDto).collect(Collectors.toList());
+    }
+    
+    @GET
+    @Path("/valide")
+    public List<UserDto> getListValide() {
+        List<User> users;
+        users = dao.isValideList();
+        return users.stream().map(User::convertToDto).collect(Collectors.toList());
+    }
+    
+    @GET
+    @Path("/!valide")
+    public List<UserDto> getListNotValide() {
+        List<User> users;
+        users = dao.isNotValideList();
+        return users.stream().map(User::convertToDto).collect(Collectors.toList());
+    }
+    
+    @GET
+    @Path("/seniors")
+    public List<UserDto> getSeniors() {
+        List<User> users;
+        users = dao.seniors();
         return users.stream().map(User::convertToDto).collect(Collectors.toList());
     }
 

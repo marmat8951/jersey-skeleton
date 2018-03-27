@@ -1,3 +1,4 @@
+.nfs*
 *~
 *.swp
 # Eclipse
@@ -17,3 +18,4 @@ dependency-reduced-pom.xml
 # cli log file
 cli.log
 /bin/
+
