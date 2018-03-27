@@ -8,6 +8,7 @@
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style type="text/css">
+<<<<<<< HEAD
         th>a{
             text-decoration: none;
             color:white;
@@ -159,182 +160,160 @@
         function retour(){
             var res = "<h1>Page Modération</h1><div class=\"buttons\"><button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button><button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button><button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button><button type='button' onClick='listService()' name='buttonAutre'>Liste des services</button><button type='button' onClick='ajoutService()' name='buttonAutre'>Ajout d'un service</button></div>"
              $('body').html(res);
+
+            var res = "<h1>Page Modération</h1><div class=\"buttons\"><button type='button' onClick='listeUsers()' name='buttonListe'>Utilisateurs en attente</button><button type='button' onClick='listValidUsers()' name='buttonAutre'>Gestion des utilisateurs</button><button type='button' onClick='listRdv()' name='buttonAutre'>Liste des rendez-vous</button><button type='button' onClick='listService()' name='buttonAutre'>Liste des services</button></div>"
+            $('body').html(res);
         }
 
         function sortTable(tid, col, ord){
-             var mybody = $("#"+tid).children('tbody'),
-             lines = mybody.children('.ligne'),
-             sorter = [],
-             i = -1,
-             j = -1;            
-             while(lines[++i]){
-                 sorter.push([lines.eq(i), lines.eq(i).children('td').eq(col).text()])
-             }            if (ord == 'asc') {
-                 sorter.sort();
-             } 
-             else if (ord == 'desc') {
-                 sorter.sort().reverse();
-             } 
-             else if (ord == 'nasc'){
-                 sorter.sort(function(a, b){return(a[1] - b[1]);});
-             } 
-             else if (ord == 'ndesc'){
-                 sorter.sort(function(a, b){return(b[1] - a[1]);});
-             } 
-             else if (ord == '?asc'){
-                 sorter.sort(function(a, b){
-                     var x = parseInt(a[1], 10),
-                     y = parseInt(b[1], 10);                    
-                     if (isNaN(x) || isNaN(y)){
-                         if (a[1] > b[1]){
-                             return 1;
-                         } else if(a[1] < b[1]){
-                             return -1;
-                         } else {
-                             return 0;
-                         }
-                     } else {
-                       return(a[1] - b[1]);
-                   }
-               });
-             }
-             else if (ord == '?desc'){
+           var mybody = $("#"+tid).children('tbody'),
+           lines = mybody.children('.ligne'),
+           sorter = [],
+           i = -1,
+           j = -1;            
+           while(lines[++i]){
+               sorter.push([lines.eq(i), lines.eq(i).children('td').eq(col).text()])
+           }            if (ord == 'asc') {
+               sorter.sort();
+           } 
+           else if (ord == 'desc') {
+               sorter.sort().reverse();
+           } 
+           else if (ord == 'nasc'){
+               sorter.sort(function(a, b){return(a[1] - b[1]);});
+           } 
+           else if (ord == 'ndesc'){
+               sorter.sort(function(a, b){return(b[1] - a[1]);});
+           } 
+           else if (ord == '?asc'){
                sorter.sort(function(a, b){
                    var x = parseInt(a[1], 10),
                    y = parseInt(b[1], 10);                    
                    if (isNaN(x) || isNaN(y)){
                        if (a[1] > b[1]){
-                           return -1;
-                       } else if(a[1] < b[1]){
                            return 1;
+                       } else if(a[1] < b[1]){
+                           return -1;
                        } else {
                            return 0;
                        }
                    } else {
-                       return(b[1] - a[1]);
-                   }
-               });
-           } 
-           while(sorter[++j]){
-               mybody.append(sorter[j][0]); 
-           }
-        }
-
-        function listRdv(){
-            $.ajax({
-              url:"http://localhost:8080/v1/rdv",
-              type:"GET",
-              dataType :"json",
-              success:function(json){
-                  var tab = JSON.stringify(json);
-                  var js = JSON.parse(tab);
-                  var res="<h1>Liste des rendez-vous<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableRDV\"><tr><th><a  href=\"javascript:sortTable('tableRDV',0, 'asc')\" value=\"tri alphanum asc col1\">Senior</th><th><a  href=\"javascript:sortTable('tableRDV',1, 'asc')\" value=\"tri alphanum asc col1\">Etudiant</th><th><a  href=\"javascript:sortTable('tableRDV',2, '?asc')\" value=\"tri alphanum asc col1\">Jour</th><th><a  href=\"javascript:sortTable('tableRDV',3, '?asc')\" value=\"tri alphanum asc col1\">Service </th><th><a  href=\"javascript:sortTable('tableRDV',4, '?asc')\" value=\"tri alphanum asc col1\">Matin</th><th><a  href=\"javascript:sortTable('tableRDV',5, '?asc')\" value=\"tri alphanum asc col1\">Aprem</th><th><a  href=\"javascript:sortTable('tableRDV',6, '?asc')\" value=\"tri alphanum asc col1\">Soir</th><th>Ajout Etudiant</th></tr>";
-                  for(var cpt=0;cpt<js.length;cpt++){
-                      var moment = function(){                   }
-                      res=res+"<tr class=\"ligne\"><td>"+js[cpt].senior +"</td>"+"<td>"+js[cpt].etudiant+"</td>"+"<td>"+js[cpt].jour+"</td><td>"+js[cpt].service+"</td><td>"+js[cpt].matin+"</td><td>"+js[cpt].aprem+"</td><td>"+js[cpt].soir+"</td>";
-                      if(js[cpt].etudiant==""){
-                         res=res+"<td><button type=\"button\" id='but' onClick=\"ajoutEtu('"+js[cpt].id+"')\" >Ajouter un étudiant</button></td>";
-                     }else{
-                         res=res+"<td>Un étudiant est déjà attribué";
-                     }
-                     res=res+"</tr>"
+                     return(a[1] - b[1]);
                  }
-                 $('body').html(res);
-             },
-             error: function( xhr, status, errorThrown ) {
-              alert( "Sorry, there was a problem!" );
-              console.log( "Error: " + errorThrown );
-              console.log( "Status: " + status );
-              console.dir( xhr );
-             },
+             });
+           }
+           else if (ord == '?desc'){
+             sorter.sort(function(a, b){
+                 var x = parseInt(a[1], 10),
+                 y = parseInt(b[1], 10);                    
+                 if (isNaN(x) || isNaN(y)){
+                     if (a[1] > b[1]){
+                         return -1;
+                     } else if(a[1] < b[1]){
+                         return 1;
+                     } else {
+                         return 0;
+                     }
+                 } else {
+                     return(b[1] - a[1]);
+                 }
+             });
+         } 
+         while(sorter[++j]){
+             mybody.append(sorter[j][0]); 
+         }
+     }
+
+     function listRdv(){
+        $.ajax({
+          url:"http://localhost:8080/v1/rdv",
+          type:"GET",
+          dataType :"json",
+          success:function(json){
+              var tab = JSON.stringify(json);
+              var js = JSON.parse(tab);
+              var res="<h1>Liste des rendez-vous<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableRDV\"><tr><th><a  href=\"javascript:sortTable('tableRDV',0, 'asc')\" value=\"tri alphanum asc col1\">Senior</th><th><a  href=\"javascript:sortTable('tableRDV',1, 'asc')\" value=\"tri alphanum asc col1\">Etudiant</th><th><a  href=\"javascript:sortTable('tableRDV',2, '?asc')\" value=\"tri alphanum asc col1\">Jour</th><th><a  href=\"javascript:sortTable('tableRDV',3, '?asc')\" value=\"tri alphanum asc col1\">Service </th><th><a  href=\"javascript:sortTable('tableRDV',4, '?asc')\" value=\"tri alphanum asc col1\">Matin</th><th><a  href=\"javascript:sortTable('tableRDV',5, '?asc')\" value=\"tri alphanum asc col1\">Aprem</th><th><a  href=\"javascript:sortTable('tableRDV',6, '?asc')\" value=\"tri alphanum asc col1\">Soir</th><th>Ajout Etudiant</th></tr>";
+              for(var cpt=0;cpt<js.length;cpt++){
+                  var moment = function(){                   }
+                  res=res+"<tr class=\"ligne\"><td>"+js[cpt].senior +"</td>"+"<td>"+js[cpt].etudiant+"</td>"+"<td>"+js[cpt].jour+"</td><td>"+js[cpt].service+"</td><td>"+js[cpt].matin+"</td><td>"+js[cpt].aprem+"</td><td>"+js[cpt].soir+"</td>";
+                  if(js[cpt].etudiant==""){
+                   res=res+"<td><button type=\"button\" id='but' onClick=\"ajoutEtu('"+js[cpt].senior+"')\" >Ajouter un étudiant</button></td>";
+               }else{
+                   res=res+"<td>Un étudiant est déjà attribué";
+               }
+               res=res+"</tr>"
+           }
+           $('body').html(res);
+       },
+       error: function( xhr, status, errorThrown ) {
+          alert( "Sorry, there was a problem!" );
+          console.log( "Error: " + errorThrown );
+          console.log( "Status: " + status );
+          console.dir( xhr );
+      },
+      complete: function( xhr, status ) {
+      }
+  });
+    }
+
+    function ajoutEtu(login){
+        $.ajax({
+            url:"http://localhost:8080/v1/user",
+            type:"GET",
+            dataType :"json",
+            success: function( json ) {
+                var tab = JSON.stringify(json);
+                var js=JSON.parse(tab);
+                var res="<h1>Liste des Utilisateurs<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableUser\"><tr><th><a href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Ajouter</th></tr>";
+                for(var cpt=0;cpt<js.length;cpt++){
+                    // if(js[cpt].status=="Etudiant"){
+                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" id='but' onClick=\"ajoutEtuFinal('"+login+","+js[cpt].jour+","+js[cpt].matin+","+js[cpt].aprem+","+js[cpt].soir+","+js[cpt].service+","+js[cpt].login+"')\" >Ajouter l'étudiant</button></td></tr>";
+                    // }
+                }
+                $('body').html(res);
+            },
+            error: function( xhr, status, errorThrown ) {
+                alert( "Sorry, there was a problem!" );
+                console.log( "Error: " + errorThrown );
+                console.log( "Status: " + status );
+                console.dir( xhr );
+            },
             complete: function( xhr, status ) {
             }
-            });
-         }
+        });
+    }
 
-        function ajoutEtu(id){
-            $.ajax({
-                url:"http://localhost:8080/v1/user",
-                type:"GET",
-                dataType :"json",
-                success: function( json ) {
-                    var tab = JSON.stringify(json);
-                    var js=JSON.parse(tab);
-                    var res="<h1>Liste des Utilisateurs<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableUser\"><tr><th><a href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Nom</th><th><a href=\"javascript:sortTable('tableUser',1, 'asc')\" value=\"tri alphanum asc col1\">Prenom</th><th><a href=\"javascript:sortTable('tableUser',2, '?asc')\" value=\"tri alphanum asc col1\">Login</th><th><a href=\"javascript:sortTable('tableUser',3, '?asc')\" value=\"tri alphanum asc col1\">Numero</th><th><a href=\"javascript:sortTable('tableUser',4, '?asc')\" value=\"tri alphanum asc col1\">Email</th><th>Ajouter</th></tr>";
-                    for(var cpt=0;cpt<js.length;cpt++){
-                    // if(js[cpt].status=="Etudiant"){
-                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].nom +"</td>"+"<td>"+js[cpt].prenom+"</td>"+"<td id=\"log\">"+js[cpt].login+"</td><td>"+js[cpt].numero+"</td><td>"+js[cpt].email+"</td><td><button type=\"button\" id='but' onClick=\"ajoutEtuFinal('"+id+js[cpt].login+"')\" >Ajouter l'étudiant</button></td></tr>";
-                    // }
-                    }
-                    $('body').html(res);
-                    },
-                    error: function( xhr, status, errorThrown ) {
-                        alert( "Sorry, there was a problem!" );
-                        console.log( "Error: " + errorThrown );
-                        console.log( "Status: " + status );
-                        console.dir( xhr );
-                    },
-                    complete: function( xhr, status ) {
-                    }
-            });
-        }
+    function ajoutEtuFinal(login, jour, matin, aprem, soir, service, loginEtu){
+        $.ajax({
 
-        function ajoutEtuFinal(id, login){
-            $.ajax({
-                url: "http://localhost:8080/v1/rdv/" + id + "/" + login,
-                type: "PUT",
-                success: function(data) {
-                    alert('Utilisateur Validé');
-                    listRdv();
-                },
-                error: function( xhr, status, errorThrown ) {
-                    alert( "Sorry, there was a problem!" );
-                    console.log( "Error: " + errorThrown );
-                    console.log( "Status: " + status );
-                    console.dir( xhr );
+            url:"http://localhost:8080/v1/rdv/validate/"+login+"\&"+jour+"\&"+jour+"\&"+matin+"\&"+aprem+"\&"+soir+"\&"+service+"\&"+loginEtu,
+            type:"PUT",
+            success: function(data) {
+                alert('Utilisateur Validé');
+                listRdv();
+            },
+            error: function( xhr, status, errorThrown ) {
+                alert( "Sorry, there was a problem!" );
+                console.log( "Error: " + errorThrown );
+                console.log( "Status: " + status );
+                console.dir( xhr );
+            }
+        });
+    }
+
+    function listService(){
+        $.ajax({
+            url: "http://localhost:8080/v1/service",
+            type: "GET",
+            dataType : "json",
+            success: function( json ) {
+                var tab = JSON.stringify(json);
+                var js=JSON.parse(tab);
+                var res="<h1>Liste des Services<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableService\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Libellé</th><th>Gestion</th></tr>";
+                for(var cpt=0;cpt<js.length;cpt++){
+                    res=res+"<tr class=\"ligne\"><td>"+js[cpt].libelle +"</td>"+"<td><button type=\"button\" id='but' onClick=\"suppressionService('"+js[cpt].libelle+"')\" >Supprimer</button></td></tr>";
                 }
-            });
-        }
 
-        function listService(){
-            $.ajax({
-                url: "http://localhost:8080/v1/service",
-                type: "GET",
-                dataType : "json",
-                success: function( json ) {
-                    var tab = JSON.stringify(json);
-                    var js=JSON.parse(tab);
-                    var res="<h1>Liste des Services<button type=\"button\" id=\"retour\" onClick=\"retour()\" >Retour</button></h1><table id=\"tableService\"><tr><th><a  href=\"javascript:sortTable('tableUser',0, 'asc')\" value=\"tri alphanum asc col1\">Libellé</th><th>Gestion</th></tr>";
-                    for(var cpt=0;cpt<js.length;cpt++){
-                        res=res+"<tr class=\"ligne\"><td>"+js[cpt].libelle +"</td>"+"<td><button type=\"button\" id='but' onClick=\"suppressionService('"+js[cpt].libelle+"')\" >Supprimer</button></td></tr>";
-                    }
-                    $('body').html(res);
-                },
-                error: function( xhr, status, errorThrown ) {
-                    alert( "Sorry, there was a problem!" );
-                    console.log( "Error: " + errorThrown );
-                    console.log( "Status: " + status );
-                    console.dir( xhr );
-                },
-                complete: function( xhr, status ) {
-                }
-            });
-        }
-
-        function suppressionService(libelle){
-            $.ajax({
-                url: "http://localhost:8080/v1/service/" + libelle,
-                type: "DELETE",
-                success: function(data) {
-                    alert('Service Supprimé');
-                    listService();
-                },
-                error: function( xhr, status, errorThrown ) {
-                    alert( "Sorry, there was a problem!" );
-                    console.log( "Error: " + errorThrown );
-                    console.log( "Status: " + status );
-                    console.dir( xhr );
-                }
             });
         }
 
@@ -354,7 +333,38 @@
                 }
             });
         }
-    </script>
+
     
+
+       /*         $('body').html(res);
+            },
+            error: function( xhr, status, errorThrown ) {
+                alert( "Sorry, there was a problem!" );
+                console.log( "Error: " + errorThrown );
+                console.log( "Status: " + status );
+                console.dir( xhr );
+            },
+            complete: function( xhr, status ) {
+            }
+        });
+    }*/
+
+    function suppressionService(libelle){
+        $.ajax({
+            url: "http://localhost:8080/v1/service/" + libelle,
+            type: "DELETE",
+            success: function(data) {
+                alert('Service Supprimé');
+                listService();
+            },
+            error: function( xhr, status, errorThrown ) {
+                alert( "Sorry, there was a problem!" );
+                console.log( "Error: " + errorThrown );
+                console.log( "Status: " + status );
+                console.dir( xhr );
+            }
+        });
+    }
+</script>
 </body>
 </html>
