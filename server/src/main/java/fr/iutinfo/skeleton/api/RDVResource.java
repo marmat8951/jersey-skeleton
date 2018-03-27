@@ -37,7 +37,7 @@ public class RDVResource {
 	        dao.createRDVTable();
 	    }
 	}
-	
+
     @POST
     public RDVDto createRDV(RDVDto dto) {
         RDV rdv = new RDV();

@@ -26,7 +26,7 @@ public interface RDVDao {
     @SqlQuery("select * from rdv where senior = :senior")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<RDV> findBySenior(@Bind("senior") String id);
-    
+     
     @SqlQuery("select * from rdv where etudiant = :etudiant")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<RDV> findByEtudiant(@Bind("etudiant") String id);

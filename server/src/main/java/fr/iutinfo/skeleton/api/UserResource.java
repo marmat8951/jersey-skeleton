@@ -36,6 +36,15 @@ public class UserResource {
         if (!tableExist("user")) {
             logger.debug("Create table user");
             dao.createUserTable();
+            UserDto dto = new UserDto();
+            dto.setLogin("admin@admin");
+            dto.setNom("Dhellemmes");
+            dto.setPrenom("Edouard");
+            dto.setNumero("0680859040");
+            dto.setPassword("entreedetvous");
+            dto.setStatut("admin");
+            createUser(dto);
+            valideUser("admin@admin");
         }
     }
 
