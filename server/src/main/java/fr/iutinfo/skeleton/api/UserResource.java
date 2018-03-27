@@ -77,7 +77,6 @@ public class UserResource {
         user.setNom(dto.getNom());
         user.setPrenom(dto.getPrenom());
         user.setNumero(dto.getNumero());
-        user.setPassword(dto.getPassword());
         dao.update(user);
         return dto;
     }
