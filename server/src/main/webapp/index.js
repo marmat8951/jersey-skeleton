@@ -281,7 +281,7 @@ function display_update(param){
 }
 
 function send_update(){
-    var url="v1/user/"+login; 
+    var url="v1/user/"+$('#loginUser').val(); 
     $.ajax({
         type: 'PUT',
         url: url,
@@ -295,7 +295,7 @@ function send_update(){
 
         dataType : "json",
         success: function( json ) {
-            alert("Inscription reussie !!!");
+            alert("Modification effectuées");
         },
         error: function( xhr, status, errorThrown ) {
 
